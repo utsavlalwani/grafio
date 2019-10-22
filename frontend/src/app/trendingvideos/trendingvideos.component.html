@@ -1,0 +1,53 @@
+
+ <mat-tab-group color = "accent">
+     <mat-tab label = "National" color = "primary">
+ 
+     
+ <mat-card *ngFor = "let article of articles.articles; let i = index">
+    
+    <div>
+
+        <strong>{{article.author}}</strong>
+        </div>
+        <div>
+        <em>{{article.title}}</em>
+            </div>
+        <div class = "description">{{article.description}}</div>
+        <div><a href="{{article.url}}"></a></div>
+        <div><img src="{{article.urlToImage}}" alt="" class = "image"></div>
+        <div>Date Published {{article.publishedAt}}</div>
+        <div class = "description">{{article.content}}</div>
+        <div><a href="{{article.url}}" target="_blank">Full Description</a></div>
+        
+        
+    
+
+</mat-card> 
+
+       
+
+</mat-tab>
+<mat-tab label = "International">
+        <mat-card *ngFor = "let article of USArticles.articles; let i = index">
+    
+                <div>
+            
+                    <strong>{{article.author}}</strong>
+                    </div>
+                    <div>
+                    <em>{{article.title}}</em>
+                        </div>
+                    <div class = "description">{{article.description}}</div>
+                    
+                    <div><img src="{{article.urlToImage}}" alt="" class = "image"></div>
+                    <div>Date Published {{article.publishedAt}}</div>
+                    <div class = "description">{{article.content}}</div>
+                    <div><a href="{{article.url}}">Full Description</a></div>
+                    
+                    
+                
+            
+            </mat-card> 
+</mat-tab>
+</mat-tab-group>
+

@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
+/* :: 2.0 Import All CSS */
+@import url(./assets/css/bootstrap.min.css);
+@import url(./assets/css/classy-nav.css);
+
+@import url(./assets/css/animate.css);
+@import url(./assets/css/magnific-popup.css);
+@import url(./assets/css/font-awesome.min.css);
+@import url(./assets/css/nice-select.css);
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

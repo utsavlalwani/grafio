@@ -1,0 +1,13 @@
+.fill-remaining-space{
+    flex: auto;
+    }
+.register{
+    padding-right: 20px;
+}
+.login{
+    text-decoration:none;
+    color:white;
+}
+.header{
+    height: 100px;
+}

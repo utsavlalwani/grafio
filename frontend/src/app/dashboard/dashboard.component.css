@@ -1,0 +1,23 @@
+.dashboard{
+    background-color: rgb(93, 93, 170);
+    margin : 20px;
+}
+.cardheader{
+    position : absolute;
+    margin : 20px;
+    width : 85%;
+    top : 20px;
+}
+.card{
+    width : 100%;
+    background-color: lightblue;
+
+}
+.tile2{
+    padding-top : 300px;
+}
+#icons{
+    position : absolute;
+    right : 10px;
+
+}
