@@ -31,14 +31,8 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        System.out.println("The request:\t"+request);
-
-        System.out.println("The header from jwtConfig:\t"+jwtConfig.getHeader());
-
         // 1. get the authentication header. Tokens are supposed to be passed in the authentication header
         String header = request.getHeader(jwtConfig.getHeader());
-
-        System.out.println("the header:\t"+header);
 
         // 2. validate the header and check the prefix
         if(header == null) {
@@ -77,13 +71,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
                 //List<String> authorities = (List<String>) claims.get("authorities");
                 List<String> authorities = (List<String>) claims.get("authorities");
-                //System.out.println("b");
-                //try {
-                //    authorities.forEach(System.out::println);
-               // } catch (Exception e) {
-              //      e.printStackTrace();
-               // }
-//                System.out.println("abc" + authorities.toString());
+
                 // 5. Create auth object
                 // UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.
                 // It needs a list of authorities, which has type of GrantedAuthority interface, where SimpleGrantedAuthority is an implementation of that interface

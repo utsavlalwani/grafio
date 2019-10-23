@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,6 +35,8 @@ public class UserControllerTest {
     private RabbitTemplate rabbitTemplate;
     @Mock
     private PasswordEncoder passwordEncoder;
+    @Mock
+    private Queue queue;
     @InjectMocks
     private UserController userController;
 
@@ -51,13 +54,22 @@ public class UserControllerTest {
                     .build();
     }
 
+//    @Test
+//    public void testRegisterUser() throws Exception {
+//        when(userRegistrationService.saveUser((User)any())).thenReturn(user);
+//        when(passwordEncoder.encode((String)any())).thenReturn("password");
+//        when(queue.getName()).thenReturn("user");
+//        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/register")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(asJsonString(userDAO)))
+//                .andExpect(MockMvcResultMatchers.status().isCreated());
+//    }
+
     @Test
-    public void testRegisterSuccess() throws Exception {
-        when(userRegistrationService.saveUser((User)any())).thenReturn(user);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(user)))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
+    public void getUser() throws Exception {
+        when(userRegistrationService.getUser(any())).thenReturn(user);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/register"+"/username"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     private static String asJsonString(final Object obj) {

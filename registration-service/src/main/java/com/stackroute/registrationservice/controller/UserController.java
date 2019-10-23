@@ -61,7 +61,6 @@ public class UserController {
         listOfViews.add("www.bing.com");
         user.setViewed(listOfViews);
 
-
         try{
             User savedUser = userRegistrationService.saveUser(user);
             UserDTO userDTO = new UserDTO(user.getUsername(), bcryptEncoder.encode(userDao.getPassword()));
@@ -74,7 +73,6 @@ public class UserController {
 
         }
         return responseEntity;
-
     }
 
     @GetMapping("register/{username}")
