@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserRegistrationService {
     public User saveUser(User user)throws UserAlreadyExistsException;
-    public List<User> getUser();
+    public User getUser(String user);
 }

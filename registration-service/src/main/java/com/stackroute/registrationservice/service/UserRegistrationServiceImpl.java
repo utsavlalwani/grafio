@@ -21,7 +21,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
     @Override
     public User saveUser(User user)throws UserAlreadyExistsException
     {
-        if(userRegistrationRepository.findByUsername(user.getUsername()).size()!=0)
+        if(userRegistrationRepository.findByUsername(user.getUsername())!=null)
         {
             throw new UserAlreadyExistsException("You have already registered yourself!");
         }
@@ -32,8 +32,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
     }
 
     @Override
-    public List<User> getUser() {
-        return  userRegistrationRepository.findAll();
+    public User getUser(String username) {
+        return  userRegistrationRepository.findByUsername(username);
     }
 
 }

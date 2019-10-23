@@ -10,5 +10,5 @@ import java.util.List;
 public interface UserRegistrationRepository extends MongoRepository<User, String> {
 
 
-   public List<User> findByUsername(String username);
+   public User findByUsername(String username);
 }

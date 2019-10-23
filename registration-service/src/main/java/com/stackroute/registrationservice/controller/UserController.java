@@ -76,9 +76,9 @@ public class UserController {
 
     }
 
-    @GetMapping("register")
-    public ResponseEntity<?> getUserData() {
-        return new ResponseEntity<List<User>>(userRegistrationService.getUser(),HttpStatus.OK);
+    @GetMapping("register/{username}")
+    public ResponseEntity<?> getUserData(@PathVariable String username) {
+        return new ResponseEntity<User>(userRegistrationService.getUser(username),HttpStatus.OK);
     }
 
 }
