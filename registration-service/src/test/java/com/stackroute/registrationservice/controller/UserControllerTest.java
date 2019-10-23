@@ -54,21 +54,19 @@ public class UserControllerTest {
                     .build();
     }
 
-//    @Test
-//    public void testRegisterUser() throws Exception {
-//        when(userRegistrationService.saveUser((User)any())).thenReturn(user);
-//        when(passwordEncoder.encode((String)any())).thenReturn("password");
-//        when(queue.getName()).thenReturn("user");
-//        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/register")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(asJsonString(userDAO)))
-//                .andExpect(MockMvcResultMatchers.status().isCreated());
-//    }
-
     @Test
     public void getUser() throws Exception {
         when(userRegistrationService.getUser(any())).thenReturn(user);
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/register"+"/username"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/register/"+userDAO.getUsername()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void updateUser() throws Exception {
+        when(userRegistrationService.updateUser(any())).thenReturn(user);
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/register/"+userDAO.getUsername())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(user)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 

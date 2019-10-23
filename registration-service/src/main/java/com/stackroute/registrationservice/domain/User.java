@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "user")
 @Data
@@ -22,8 +23,11 @@ public class User {
     private String email;
     private Date dateOfBirth;
 
-    private ArrayList<String> posts;
-    private ArrayList<String> viewed;
+    private List<String> newsPreferences;
 
-    private String[] newsPreferences;
+    private List<Post> posts;
+    private List<Post> liked;
+    private List<Post> watched;
+    private List<Post> flagged;
+    private List<Post> bought;
 }

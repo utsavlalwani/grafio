@@ -1,8 +1,6 @@
 package com.stackroute.registrationservice.exception;
 
 public class UserAlreadyExistsException extends Exception {
-
-
     private String message;
 
     public UserAlreadyExistsException() {

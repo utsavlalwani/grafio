@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class UserDAO {
     private String name;
     private String email;
     private Date dateOfBirth;
-    private String[] newsPreferences;
+    private List<String> newsPreferences;
     private String password;
 
 }

@@ -2,6 +2,7 @@ package com.stackroute.registrationservice.service;
 
 import com.stackroute.registrationservice.domain.User;
 import com.stackroute.registrationservice.exception.UserAlreadyExistsException;
+import com.stackroute.registrationservice.exception.UserNotFoundException;
 import com.stackroute.registrationservice.repository.UserRegistrationRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,9 +46,30 @@ public class UserRegistrationServiceTest {
     }
 
     @Test
-    public void testGetUser() {
+    public void testGetUserSuccess() throws UserNotFoundException {
         when(userRegistrationRepository.findByUsername(any())).thenReturn(user);
         userRegistrationServiceImpl.getUser(user.getUsername());
         verify(userRegistrationRepository, times(1)).findByUsername(user.getUsername());
+    }
+
+    @Test(expected = UserNotFoundException.class)
+    public void testGetUserFailure() throws UserNotFoundException {
+        when(userRegistrationRepository.findByUsername(any())).thenReturn(null);
+        userRegistrationServiceImpl.getUser(user.getUsername());
+    }
+
+    @Test
+    public void testUpdateUserSuccess() throws UserNotFoundException {
+        when(userRegistrationRepository.findByUsername(any())).thenReturn(user);
+        when(userRegistrationRepository.save(any())).thenReturn(user);
+        userRegistrationServiceImpl.updateUser(user.getUsername());
+        verify(userRegistrationRepository, times(1)).save(user);
+        verify(userRegistrationRepository, times(1)).findByUsername(user.getUsername());
+    }
+
+    @Test(expected = UserNotFoundException.class)
+    public void testUpdateUserFailure() throws UserNotFoundException {
+        when(userRegistrationRepository.findByUsername(any())).thenReturn(null);
+        userRegistrationServiceImpl.updateUser(user.getUsername());
     }
 }

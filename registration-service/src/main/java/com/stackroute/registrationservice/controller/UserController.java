@@ -6,6 +6,7 @@ import com.stackroute.registrationservice.domain.User;
 import com.stackroute.registrationservice.domain.UserDAO;
 import com.stackroute.registrationservice.domain.UserDTO;
 import com.stackroute.registrationservice.exception.UserAlreadyExistsException;
+import com.stackroute.registrationservice.exception.UserNotFoundException;
 import com.stackroute.registrationservice.service.UserRegistrationService;
 import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class UserController {
                         .newsPreferences(userDao.getNewsPreferences())
                         .build();
         ResponseEntity responseEntity;
-        ArrayList<String> listOfPosts = new ArrayList<>();//user.getPosts();
+        /*ArrayList<String> listOfPosts = new ArrayList<>();//user.getPosts();
         ArrayList<String> listOfViews = new ArrayList<>();
 
         listOfPosts .add("www.google.com");
@@ -59,25 +60,28 @@ public class UserController {
         listOfViews.add("www.yahoo.com");
         listOfViews.add("www.facebook.com");
         listOfViews.add("www.bing.com");
-        user.setViewed(listOfViews);
+        user.setViewed(listOfViews);*/
 
         try{
             User savedUser = userRegistrationService.saveUser(user);
             UserDTO userDTO = new UserDTO(user.getUsername(), bcryptEncoder.encode(userDao.getPassword()));
             rabbitTemplate.convertAndSend(queue.getName(), new ObjectMapper().writeValueAsString(userDTO));
             responseEntity = new ResponseEntity<User>( savedUser,HttpStatus.CREATED);
-        }
-        catch (UserAlreadyExistsException | JsonProcessingException e)
-        {
+        } catch (UserAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
-
+        } catch (JsonProcessingException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
 
     @GetMapping("register/{username}")
-    public ResponseEntity<?> getUserData(@PathVariable String username) {
-        return new ResponseEntity<User>(userRegistrationService.getUser(username),HttpStatus.OK);
+    public ResponseEntity<?> getUser(@PathVariable String username) throws UserNotFoundException {
+        return new ResponseEntity<User>(userRegistrationService.getUser(username), HttpStatus.OK);
     }
 
+    @PutMapping("register/{username}")
+    public ResponseEntity<?> updateUser(@PathVariable String username) throws UserNotFoundException {
+        return new ResponseEntity<User>(userRegistrationService.updateUser(username), HttpStatus.OK);
+    }
 }
