@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "user")
-@Data
+@Document(collection = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

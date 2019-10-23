@@ -7,8 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "user")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -23,6 +21,5 @@ public class Post {
     private Date timestamp;
     private List<String> tags;
     private boolean isAnonymous;
-    private List<String> likedBy;
 
 }

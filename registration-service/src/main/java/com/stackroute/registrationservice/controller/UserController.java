@@ -76,12 +76,24 @@ public class UserController {
     }
 
     @GetMapping("register/{username}")
-    public ResponseEntity<?> getUser(@PathVariable String username) throws UserNotFoundException {
-        return new ResponseEntity<User>(userRegistrationService.getUser(username), HttpStatus.OK);
+    public ResponseEntity<?> getUser(@PathVariable String username) {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = new ResponseEntity<User>(userRegistrationService.getUser(username), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
     }
 
     @PutMapping("register/{username}")
-    public ResponseEntity<?> updateUser(@PathVariable String username) throws UserNotFoundException {
-        return new ResponseEntity<User>(userRegistrationService.updateUser(username), HttpStatus.OK);
+    public ResponseEntity<?> updateUser(@PathVariable String username) {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = new ResponseEntity<User>(userRegistrationService.updateUser(username), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
     }
 }
