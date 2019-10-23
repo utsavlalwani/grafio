@@ -22,7 +22,7 @@ stages:
 maven_job:
   stage: build
   script:
-    - mvn clean install -DskipTests
+    - mvn clean install
   only:
     - master
     - v1.0.0

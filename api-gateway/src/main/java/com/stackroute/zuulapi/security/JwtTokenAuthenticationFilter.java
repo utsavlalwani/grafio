@@ -51,7 +51,6 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
         // 3. Get the token
         String token = header.replace(jwtConfig.getPrefix(), "");
-        System.out.println("token: " + token);
 
 
         // exceptions might be thrown in creating the claims if for example the token is expired
@@ -64,7 +63,6 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
 
             String username = claims.getSubject();
-            System.out.println("username:" + username );
         try {
 
             if(username != null) {
@@ -82,7 +80,6 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                 //       username, null, new ArrayList<>());
                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                System.out.println("a");
                 // 6. Authenticate the user
                 // Now, user is authenticated
                 SecurityContextHolder.getContext().setAuthentication(auth);
