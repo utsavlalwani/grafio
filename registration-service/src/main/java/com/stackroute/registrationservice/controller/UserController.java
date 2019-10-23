@@ -34,7 +34,8 @@ public class UserController {
     private Queue queue;
 
     @Autowired
-    public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate){this.userRegistrationService=userRegistrationService;
+    public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate) {
+        this.userRegistrationService=userRegistrationService;
         this.rabbitTemplate = rabbitTemplate;
     }
 

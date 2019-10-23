@@ -20,7 +20,6 @@ public class RabbitMqReceiverService {
         UserDTO user = null;
         try {
             user = new ObjectMapper().readValue(message, UserDTO.class);
-            System.out.println(bCryptPasswordEncoder.matches("pass", user.getPassword()));
         } catch (IOException e) {
             e.printStackTrace();
         }

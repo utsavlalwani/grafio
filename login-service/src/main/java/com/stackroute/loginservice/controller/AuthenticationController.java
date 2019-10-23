@@ -32,7 +32,6 @@ public class AuthenticationController {
 
 		final UserDetails userDetails = userDetailsServiceImpl
 				.loadUserByUsername(authenticationRequest.getUsername());
-		System.out.println(userDetails.getUsername()+userDetails.getPassword());
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
