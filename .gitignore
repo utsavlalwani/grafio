@@ -160,5 +160,4 @@ Desktop.ini
 ######################
 # Other
 ######################
-assets
-assets/*
+assets/
