@@ -8,8 +8,11 @@ import com.stackroute.registrationservice.domain.UserDTO;
 import com.stackroute.registrationservice.exception.UserAlreadyExistsException;
 import com.stackroute.registrationservice.exception.UserNotFoundException;
 import com.stackroute.registrationservice.service.UserRegistrationService;
+import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +34,19 @@ public class UserController {
 
     private PasswordEncoder bcryptEncoder = new BCryptPasswordEncoder(12);
 
-    @Autowired
     private Queue queue;
 
+    static final String queueName="user";
+    static final String topicExchangeName="user-auth";
+
     @Autowired
-    public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate) {
+    public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate, Queue queue) {
         this.userRegistrationService=userRegistrationService;
         this.rabbitTemplate = rabbitTemplate;
+        this.queue = new Queue(queueName, false);
+        BindingBuilder.bind(queue)
+                .to(new TopicExchange(topicExchangeName))
+                .with("user.auth.#");
     }
 
     @PostMapping("register")
@@ -87,10 +96,10 @@ public class UserController {
     }
 
     @PutMapping("register/{username}")
-    public ResponseEntity<?> updateUser(@PathVariable String username) {
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
         ResponseEntity responseEntity;
         try {
-            responseEntity = new ResponseEntity<User>(userRegistrationService.updateUser(username), HttpStatus.OK);
+            responseEntity = new ResponseEntity<User>(userRegistrationService.updateUser(user), HttpStatus.OK);
         } catch (UserNotFoundException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

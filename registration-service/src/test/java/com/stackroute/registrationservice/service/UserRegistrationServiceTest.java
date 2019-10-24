@@ -62,7 +62,7 @@ public class UserRegistrationServiceTest {
     public void testUpdateUserSuccess() throws UserNotFoundException {
         when(userRegistrationRepository.findByUsername(any())).thenReturn(user);
         when(userRegistrationRepository.save(any())).thenReturn(user);
-        userRegistrationServiceImpl.updateUser(user.getUsername());
+        userRegistrationServiceImpl.updateUser(user);
         verify(userRegistrationRepository, times(1)).save(user);
         verify(userRegistrationRepository, times(1)).findByUsername(user.getUsername());
     }
@@ -70,6 +70,6 @@ public class UserRegistrationServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void testUpdateUserFailure() throws UserNotFoundException {
         when(userRegistrationRepository.findByUsername(any())).thenReturn(null);
-        userRegistrationServiceImpl.updateUser(user.getUsername());
+        userRegistrationServiceImpl.updateUser(user);
     }
 }

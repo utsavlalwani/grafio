@@ -32,6 +32,7 @@
         <module>api-gateway</module>
         <module>login-service</module>
         <module>registration-service</module>
+        <module>content-service</module>
     </modules>
 
     <dependencies>

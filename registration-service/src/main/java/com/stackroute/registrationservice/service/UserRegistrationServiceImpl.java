@@ -42,9 +42,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService{
     }
 
     @Override
-    public User updateUser(String username) throws UserNotFoundException {
-        User user = userRegistrationRepository.findByUsername(username);
-        if(user == null) {
+    public User updateUser(User user) throws UserNotFoundException {
+        User findUser = userRegistrationRepository.findByUsername(user.getUsername());
+        if(findUser == null) {
             throw new UserNotFoundException("User not found!");
         }
 

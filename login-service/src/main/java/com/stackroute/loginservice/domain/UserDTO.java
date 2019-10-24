@@ -15,7 +15,6 @@ public class UserDTO implements Serializable {
 	private String username;
 	private String password;
 
-
 	@Override
 	public String toString() {
 		return "UserDTO{" +

@@ -9,5 +9,5 @@ import java.util.List;
 public interface UserRegistrationService {
     User saveUser(User user)throws UserAlreadyExistsException;
     User getUser(String username) throws UserNotFoundException;
-    User updateUser(String username) throws UserNotFoundException;
+    User updateUser(User user) throws UserNotFoundException;
 }

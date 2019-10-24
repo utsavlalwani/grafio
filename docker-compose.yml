@@ -88,3 +88,18 @@ services:
     hostname: localhost
     ports:
       - 8091:8091
+
+  content-service:
+    build: content-service/
+    container_name: content-service
+    depends_on:
+      - config-server
+      - eureka-server
+      - mongo
+      - rabbitmq
+      - registration-service
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8093:8093
