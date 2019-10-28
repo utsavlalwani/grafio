@@ -30,6 +30,9 @@
         <module>config-server</module>
         <module>eureka-server</module>
         <module>api-gateway</module>
+        <module>login-service</module>
+        <module>registration-service</module>
+        <module>content-service</module>
     </modules>
 
     <dependencies>
@@ -52,12 +55,12 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
-            <version>2.2.11</version>
+            <version>2.3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.2.11</version>
+            <version>2.3.2</version>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>

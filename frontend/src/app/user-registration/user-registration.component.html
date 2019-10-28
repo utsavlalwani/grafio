@@ -1,0 +1,85 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Register yourself here!</span>
+</mat-toolbar>
+
+<div class="container" *ngIf="!post; else forminfo" novalidate>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+
+    <mat-form-field class="form-element">
+      <input matInput placeholder="What's your name?" formControlName="name" #name>
+      <mat-error *ngIf="!name.valid && name.touched">
+        {{ titleAlert }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <input matInput placeholder="What's your username?" formControlName="userName" #userName>
+     
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <input matInput placeholder="An email address to contact you!" formControlName="email" #email>
+      <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+        {{ getErrorEmail() }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput [matDatepicker]="picker" placeholder="When were you born?" formControlName="date" #date>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+
+
+
+  
+
+    <mat-form-field class="form-element">
+      <input matInput placeholder="A password to keep your account safe with us." formControlName="password" [type]="hide ? 'password' : 'text'" #password>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
+      <mat-error *ngIf="!formGroup.controls['password'].valid && formGroup.controls['password'].touched">
+        {{ getErrorPassword() }}
+      </mat-error>
+    </mat-form-field>
+
+
+
+    <!-- <mat-form-field class="form-element">
+                <input matInput placeholder="Enter your password" formControlName="password">
+                <mat-error *ngIf="form.controls['password'].invalid">Password is required</mat-error>
+              </mat-form-field>
+              <mat-form-field *ngIf="form.controls['password'].valid">
+                <input matInput placeholder="Confirm your password" formControlName="confirmPassword">
+            <mat-error *ngIf="form.controls['confirmPassword'].pristine || form.controls['confirmPassword'].errors?.MatchPassword">Password does not match</mat-error>
+              </mat-form-field> -->
+
+    <p>
+      Below are options from which you can select your interests in news!
+    </p>
+    <div>
+      Selected: {{ selectedOption | json }}
+    </div>
+
+    <mat-selection-list #list [(ngModel)]="selectedOptions" [ngModelOptions]="{standalone: true}" (ngModelChange)="onNgModelChange($event)">
+      <mat-list-option *ngFor="let tta of taskTypeAreas" [value]="tta.name">
+        {{tta.name}}
+      </mat-list-option>
+    </mat-selection-list>
+
+
+    <div class="form-element">
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid" (click)=register(name.value,userName.value,email.value,date.value,password.value,selectedOptions)>Register!</button>
+      <button mat-raised-button color="primary" type="reset" class="button" >Reset</button>
+    </div>
+
+  </form>
+</div>
+
+<ng-template #forminfo>
+  <div class="container">
+    {{ post | json }}
+  </div>
+</ng-template>
