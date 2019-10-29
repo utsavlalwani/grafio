@@ -49,6 +49,7 @@ public class PostController {
                                 .tags(post.getTags())
                                 .videoUrl(post.getVideoUrl())
                                 .isAnonymous(post.isAnonymous())
+                                .category(post.getCategory())
                                 .postedBy(post.getPostedBy())
                                 .build();
         ResponseEntity responseEntity;

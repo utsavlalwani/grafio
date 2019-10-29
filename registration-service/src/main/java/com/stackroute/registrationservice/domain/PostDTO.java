@@ -20,4 +20,6 @@ public class PostDTO implements Serializable {
     private List<String> tags;
     private boolean isAnonymous;
     private User postedBy;
+    private String category;
+
 }

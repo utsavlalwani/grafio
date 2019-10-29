@@ -21,6 +21,7 @@ public class Post {
     private Date timestamp;
     private User postedBy;
     private List<String> tags;
+    private String category;
     private boolean isAnonymous;
     private List<User> likedBy;
     private List<User> flaggedBy;

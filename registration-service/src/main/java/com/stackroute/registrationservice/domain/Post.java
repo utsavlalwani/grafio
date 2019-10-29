@@ -21,5 +21,6 @@ public class Post {
     private Date timestamp;
     private List<String> tags;
     private boolean isAnonymous;
+    private String category;
 
 }
