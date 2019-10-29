@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private PostService postService;
     private RabbitTemplate rabbitTemplate;
-    private Queue queue;
+    private String topicExchange = "post";
+    private String routingKey = "user.post.new";
 
     @Autowired
-    public PostController(PostService postService, RabbitTemplate rabbitTemplate, Queue queue) {
+    public PostController(PostService postService, RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
         this.postService = postService;
-        this.queue = queue;
     }
 
     @GetMapping("/post/{id}")
@@ -55,7 +55,7 @@ public class PostController {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<Post>(postService.savePost(post), HttpStatus.CREATED);
-            rabbitTemplate.convertAndSend(queue.getName(), new ObjectMapper().writeValueAsString(postDTO));
+            rabbitTemplate.convertAndSend(topicExchange, routingKey , new ObjectMapper().writeValueAsString(postDTO));
         } catch (PostAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         } catch (JsonProcessingException e) {

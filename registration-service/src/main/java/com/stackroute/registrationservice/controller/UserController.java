@@ -38,6 +38,7 @@ public class UserController {
 
     static final String queueName="user";
     static final String topicExchangeName="user-auth";
+    static final String routingKey = "user.auth.reg";
 
     @Autowired
     public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate, Queue queue) {
@@ -74,7 +75,7 @@ public class UserController {
         try{
             User savedUser = userRegistrationService.saveUser(user);
             UserDTO userDTO = new UserDTO(user.getUsername(), bcryptEncoder.encode(userDao.getPassword()));
-            rabbitTemplate.convertAndSend(queue.getName(), new ObjectMapper().writeValueAsString(userDTO));
+            rabbitTemplate.convertAndSend(topicExchangeName, routingKey, new ObjectMapper().writeValueAsString(userDTO));
             responseEntity = new ResponseEntity<User>( savedUser,HttpStatus.CREATED);
         } catch (UserAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
