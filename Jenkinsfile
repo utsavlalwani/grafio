@@ -13,7 +13,10 @@ pipeline {
         stage('build') {
             when { branch 'master' }
             steps {
-                sh "ssh ubuntu@10.20.1.213 'cd ~/'${repo_path}' ; mvn clean package -DskipTests'"
+            
+               sh "ssh ubuntu@10.20.1.213 'cd ~/'${repo_path}' ; mvn clean package -DskipTests'"
+               sh "ssh ubuntu@10.20.1.213 'cd ~/'${repo_path}'/frontend ; npm install'"
+               sh "ssh ubuntu@10.20.1.213 'cd ~/'${repo_path}'/frontend ; ng build'"
             }
         }
         stage('Deploy') {
