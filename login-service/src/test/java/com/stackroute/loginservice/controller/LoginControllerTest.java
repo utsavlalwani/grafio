@@ -1,7 +1,7 @@
 package com.stackroute.loginservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stackroute.loginservice.config.AuthEntryPoint;
+//import com.stackroute.loginservice.config.AuthEntryPoint;
 import com.stackroute.loginservice.config.JwtTokenUtil;
 import com.stackroute.loginservice.domain.UserDTO;
 import com.stackroute.loginservice.service.UserDetailsServiceImpl;
@@ -41,8 +41,8 @@ public class LoginControllerTest {
     private JwtTokenUtil jwtTokenUtil;
     @MockBean
     private AuthenticationManager authenticationManager;
-    @MockBean
-    private AuthEntryPoint authEntryPoint;
+//    @MockBean
+//    private AuthEntryPoint authEntryPoint;
 
     @InjectMocks
     private AuthenticationController authenticationController;
