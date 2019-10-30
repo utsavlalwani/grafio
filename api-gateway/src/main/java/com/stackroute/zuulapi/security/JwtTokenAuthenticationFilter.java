@@ -30,6 +30,10 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+        
+        if(CorsUtils.isPreFlightRequest(request)) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
 
         // 1. get the authentication header. Tokens are supposed to be passed in the authentication header
         String header = request.getHeader(jwtConfig.getHeader());
