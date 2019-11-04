@@ -25,6 +25,7 @@ public class RabbitMqReceiverService {
                     .id(postDTO.getId())
                     .title(postDTO.getTitle())
                     .videoUrl(postDTO.getVideoUrl())
+                    .location(postDTO.getLocation())
                     .tags(postDTO.getTags())
                     .timestamp(postDTO.getTimestamp())
                     .isAnonymous(postDTO.isAnonymous())

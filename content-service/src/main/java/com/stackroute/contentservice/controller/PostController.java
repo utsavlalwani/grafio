@@ -52,6 +52,7 @@ public class PostController {
             PostDTO postDTO = PostDTO.builder()
                     .id(posted.getId())
                     .title(posted.getTitle())
+                    .location(posted.getLocation())
                     .timestamp(posted.getTimestamp())
                     .tags(posted.getTags())
                     .videoUrl(posted.getVideoUrl())

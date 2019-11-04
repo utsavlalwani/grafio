@@ -19,6 +19,7 @@ public class Post {
     private String title;
     private String videoUrl;
     private Date timestamp;
+    private String location;
     private List<String> tags;
     private boolean isAnonymous;
     private String category;
