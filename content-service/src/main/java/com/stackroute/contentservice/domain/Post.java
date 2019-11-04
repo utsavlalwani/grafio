@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class Post {
     @Id
-    private long id;
+    private String id;
     private String title;
     private String videoUrl;
     private Date timestamp;

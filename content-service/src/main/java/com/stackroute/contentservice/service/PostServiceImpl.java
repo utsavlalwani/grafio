@@ -17,7 +17,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post getPost(long id) throws PostNotFoundException {
+    public Post getPost(String id) throws PostNotFoundException {
         if(postRepository.findById(id).isEmpty()) {
            throw new PostNotFoundException("Post with id: "+id+" not found!");
         }
@@ -41,7 +41,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post deletePost(long id) throws PostNotFoundException {
+    public Post deletePost(String id) throws PostNotFoundException {
         if(postRepository.findById(id).isEmpty()) {
             throw new PostNotFoundException("Post with id: "+id+" not found!");
         }

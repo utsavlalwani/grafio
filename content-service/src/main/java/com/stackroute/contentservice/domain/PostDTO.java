@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 public class PostDTO implements Serializable {
-    private long id;
+    private String id;
     private String title;
     private String videoUrl;
     private Date timestamp;

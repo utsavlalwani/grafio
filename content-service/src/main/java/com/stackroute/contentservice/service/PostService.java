@@ -5,8 +5,8 @@ import com.stackroute.contentservice.exception.PostAlreadyExistsException;
 import com.stackroute.contentservice.exception.PostNotFoundException;
 
 public interface PostService {
-    Post getPost(long id) throws PostNotFoundException;
+    Post getPost(String id) throws PostNotFoundException;
     Post savePost(Post post) throws PostAlreadyExistsException;
     Post updatePost(Post post) throws PostNotFoundException;
-    Post deletePost(long id) throws PostNotFoundException;
+    Post deletePost(String id) throws PostNotFoundException;
 }

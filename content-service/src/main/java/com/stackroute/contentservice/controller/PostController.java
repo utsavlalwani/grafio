@@ -30,7 +30,7 @@ public class PostController {
     }
 
     @GetMapping("/post/{id}")
-    public ResponseEntity<?> getPost(@PathVariable long id) {
+    public ResponseEntity<?> getPost(@PathVariable String id) {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<Post>(postService.getPost(id), HttpStatus.OK);
@@ -76,7 +76,7 @@ public class PostController {
     }
 
     @DeleteMapping("/post/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable long id) {
+    public ResponseEntity<?> deletePost(@PathVariable String id) {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<Post>(postService.deletePost(id), HttpStatus.OK);
