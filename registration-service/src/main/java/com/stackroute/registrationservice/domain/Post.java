@@ -17,7 +17,7 @@ public class Post {
     @Id
     private long id;
     private String title;
-    private String video_url;
+    private String videoUrl;
     private Date timestamp;
     private List<String> tags;
     private boolean isAnonymous;
