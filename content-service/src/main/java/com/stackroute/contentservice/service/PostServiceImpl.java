@@ -7,6 +7,8 @@ import com.stackroute.contentservice.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+
 @Service
 public class PostServiceImpl implements PostService{
     private PostRepository postRepository;
@@ -17,7 +19,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post getPost(String id) throws PostNotFoundException {
+    public Post getPost(BigInteger id) throws PostNotFoundException {
         if(postRepository.findById(id).isEmpty()) {
            throw new PostNotFoundException("Post with id: "+id+" not found!");
         }
@@ -41,7 +43,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post deletePost(String id) throws PostNotFoundException {
+    public Post deletePost(BigInteger id) throws PostNotFoundException {
         if(postRepository.findById(id).isEmpty()) {
             throw new PostNotFoundException("Post with id: "+id+" not found!");
         }

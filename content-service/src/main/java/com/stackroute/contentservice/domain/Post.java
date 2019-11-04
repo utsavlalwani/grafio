@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private String id;
+    private BigInteger id;
     private String title;
     private String videoUrl;
     private Date timestamp;

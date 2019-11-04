@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/")
@@ -30,7 +32,7 @@ public class PostController {
     }
 
     @GetMapping("/post/{id}")
-    public ResponseEntity<?> getPost(@PathVariable String id) {
+    public ResponseEntity<?> getPost(@PathVariable BigInteger id) {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<Post>(postService.getPost(id), HttpStatus.OK);
@@ -78,7 +80,7 @@ public class PostController {
     }
 
     @DeleteMapping("/post/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable String id) {
+    public ResponseEntity<?> deletePost(@PathVariable BigInteger id) {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<Post>(postService.deletePost(id), HttpStatus.OK);
