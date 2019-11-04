@@ -45,6 +45,7 @@ public class PostController {
         ResponseEntity responseEntity;
         try {
             Post posted = postService.savePost(post);
+            System.out.println(posted.toString());
             responseEntity = new ResponseEntity<Post>(posted, HttpStatus.CREATED);
             PostDTO postDTO = PostDTO.builder()
                     .id(posted.getId())
