@@ -42,19 +42,20 @@ public class PostController {
 
     @PostMapping("/post")
     public ResponseEntity<?> savePost(@RequestBody Post post) {
-        PostDTO postDTO = PostDTO.builder()
-                                .id(post.getId())
-                                .title(post.getTitle())
-                                .timestamp(post.getTimestamp())
-                                .tags(post.getTags())
-                                .videoUrl(post.getVideoUrl())
-                                .isAnonymous(post.isAnonymous())
-                                .category(post.getCategory())
-                                .postedBy(post.getPostedBy())
-                                .build();
         ResponseEntity responseEntity;
         try {
-            responseEntity = new ResponseEntity<Post>(postService.savePost(post), HttpStatus.CREATED);
+            Post posted = postService.savePost(post);
+            responseEntity = new ResponseEntity<Post>(posted, HttpStatus.CREATED);
+            PostDTO postDTO = PostDTO.builder()
+                    .id(posted.getId())
+                    .title(posted.getTitle())
+                    .timestamp(posted.getTimestamp())
+                    .tags(posted.getTags())
+                    .videoUrl(posted.getVideoUrl())
+                    .isAnonymous(posted.isAnonymous())
+                    .category(posted.getCategory())
+                    .postedBy(posted.getPostedBy())
+                    .build();
             rabbitTemplate.convertAndSend(topicExchange, routingKey , new ObjectMapper().writeValueAsString(postDTO));
         } catch (PostAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
