@@ -1,4 +1,4 @@
-pipeline {
+    pipeline {
     agent any
     environment {
         repo_path = '$(basename $PWD)'

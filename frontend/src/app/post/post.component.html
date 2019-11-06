@@ -1,0 +1,22 @@
+<mat-card class="post">
+  <mat-video [preload]="true" [fullscreen]="true"
+             [download]="false" color="accent" spinner="spin">
+      <source src="{{post.videoUrl}}" type="video/mp4">
+  </mat-video>
+  <br>
+  <mat-card-title>{{post.title}}</mat-card-title>
+  <mat-card-actions>
+    <button mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">thumb_up</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">thumb_down</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">flag</mat-icon>
+    </button>
+    <!-- <button mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">remove_red_eye</mat-icon>
+    </button> -->
+  </mat-card-actions>
+</mat-card>

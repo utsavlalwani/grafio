@@ -14,23 +14,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/")
 public class PostController {
     private PostService postService;
     private RabbitTemplate rabbitTemplate;
-    private Queue queue;
+    private String topicExchange = "post";
+    private String routingKey = "user.post.new";
 
     @Autowired
-    public PostController(PostService postService, RabbitTemplate rabbitTemplate, Queue queue) {
+    public PostController(PostService postService, RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
         this.postService = postService;
-        this.queue = queue;
     }
 
     @GetMapping("/post/{id}")
-    public ResponseEntity<?> getPost(@PathVariable long id) {
+    public ResponseEntity<?> getPost(@PathVariable BigInteger id) {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<Post>(postService.getPost(id), HttpStatus.OK);
@@ -42,19 +45,23 @@ public class PostController {
 
     @PostMapping("/post")
     public ResponseEntity<?> savePost(@RequestBody Post post) {
-        PostDTO postDTO = PostDTO.builder()
-                                .id(post.getId())
-                                .title(post.getTitle())
-                                .timestamp(post.getTimestamp())
-                                .tags(post.getTags())
-                                .videoUrl(post.getVideoUrl())
-                                .isAnonymous(post.isAnonymous())
-                                .postedBy(post.getPostedBy())
-                                .build();
         ResponseEntity responseEntity;
         try {
-            responseEntity = new ResponseEntity<Post>(postService.savePost(post), HttpStatus.CREATED);
-            rabbitTemplate.convertAndSend(queue.getName(), new ObjectMapper().writeValueAsString(postDTO));
+            Post posted = postService.savePost(post);
+            System.out.println(posted.toString());
+            responseEntity = new ResponseEntity<Post>(posted, HttpStatus.CREATED);
+            PostDTO postDTO = PostDTO.builder()
+                    .id(posted.getId())
+                    .title(posted.getTitle())
+                    .location(posted.getLocation())
+                    .timestamp(posted.getTimestamp())
+                    .tags(posted.getTags())
+                    .videoUrl(posted.getVideoUrl())
+                    .isAnonymous(posted.isAnonymous())
+                    .category(posted.getCategory())
+                    .postedBy(posted.getPostedBy())
+                    .build();
+            rabbitTemplate.convertAndSend(topicExchange, routingKey , new ObjectMapper().writeValueAsString(postDTO));
         } catch (PostAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         } catch (JsonProcessingException e) {
@@ -75,7 +82,7 @@ public class PostController {
     }
 
     @DeleteMapping("/post/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable long id) {
+    public ResponseEntity<?> deletePost(@PathVariable BigInteger id) {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<Post>(postService.deletePost(id), HttpStatus.OK);
@@ -84,4 +91,52 @@ public class PostController {
         }
         return responseEntity;
     }
+
+    @GetMapping("/posts")
+    public ResponseEntity<?> getAllPosts() {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = new ResponseEntity<List<Post>>(postService.getAllPosts(), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping("/posts/{category}")
+    public ResponseEntity<?> getPostsByCategory(@PathVariable String category) {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = new ResponseEntity<List<Post>>(postService.getPostsByCategory(category), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+
+
+    @GetMapping("/posts/trending")
+    public ResponseEntity<?> getTrendingPosts()  {
+        ResponseEntity responseEntity;
+        try {
+            List<Post> trendingPosts=postService.getAllPosts();
+            responseEntity = new ResponseEntity<List<Post>>(postService.getTrendingPosts(trendingPosts), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+    @GetMapping("/posts/trending/{category}")
+    public ResponseEntity<?> getTrendingPostsByCategory(@PathVariable String category)  {
+        ResponseEntity responseEntity;
+        try {
+            List<Post> trendingPostsByCategory=postService.getPostsByCategory(category);
+            trendingPostsByCategory=postService.getTrendingPosts(trendingPostsByCategory);
+            responseEntity = new ResponseEntity<List<Post>>(postService.getTrendingPosts(trendingPostsByCategory), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+
 }

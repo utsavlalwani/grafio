@@ -33,6 +33,7 @@
         <module>login-service</module>
         <module>registration-service</module>
         <module>content-service</module>
+        <module>search-service</module>
     </modules>
 
     <dependencies>

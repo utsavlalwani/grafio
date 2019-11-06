@@ -48,10 +48,9 @@ services:
       - "3306:3306"
     container_name: mysql-docker
     network_mode: host
-    hostname: localhost
     environment:
-      - MYSQL_ROOT_PASSWORD:"root"
-      - MYSQL_ROOT_HOST:%
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=%
     volumes:
       - $HOME/mysql:/var/lib/mysql
 
@@ -103,3 +102,12 @@ services:
     hostname: localhost
     ports:
       - 8093:8093
+
+  news-zoid-frontend:
+    build: frontend/
+    container_name: news-zoid-frontend-container
+    network_mode: "host"
+    hostname: localhost
+    restart: always
+    ports:
+      - "4200:4200"

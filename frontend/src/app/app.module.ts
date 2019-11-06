@@ -1,33 +1,84 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { FormsModule } from "@angular/forms";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule } from '@angular/material';
-import { HeaderComponent } from './header/header.component';
+import {
+  MatButtonModule, MatCardModule, MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule, MatGridListModule,
+  MatIconModule,
+  MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
+  MatStepperModule,
+  MatToolbarModule
+} from '@angular/material';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatVideoModule } from 'mat-video';
+import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
-import { TrendingvideosComponent } from './trendingvideos/trendingvideos.component';
-import { FooterComponent } from './footer/footer.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { LoginComponent } from './login/login.component';
-import { MatTabsModule } from '@angular/material/tabs';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import {HttpClientModule} from '@angular/common/http' 
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
-import { ReactiveFormsModule }         from '@angular/forms';
-import { MaterialModule } from './material.module';
-import { HomeComponent } from './home/home.component';
-
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import {DatePipe} from '@angular/common';
+import { UploadComponent } from './upload/upload.component';
+import { TrendingComponent } from './trending/trending.component';
+import { RecommendationComponent } from './recommendation/recommendation.component';
+import { LikedComponent } from './liked/liked.component';
+import { PostedComponent } from './posted/posted.component';
+import { PostComponent } from './post/post.component';
+import { CategoryComponent } from './category/category.component';
+import { EditProfileComponent} from './edit-profile/edit-profile.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NavbarComponent, LoginComponent, TrendingvideosComponent, FooterComponent, DashboardComponent, UserRegistrationComponent, HomeComponent],
-  imports: [BrowserModule, ReactiveFormsModule, MaterialModule, MatGridListModule, AppRoutingModule, FormsModule, BrowserAnimationsModule, MatSliderModule, MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, HttpClientModule, MatTabsModule, MatDividerModule],
-  providers: [],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent,
+    UploadComponent,
+    TrendingComponent,
+    RecommendationComponent,
+    LikedComponent,
+    PostedComponent,
+    PostComponent,
+    CategoryComponent,
+    EditProfileComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    LayoutModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDialogModule,
+    FormsModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatGridListModule,
+    MatVideoModule,
+    MatCheckboxModule
+  ],
+  entryComponents: [
+    LoginComponent,
+    UploadComponent
+  ],
+  providers: [DatePipe, CategoryComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -4,6 +4,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -15,12 +18,15 @@ import java.util.List;
 @Builder
 public class Post {
     @Id
-    private long id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private BigInteger id;
     private String title;
     private String videoUrl;
     private Date timestamp;
     private User postedBy;
     private List<String> tags;
+    private String category;
+    private String location;
     private boolean isAnonymous;
     private List<User> likedBy;
     private List<User> flaggedBy;

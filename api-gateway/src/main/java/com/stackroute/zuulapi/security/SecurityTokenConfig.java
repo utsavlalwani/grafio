@@ -24,11 +24,12 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 // handle an authorized attempts
-                .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                 .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_ACCEPTED))
                 .and()
                 // Add a filter to validate the tokens with every request
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 // authorization requests config
+//                .authorizeRequests().antMatchers("/*").permitAll()
                 .authorizeRequests().antMatchers("/registration-service/api/v1/register", "/login-service/api/v1/authenticate").permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
 //                .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")

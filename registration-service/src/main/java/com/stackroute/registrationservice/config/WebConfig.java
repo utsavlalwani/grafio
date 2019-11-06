@@ -29,7 +29,7 @@ public class WebConfig {
 
     @Bean
     Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("post");
+        return BindingBuilder.bind(queue).to(exchange).with("user.post.#");
     }
 
     @Bean
@@ -37,7 +37,7 @@ public class WebConfig {
                                              MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queueName1, queueName2);
+        container.setQueueNames(queueName2);
         container.setMessageListener(listenerAdapter);
         return container;
     }

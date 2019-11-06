@@ -17,7 +17,10 @@ public class PostDTO implements Serializable {
     private String title;
     private String videoUrl;
     private Date timestamp;
+    private String location;
     private List<String> tags;
     private boolean isAnonymous;
     private User postedBy;
+    private String category;
+
 }
