@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {Router} from '@angular/router';
-import {User} from './user';
-import { AuthenticationService } from '../authentication.service';
-import {FormGroup, FormBuilder, Validators, FormsModule, NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -12,26 +10,28 @@ import {FormGroup, FormBuilder, Validators, FormsModule, NgForm} from '@angular/
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authenticationService:AuthenticationService,
-    private router:Router) { }
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router) { }
+  errorMessage: string = null;
 
   ngOnInit() {
   }
-  errorm : string;
-  loginUser(myForm: NgForm){
-    let user: User = {
+
+  loginUser(myForm: NgForm) {
+    const user: any = {
       username: myForm.value.username,
       password: myForm.value.password
     };
     user.username = myForm.value.username;
     user.password = myForm.value.password;
-    console.log('user: ', user);
-    this.authenticationService.loginUser(user).subscribe(data=>{
-      console.log(data);
-      this.router.navigateByUrl('/dashboard');
-    },error=>{
-      
-      this.errorm = "Incorrect username or password";
+    console.log(user.username + ' ' + user.password);
+    this.authenticationService.loginUser(user).subscribe(data => {
+      const jwt = data.jwtToken;
+      localStorage.setItem('jwt', jwt);
+      localStorage.setItem('username', user.username);
+    }, error => {
+      this.errorMessage = 'Incorrect username or password';
     });
   }
+
 }
