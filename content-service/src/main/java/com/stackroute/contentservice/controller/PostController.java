@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -90,4 +91,52 @@ public class PostController {
         }
         return responseEntity;
     }
+
+    @GetMapping("/posts")
+    public ResponseEntity<?> getAllPosts() {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = new ResponseEntity<List<Post>>(postService.getAllPosts(), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping("/posts/{category}")
+    public ResponseEntity<?> getPostsByCategory(@PathVariable String category) {
+        ResponseEntity responseEntity;
+        try {
+            responseEntity = new ResponseEntity<List<Post>>(postService.getPostsByCategory(category), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+
+
+    @GetMapping("/posts/trending")
+    public ResponseEntity<?> getTrendingPosts()  {
+        ResponseEntity responseEntity;
+        try {
+            List<Post> trendingPosts=postService.getAllPosts();
+            responseEntity = new ResponseEntity<List<Post>>(postService.getTrendingPosts(trendingPosts), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+    @GetMapping("/posts/trending/{category}")
+    public ResponseEntity<?> getTrendingPostsByCategory(@PathVariable String category)  {
+        ResponseEntity responseEntity;
+        try {
+            List<Post> trendingPostsByCategory=postService.getPostsByCategory(category);
+            trendingPostsByCategory=postService.getTrendingPosts(trendingPostsByCategory);
+            responseEntity = new ResponseEntity<List<Post>>(postService.getTrendingPosts(trendingPostsByCategory), HttpStatus.OK);
+        } catch (PostNotFoundException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
+    }
+
 }
