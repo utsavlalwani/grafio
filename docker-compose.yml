@@ -104,9 +104,9 @@ services:
     ports:
       - 8093:8093
 
-  newsZoid-frontend:
+  news-zoid-frontend:
     build: frontend/
-    container_name: newsZoid-frontend-container
+    container_name: news-zoid-frontend-container
     network_mode: "host"
     hostname: localhost
     restart: always
