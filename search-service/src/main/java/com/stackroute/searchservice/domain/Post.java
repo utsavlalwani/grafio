@@ -1,4 +1,4 @@
-package com.stackroute.registrationservice.domain;
+package com.stackroute.searchservice.domain;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -12,16 +12,15 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@ToString
 public class Post {
-
     @Id
     private BigInteger id;
     private String title;
     private String videoUrl;
     private Date timestamp;
-    private String location;
+    private User postedBy;
     private List<String> tags;
-    private String category;
-
+    private List<User> likedBy;
+    private List<User> flaggedBy;
+    private List<User> watchedBy;
 }

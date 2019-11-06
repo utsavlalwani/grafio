@@ -14,6 +14,7 @@ import java.util.List;
 
 @Service
 public class RabbitMqReceiverService {
+
     @Autowired
     private UserRegistrationService userRegistrationService;
 
@@ -28,9 +29,8 @@ public class RabbitMqReceiverService {
                     .location(postDTO.getLocation())
                     .tags(postDTO.getTags())
                     .timestamp(postDTO.getTimestamp())
-                    .isAnonymous(postDTO.isAnonymous())
+                    .category(postDTO.getCategory())
                     .build();
-            System.out.println(postDTO.toString());
             User user = userRegistrationService.getUser(postDTO.getPostedBy().getUsername());
             if(user.getPosts()!=null) {
                 user.getPosts().add(post);
@@ -39,10 +39,42 @@ public class RabbitMqReceiverService {
                 posts.add(post);
                 user.setPosts(posts);
             }
+            for (User userFind: postDTO.getLikedBy()) {
+                if(user.getUsername().equals(userFind.getUsername())) {
+                    if(user.getLiked()!=null) {
+                        user.getLiked().add(post);
+                    } else {
+                        List<Post> posts = new ArrayList<Post>();
+                        posts.add(post);
+                        user.setLiked(posts);
+                    }
+                }
+            }
+            for (User userFind: postDTO.getWatchedBy()) {
+                if(user.getUsername().equals(userFind.getUsername())) {
+                    if(user.getWatched()!=null) {
+                        user.getWatched().add(post);
+                    } else {
+                        List<Post> posts = new ArrayList<Post>();
+                        posts.add(post);
+                        user.setWatched(posts);
+                    }
+                }
+            }
+            for (User userFind: postDTO.getFlaggedBy()) {
+                if(user.getUsername().equals(userFind.getUsername())) {
+                    if(user.getFlagged()!=null) {
+                        user.getFlagged().add(post);
+                    } else {
+                        List<Post> posts = new ArrayList<Post>();
+                        posts.add(post);
+                        user.setFlagged(posts);
+                    }
+                }
+            }
             userRegistrationService.updateUser(user);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
 }

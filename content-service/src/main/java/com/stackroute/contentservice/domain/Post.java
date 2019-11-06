@@ -18,7 +18,6 @@ import java.util.List;
 @Builder
 public class Post {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private BigInteger id;
     private String title;
     private String videoUrl;
@@ -27,9 +26,7 @@ public class Post {
     private List<String> tags;
     private String category;
     private String location;
-    private boolean isAnonymous;
     private List<User> likedBy;
     private List<User> flaggedBy;
-    private List<User> boughtBy;
     private List<User> watchedBy;
 }

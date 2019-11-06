@@ -48,20 +48,8 @@ public class PostController {
         ResponseEntity responseEntity;
         try {
             Post posted = postService.savePost(post);
-            System.out.println(posted.toString());
             responseEntity = new ResponseEntity<Post>(posted, HttpStatus.CREATED);
-            PostDTO postDTO = PostDTO.builder()
-                    .id(posted.getId())
-                    .title(posted.getTitle())
-                    .location(posted.getLocation())
-                    .timestamp(posted.getTimestamp())
-                    .tags(posted.getTags())
-                    .videoUrl(posted.getVideoUrl())
-                    .isAnonymous(posted.isAnonymous())
-                    .category(posted.getCategory())
-                    .postedBy(posted.getPostedBy())
-                    .build();
-            rabbitTemplate.convertAndSend(topicExchange, routingKey , new ObjectMapper().writeValueAsString(postDTO));
+            rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(post));
         } catch (PostAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         } catch (JsonProcessingException e) {
@@ -114,29 +102,28 @@ public class PostController {
         return responseEntity;
     }
 
-
     @GetMapping("/posts/trending")
-    public ResponseEntity<?> getTrendingPosts()  {
+    public ResponseEntity<?> getTrendingPosts() {
         ResponseEntity responseEntity;
         try {
-            List<Post> trendingPosts=postService.getAllPosts();
+            List<Post> trendingPosts = postService.getAllPosts();
             responseEntity = new ResponseEntity<List<Post>>(postService.getTrendingPosts(trendingPosts), HttpStatus.OK);
         } catch (PostNotFoundException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return responseEntity;
     }
+
     @GetMapping("/posts/trending/{category}")
-    public ResponseEntity<?> getTrendingPostsByCategory(@PathVariable String category)  {
+    public ResponseEntity<?> getTrendingPostsByCategory(@PathVariable String category) {
         ResponseEntity responseEntity;
         try {
-            List<Post> trendingPostsByCategory=postService.getPostsByCategory(category);
-            trendingPostsByCategory=postService.getTrendingPosts(trendingPostsByCategory);
+            List<Post> trendingPostsByCategory = postService.getPostsByCategory(category);
+            trendingPostsByCategory = postService.getTrendingPosts(trendingPostsByCategory);
             responseEntity = new ResponseEntity<List<Post>>(postService.getTrendingPosts(trendingPostsByCategory), HttpStatus.OK);
         } catch (PostNotFoundException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return responseEntity;
     }
-
 }
