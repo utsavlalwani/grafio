@@ -3,7 +3,6 @@ package com.stackroute.registrationservice.domain;
 import lombok.*;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -14,15 +13,14 @@ import java.util.List;
 @Builder
 @ToString
 public class PostDTO implements Serializable {
-    private BigInteger id;
+    private long id;
     private String title;
     private String videoUrl;
     private Date timestamp;
-    private User postedBy;
-    private List<String> tags;
-    private String category;
     private String location;
-    private List<User> likedBy;
-    private List<User> flaggedBy;
-    private List<User> watchedBy;
+    private List<String> tags;
+    private boolean isAnonymous;
+    private User postedBy;
+    private String category;
+
 }
