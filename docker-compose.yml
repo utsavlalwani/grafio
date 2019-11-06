@@ -48,7 +48,6 @@ services:
       - "3306:3306"
     container_name: mysql-docker
     network_mode: host
-    hostname: localhost
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_ROOT_HOST=%
