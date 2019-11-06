@@ -18,7 +18,7 @@
                       [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
-              <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number
+              <mat-hint>At least eight characters. Use uppercase letters, lowercase letters, numbers and special characters.
               </mat-hint>
               <mat-error
                 *ngIf="!firstFormGroup.controls['password'].valid && firstFormGroup.controls['password'].touched">
