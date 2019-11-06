@@ -103,3 +103,12 @@ services:
     hostname: localhost
     ports:
       - 8093:8093
+
+  newsZoid-frontend:
+    build: frontend/
+    container_name: newsZoid-frontend-container
+    network_mode: "host"
+    hostname: localhost
+    restart: always
+    ports:
+      - "4200:4200"
