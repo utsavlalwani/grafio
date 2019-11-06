@@ -111,3 +111,16 @@ services:
     restart: always
     ports:
       - "4200:4200"
+
+  search:
+    build: search-service/
+    container_name: search-service
+    depends_on:
+      - eureka-server
+      - api-gateway
+      - rabbitmq
+      - content-service
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:

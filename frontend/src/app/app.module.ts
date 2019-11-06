@@ -32,6 +32,8 @@ import { PostedComponent } from './posted/posted.component';
 import { PostComponent } from './post/post.component';
 import { CategoryComponent } from './category/category.component';
 import { EditProfileComponent} from './edit-profile/edit-profile.component';
+import { SearchComponent } from './search/search.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { EditProfileComponent} from './edit-profile/edit-profile.component';
     PostedComponent,
     PostComponent,
     CategoryComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    SearchComponent,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,
