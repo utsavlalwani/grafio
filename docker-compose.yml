@@ -124,3 +124,4 @@ services:
     network_mode: "host"
     hostname: localhost
     ports:
+      - 8094:8094
