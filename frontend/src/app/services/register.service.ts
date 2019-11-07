@@ -6,7 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class RegisterService {
   constructor(private http: HttpClient) { }
-  private url = 'https://newszoid.stackroute.io:8080/registration-service/api/v1/register';
+  private url = 'https://newszoid.stackroute.io:8443/registration-service/api/v1/register';
 
 
   saveUser(userObj): any {
@@ -49,7 +49,7 @@ export class RegisterService {
     }
     console.log('headers: ', httpOptions.headers);
 
-    return this.http.put<any>('https://newszoid.stackroute.io:8080/registration-service/api/v1/register/' + username, userObj, httpOptions);
+    return this.http.put<any>('https://newszoid.stackroute.io:8443/registration-service/api/v1/register/' + username, userObj, httpOptions);
 
   }
 
@@ -73,7 +73,7 @@ export class RegisterService {
 
     console.log('headers: ', httpOptions.headers);
 
-    return this.http.get<any>('https://newszoid.stackroute.io:8080/registration-service/api/v1/register/' + username, httpOptions);
+    return this.http.get<any>('https://newszoid.stackroute.io:8443/registration-service/api/v1/register/' + username, httpOptions);
 
   }
 }

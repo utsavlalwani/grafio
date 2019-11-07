@@ -15,7 +15,7 @@ export class UploadComponent implements OnInit {
   /** Name used in form which will be sent in HTTP request. */
   @Input() param = 'file';
   /** Target URL for file uploading. */
-  @Input() target = 'https://newszoid.stackroute.io:8080/content-service/api/v1/file/';
+  @Input() target = 'https://newszoid.stackroute.io:8443/content-service/api/v1/file/';
   @Input() accept = '*';
   /** Allow you to add handler after its completion. Bubble up response text from remote. */
   @Output() complete = new EventEmitter<string>();
@@ -102,7 +102,7 @@ export class UploadComponent implements OnInit {
           'Authorization': 'Bearer ' + localStorage.getItem('jwt')
         })
     };
-    this.http.post('https://newszoid.stackroute.io:8080/content-service/api/v1/post', this.post, httpOptions).subscribe(data => {
+    this.http.post('https://newszoid.stackroute.io:8443/content-service/api/v1/post', this.post, httpOptions).subscribe(data => {
       console.log(data);
     });
     this.router.navigateByUrl('/posted');

@@ -18,7 +18,7 @@ export class PostedService {
         })
     };
     const username = localStorage.getItem('username');
-    const url = 'https://newszoid.stackroute.io:8080/registration-service/api/v1/register/' + username;
+    const url = 'https://newszoid.stackroute.io:8443/registration-service/api/v1/register/' + username;
     return this.http.get(url, httpOptions);
   }
 }
