@@ -7,7 +7,9 @@ import com.stackroute.searchservice.domain.Category;
 import com.stackroute.searchservice.domain.Location;
 import com.stackroute.searchservice.domain.Post;
 import com.stackroute.searchservice.domain.PostDTO;
+import com.stackroute.searchservice.exceptions.CategoryAlreadyExistsException;
 import com.stackroute.searchservice.exceptions.CategoryNotFoundException;
+import com.stackroute.searchservice.exceptions.LocationAlreadyExistsException;
 import com.stackroute.searchservice.exceptions.LocationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class RabbitMqReceiver {
     }
 
     public void receiveMessage(String message) {
+        System.out.println("in receiver");
         try {
             PostDTO postDTO = new ObjectMapper().readValue(message, PostDTO.class);
             Post post = Post.builder()
@@ -54,6 +57,11 @@ public class RabbitMqReceiver {
                                             .location(postDTO.getLocation())
                                             .posts(posts)
                                             .build();
+                try {
+                    locationService.addLocation(location);
+                } catch (LocationAlreadyExistsException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             try {
@@ -68,6 +76,11 @@ public class RabbitMqReceiver {
                         .category(postDTO.getCategory())
                         .posts(posts)
                         .build();
+                try {
+                    categoryService.addCategory(category);
+                } catch (CategoryAlreadyExistsException ex) {
+                    ex.printStackTrace();
+                }
             }
         } catch (JsonParseException e) {
             e.printStackTrace();

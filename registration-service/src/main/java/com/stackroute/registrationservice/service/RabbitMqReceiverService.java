@@ -39,7 +39,7 @@ public class RabbitMqReceiverService {
                 posts.add(post);
                 user.setPosts(posts);
             }
-            for (User userFind: postDTO.getLikedBy()) {
+            /*for (User userFind: postDTO.getLikedBy()) {
                 if(user.getUsername().equals(userFind.getUsername())) {
                     if(user.getLiked()!=null) {
                         user.getLiked().add(post);
@@ -71,10 +71,10 @@ public class RabbitMqReceiverService {
                         user.setFlagged(posts);
                     }
                 }
-            }
+            }*/
             userRegistrationService.updateUser(user);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
