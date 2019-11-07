@@ -19,18 +19,19 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+		.cors().and()
                 .csrf().disable()
                 // make sure we use stateless session; session won't be used to store user's state.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 // handle an authorized attempts
-                 .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_ACCEPTED, e.getMessage()))
+                .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_ACCEPTED, e.getMessage()))
                 .and()
                 // Add a filter to validate the tokens with every request
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 // authorization requests config
-//                .authorizeRequests().antMatchers("/*").permitAll()
-                .authorizeRequests().antMatchers("/registration-service/api/v1/register", "/login-service/api/v1/authenticate").permitAll()
+                .authorizeRequests().antMatchers("/login-service/api/v1/authenticate", "/registration-service/api/v1/register").permitAll()
+//                .authorizeRequests().antMatchers("/registration-service/api/v1/register", "/login-service/api/v1/authenticate").permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
 //                .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
                 // Any other request must be authenticated

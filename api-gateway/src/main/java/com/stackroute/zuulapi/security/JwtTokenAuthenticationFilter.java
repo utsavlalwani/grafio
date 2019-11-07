@@ -53,7 +53,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
         // 3. Get the token
         String token = header.replace(jwtConfig.getPrefix(), "");
-
+	System.out.println("qqqqqqqqqqq"+token);
 
         // exceptions might be thrown in creating the claims if for example the token is expired
 

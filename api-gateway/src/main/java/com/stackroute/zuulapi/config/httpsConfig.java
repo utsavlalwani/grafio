@@ -1,4 +1,4 @@
-package com.stackroute.zuulapi.config;
+/*package com.stackroute.zuulapi.config;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
@@ -38,3 +38,4 @@ public class httpsConfig {
         return connector;
     }
 }
+*/
