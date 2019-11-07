@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  uploadPostUrl: 'http://13.235.222.93:8080/content-service/api/v1/post',
+  registerUrl: 'http://13.235.222.93:8080/registration-service/api/v1/register',
+  loginUrl:'http://13.235.222.93:8080/login-service/api/v1/authenticate',
+  postTargetUrl:'http://13.235.222.93:8080/content-service/api/v1/file/'
 };
 
 /*

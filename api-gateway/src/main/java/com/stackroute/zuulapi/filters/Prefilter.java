@@ -1,4 +1,4 @@
-package com.stackroute.zuulapi.pre;
+package com.stackroute.zuulapi.filters;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -6,7 +6,7 @@ import com.netflix.zuul.exception.ZuulException;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class SimpleFilter extends ZuulFilter {
+public class Prefilter extends ZuulFilter {
     @Override
     public String filterType() {
         return "pre";
@@ -22,6 +22,11 @@ public class SimpleFilter extends ZuulFilter {
     }
 
     public Object run() throws ZuulException {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+
+        System.out.println("Request Method : " + request.getMethod() + " Request URL : " + request.getRequestURL().toString());
         return null;
     }
+
 }

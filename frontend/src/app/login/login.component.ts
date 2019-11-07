@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       const jwt = data.jwtToken;
       localStorage.setItem('jwt', jwt);
       localStorage.setItem('username', user.username);
+      this.router.navigateByUrl('/trending');
     }, error => {
       this.errorMessage = 'Incorrect username or password';
     });

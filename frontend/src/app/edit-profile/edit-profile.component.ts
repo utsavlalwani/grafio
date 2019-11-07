@@ -61,7 +61,7 @@ export class EditProfileComponent implements OnInit {
   submitted = false;
   selectedOptions: String[] = [];
   selectedOption;
-  disabled = true;
+  
 
   taskTypeAreas: {
     name: string;
@@ -73,20 +73,23 @@ export class EditProfileComponent implements OnInit {
         name: 'International'
       },
       {
-        name: 'Sports'
-      },
-      {
         name: 'Business'
-      },
-      {
-        name: 'Movies'
       },
       {
         name: 'Technology'
       },
       {
-        name: 'Economy'
+        name: 'Entertainment'
       },
+      {
+        name: 'Sports'
+      },
+      {
+        name: 'Science'
+      },
+      {
+        name: 'Health'
+      }
     ];
 
 
@@ -184,6 +187,7 @@ export class EditProfileComponent implements OnInit {
         () => {
           this.ngOnInit();
           this.router.navigateByUrl('/trending');
+          
         }
       );
   }

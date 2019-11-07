@@ -22,6 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatRippleModule} from '@angular/material/core'; 
 import { RegisterComponent } from './register/register.component';
 import {DatePipe} from '@angular/common';
 import { UploadComponent } from './upload/upload.component';
@@ -32,8 +33,7 @@ import { PostedComponent } from './posted/posted.component';
 import { PostComponent } from './post/post.component';
 import { CategoryComponent } from './category/category.component';
 import { EditProfileComponent} from './edit-profile/edit-profile.component';
-import { SearchComponent } from './search/search.component';
-import { SearchbarComponent } from './searchbar/searchbar.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +49,7 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
     PostComponent,
     CategoryComponent,
     EditProfileComponent,
-    SearchComponent,
-    SearchbarComponent
+    ViewProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +75,8 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
     MatCardModule,
     MatGridListModule,
     MatVideoModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRippleModule
   ],
   entryComponents: [
     LoginComponent,

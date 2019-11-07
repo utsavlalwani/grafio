@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest, HttpEvent, HttpEventType, HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {environment} from '../../environments/environment'
 
 @Component({
   selector: 'app-upload',
@@ -15,7 +16,7 @@ export class UploadComponent implements OnInit {
   /** Name used in form which will be sent in HTTP request. */
   @Input() param = 'file';
   /** Target URL for file uploading. */
-  @Input() target = 'http://13.235.222.93:8080/content-service/api/v1/file/';
+  @Input() target = environment.postTargetUrl;
   @Input() accept = '*';
   /** Allow you to add handler after its completion. Bubble up response text from remote. */
   @Output() complete = new EventEmitter<string>();
@@ -24,6 +25,7 @@ export class UploadComponent implements OnInit {
 
   response: any;
   post: any;
+  prog: number = 0;
 
   ngOnInit() {
   }
@@ -59,10 +61,26 @@ export class UploadComponent implements OnInit {
     const request = new HttpRequest('POST', this.target, fd, { headers, responseType: 'text' });
     file.inProgress = true;
     const fds = new FormData();
-    this.http.request(request).subscribe(data => {
+    this.http.request(request).subscribe((data:HttpEvent<any>) => {
+      switch (data.type) {
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has been received!');
+          break;
+        case HttpEventType.UploadProgress:
+          this.prog = Math.round(data.loaded / data.total * 100);
+          console.log(`Uploaded! ${this.prog}%`);
+          break;
+        case HttpEventType.Response:
+          console.log('User successfully created!', data.body);
+          setTimeout(() => {
+            this.prog = 0;
+          }, 1500);
       this.response = data['body'];
       console.log('abc' + this.response);
-
+        }
     });
   }
 
@@ -102,7 +120,7 @@ export class UploadComponent implements OnInit {
           'Authorization': 'Bearer ' + localStorage.getItem('jwt')
         })
     };
-    this.http.post('http://13.235.222.93:8080/content-service/api/v1/post', this.post, httpOptions).subscribe(data => {
+    this.http.post(environment.uploadPostUrl, this.post, httpOptions).subscribe(data => {
       console.log(data);
     });
     this.router.navigateByUrl('/posted');

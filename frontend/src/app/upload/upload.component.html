@@ -17,6 +17,9 @@
         <mat-icon>file_upload</mat-icon>
         Select File
       </button>
+     
+      <br><br>
+      <mat-progress-bar mode="determinate" [value] = "prog"></mat-progress-bar>
 
       <!--<ul>
         <li *ngFor="let file of files" [@fadeInOut]="file.state">
@@ -33,6 +36,8 @@
         </li>
       </ul>-->
       <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="{{accept}}" hidden="hidden"/>
+     
+
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
