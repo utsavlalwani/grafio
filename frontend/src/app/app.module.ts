@@ -34,7 +34,7 @@ import { CategoryComponent } from './category/category.component';
 import { EditProfileComponent} from './edit-profile/edit-profile.component';
 import { SearchComponent } from './search/search.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
-
+import {ViewProfileComponent} from './view-profile/view-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +50,8 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
     CategoryComponent,
     EditProfileComponent,
     SearchComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    ViewProfileComponent
   ],
   imports: [
     BrowserModule,

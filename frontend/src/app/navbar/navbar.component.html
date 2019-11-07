@@ -15,7 +15,7 @@
   <section *ngIf="loggedIn(); else loggedOut">
     <mat-menu #userMenu="matMenu">
 
-      <button mat-menu-item routerLink="/">
+      <button mat-menu-item routerLink="/viewProfile">
         <mat-icon aria-hidden="false" aria-label="edit profile">accessibility_new</mat-icon>
         Hi {{username}} !
       </button>

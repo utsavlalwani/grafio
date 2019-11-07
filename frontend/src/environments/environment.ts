@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  ip: window.location.origin
-
+  uploadPostUrl: 'https://newszoid.stackroute.io:8443/content-service/api/v1/post',
+  registerUrl: 'https://newszoid.stackroute.io:8443/registration-service/api/v1/register',
+  loginUrl: 'https://newszoid.stackroute.io:8443/login-service/api/v1/authenticate',
+  postTargetUrl: 'https://newszoid.stackroute.io:8443/content-service/api/v1/file/'
 };
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

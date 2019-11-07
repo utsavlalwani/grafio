@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import{environment} from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class PostedService {
         })
     };
     const username = localStorage.getItem('username');
-    const url = 'https://.154.175.62:8443/registration-service/api/v1/register/' + username;
+    const url = environment.registerUrl + '/' + username;
     return this.http.get(url, httpOptions);
   }
 }

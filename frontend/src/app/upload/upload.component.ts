@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import{environment} from '../../environments/environment';
+
 
 @Component({
   selector: 'app-upload',
@@ -15,7 +17,7 @@ export class UploadComponent implements OnInit {
   /** Name used in form which will be sent in HTTP request. */
   @Input() param = 'file';
   /** Target URL for file uploading. */
-  @Input() target = 'https://.154.175.62:8443/content-service/api/v1/file/';
+  @Input() target = environment.postTargetUrl;
   @Input() accept = '*';
   /** Allow you to add handler after its completion. Bubble up response text from remote. */
   @Output() complete = new EventEmitter<string>();
@@ -102,7 +104,7 @@ export class UploadComponent implements OnInit {
           'Authorization': 'Bearer ' + localStorage.getItem('jwt')
         })
     };
-    this.http.post('https://.154.175.62:8443/content-service/api/v1/post', this.post, httpOptions).subscribe(data => {
+    this.http.post(environment.uploadPostUrl, this.post, httpOptions).subscribe(data => {
       console.log(data);
     });
     this.router.navigateByUrl('/posted');
