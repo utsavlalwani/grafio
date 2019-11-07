@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
+import {environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
-  private url = 'http://13.235.222.93:8080/login-service/api/v1/authenticate';
+  private url = environment.loginUrl;
 
   loginUser(user: any): any {
     const httpOptions = {

@@ -36,39 +36,39 @@ export class RegisterComponent implements OnInit {
 
   categories: {
     name: string;
-    icon: string;
+     icon: string;
   }[] = [
     {
       name: 'National',
-      icon: 'flag'
+       icon: 'flag'
     },
     {
       name: 'International',
-      icon: 'public'
+       icon: 'public'
     },
     {
       name: 'Business',
-      icon: 'business'
+       icon: 'business'
     },
     {
       name: 'Technology',
-      icon: 'memory'
+       icon: 'memory'
     },
     {
       name: 'Entertainment',
-      icon: 'movie'
+       icon: 'movie'
     },
     {
       name: 'Sports',
-      icon: 'directions_bike'
+       icon: 'directions_bike'
     },
     {
       name: 'Science',
-      icon: 'emoji_objects'
+       icon: 'emoji_objects'
     },
     {
       name: 'Health',
-      icon: 'fitness_center'
+       icon: 'fitness_center'
     },
   ];
 

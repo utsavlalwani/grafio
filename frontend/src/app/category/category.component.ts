@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
 
 class category {
   name: string;
@@ -53,9 +52,8 @@ export class CategoryComponent implements OnInit {
       icon: 'fitness_center'
     },
   ];
-  constructor(private route: ActivatedRoute,
-              private http: HttpClient) { }
-  posts: any;
+  constructor(private route: ActivatedRoute) { }
+
   ngOnInit() {
     this.route.url.subscribe(url => {
       this.categoryName = this.route.snapshot.paramMap.get('categoryName');
@@ -64,11 +62,6 @@ export class CategoryComponent implements OnInit {
           this.category = c;
         }
       });
-      this.http.get('http://13.235.222.93:8080/search-service/api/v1/category/' + this.category.name).subscribe(
-        (data) => {
-          this.posts = data['posts'];
-        }
-      );
     });
   }
 
