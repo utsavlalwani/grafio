@@ -7,7 +7,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
-  private url = 'http://newszoid.stackroute.io:8080/login-service/api/v1/authenticate';
+  private url = 'https://newszoid.stackroute.io:8080/login-service/api/v1/authenticate';
 
   loginUser(user: any): any {
     const httpOptions = {
