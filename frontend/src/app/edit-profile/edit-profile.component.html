@@ -85,11 +85,9 @@
                 (click)=update(name.value,userData.username,email.value,date.value,selectedOptions)>Submit</button>
 
             <button mat-button (click)="stepper.reset()">Reset</button>
-            
         </div>
     </mat-step>
 </mat-vertical-stepper>
-
 <ng-template #forminfo>
     <div class="container">
         {{ post | json }}

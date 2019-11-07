@@ -11,15 +11,11 @@
     <input matInput placeholder="Search for tags and locations" type="search" class="placeholder" style="color: aqua">
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field> -->
-  <mat-form-field class="search-bar">
-    <input matInput appearance="outline" >
-    <mat-placeholder class="placeholder">Search for news</mat-placeholder>
-    <mat-icon matSuffix class="searchIcon">search</mat-icon>
-</mat-form-field>
+  <app-searchbar></app-searchbar>
   <section *ngIf="loggedIn(); else loggedOut">
     <mat-menu #userMenu="matMenu">
-      
-      <button mat-menu-item routerLink="/viewProfile">
+
+      <button mat-menu-item routerLink="/">
         <mat-icon aria-hidden="false" aria-label="edit profile">accessibility_new</mat-icon>
         Hi {{username}} !
       </button>

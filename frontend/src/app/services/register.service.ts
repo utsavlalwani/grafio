@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
   constructor(private http: HttpClient) { }
-  private url = environment.registerUrl;
+  private url = 'http://13.235.222.93:8080/registration-service/api/v1/register';
 
 
   saveUser(userObj): any {
@@ -50,7 +49,7 @@ export class RegisterService {
     }
     console.log('headers: ', httpOptions.headers);
 
-    return this.http.put<any>(environment.registerUrl + '/'+ username, userObj, httpOptions);
+    return this.http.put<any>('http://13.235.222.93:8080/registration-service/api/v1/register/' + username, userObj, httpOptions);
 
   }
 
@@ -74,7 +73,7 @@ export class RegisterService {
 
     console.log('headers: ', httpOptions.headers);
 
-    return this.http.get<any>(environment.registerUrl + '/' + username, httpOptions);
+    return this.http.get<any>('http://13.235.222.93:8080/registration-service/api/v1/register/' + username, httpOptions);
 
   }
 }
