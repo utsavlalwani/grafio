@@ -8,6 +8,7 @@ import {PostedComponent} from './posted/posted.component';
 import {CategoryComponent} from './category/category.component';
 import { EditProfileComponent} from './edit-profile/edit-profile.component';
 import {ViewProfileComponent} from './view-profile/view-profile.component';
+import { SearchComponent} from './search/search.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'posted', component: PostedComponent},
   {path: 'category/:categoryName', component: CategoryComponent},
   {path: 'editProfile', component: EditProfileComponent},
-  {path: 'viewProfile', component: ViewProfileComponent}
+  {path: 'viewProfile', component: ViewProfileComponent},
+  {path: 'search/:query', component: SearchComponent}
 
 ];
 
