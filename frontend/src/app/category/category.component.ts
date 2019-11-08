@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 class category {
   name: string;
@@ -71,7 +72,7 @@ export class CategoryComponent implements OnInit {
             'Authorization': 'Bearer ' + localStorage.getItem('jwt')
           })
       };
-      this.http.get('https://.154.175.62:8443/search-service/api/v1/category/' + this.category.name, httpOptions).subscribe(
+      this.http.get(environment.categoryUrl + this.category.name, httpOptions).subscribe(
         (data) => {
           this.posts = data['posts'];
         }

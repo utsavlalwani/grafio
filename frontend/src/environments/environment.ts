@@ -7,7 +7,8 @@ export const environment = {
   uploadPostUrl: 'https://newszoid.stackroute.io:8443/content-service/api/v1/post',
   registerUrl: 'https://newszoid.stackroute.io:8443/registration-service/api/v1/register',
   loginUrl: 'https://newszoid.stackroute.io:8443/login-service/api/v1/authenticate',
-  postTargetUrl: 'https://newszoid.stackroute.io:8443/content-service/api/v1/file/'
+  postTargetUrl: 'https://newszoid.stackroute.io:8443/content-service/api/v1/file/',
+  categoryUrl: 'https://newszoid.stackroute.io:8443/search-service/api/v1/category/'
 };
 
 /*
