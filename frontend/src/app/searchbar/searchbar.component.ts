@@ -18,6 +18,8 @@ export class SearchbarComponent implements OnInit {
   response:any;
   search(query)
   {
-    this.router.navigateByUrl('/search/'+query);
+    this.router.navigateByUrl('/').then(() => {
+      this.router.navigateByUrl('/search/'+query);
+    });
   }
 }

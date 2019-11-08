@@ -50,6 +50,7 @@ public class RabbitMqReceiver {
                 List<Post> posts = location.getPosts();
                 posts.add(post);
                 location.setPosts(posts);
+                locationService.updateLocation(location);
             } catch (LocationNotFoundException e) {
                 List<Post> posts = new ArrayList<Post>();
                 posts.add(post);
@@ -69,6 +70,7 @@ public class RabbitMqReceiver {
                 List<Post> posts = category.getPosts();
                 posts.add(post);
                 category.setPosts(posts);
+                categoryService.updateCategory(category);
             } catch (CategoryNotFoundException e) {
                 List<Post> posts = new ArrayList<Post>();
                 posts.add(post);
