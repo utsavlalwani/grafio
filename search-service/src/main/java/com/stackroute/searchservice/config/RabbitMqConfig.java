@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMqConfig {
-    static final String queueName2="post";
+    static final String queueName2="posts";
     static final String topicExchangeName="post";
 
     @Bean

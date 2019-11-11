@@ -17,7 +17,7 @@
 
       <button mat-menu-item routerLink="/viewProfile">
         <mat-icon aria-hidden="false" aria-label="edit profile">accessibility_new</mat-icon>
-        Hi {{username}} !
+        Hi {{username}}!
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item routerLink="/editProfile">
@@ -40,7 +40,7 @@
   </ng-template>
 </mat-toolbar>
 <mat-sidenav-container hasBackdrop="false">
-  <mat-sidenav #sideNavBar mode="side" opened="true" class="side-navbar" fixedInViewport="true" fixedTopGap="90">
+  <mat-sidenav #sideNavBar mode="side" opened="true" class="side-navbar" fixedInViewport="true" fixedTopGap="70">
     <button mat-flat-button class="navbar-button" (click)="trending()">
       <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">local_activity</mat-icon>
       Trending Now
@@ -49,10 +49,10 @@
       <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon" >person</mat-icon>
       For You
     </button>
-    <button mat-flat-button class="navbar-button" (click)="liked()">
+    <!--<button mat-flat-button class="navbar-button" (click)="liked()">
       <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">thumb_up</mat-icon>
       Liked News
-    </button>
+    </button>-->
     <button mat-flat-button class="navbar-button" (click)="posted()">
       <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">movie_creation</mat-icon>
       Your Posts

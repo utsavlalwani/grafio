@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
@@ -47,7 +47,7 @@ export class CategoryComponent implements OnInit {
     },
     {
       name: 'Science',
-      icon: 'emoji_objects'
+      icon: 'whatshot'
     },
     {
       name: 'Health',
@@ -55,7 +55,8 @@ export class CategoryComponent implements OnInit {
     },
   ];
   constructor(private route: ActivatedRoute,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private router: Router) { }
   posts: any;
   ngOnInit() {
     this.route.url.subscribe(url => {
@@ -75,6 +76,8 @@ export class CategoryComponent implements OnInit {
       this.http.get(environment.categoryUrl + this.category.name, httpOptions).subscribe(
         (data) => {
           this.posts = data['posts'];
+        }, (error) => {
+          this.router.navigateByUrl('/404');
         }
       );
     });

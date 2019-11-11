@@ -4,12 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.registrationservice.domain.Post;
 import com.stackroute.registrationservice.domain.PostDTO;
 import com.stackroute.registrationservice.domain.User;
-import com.stackroute.registrationservice.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -33,45 +32,83 @@ public class RabbitMqReceiverService {
                     .build();
             User user = userRegistrationService.getUser(postDTO.getPostedBy().getUsername());
             if(user.getPosts()!=null) {
+                Iterator itr = user.getPosts().iterator();
+                while(itr.hasNext()) {
+                    Post postFind = (Post) itr.next();
+                    if(postFind.getId().equals(post.getId())) {
+                        System.out.printf("found!");
+                        itr.remove();
+                    }
+                }
                 user.getPosts().add(post);
             } else {
                 List<Post> posts = new ArrayList<Post>();
                 posts.add(post);
                 user.setPosts(posts);
             }
-            /*for (User userFind: postDTO.getLikedBy()) {
-                if(user.getUsername().equals(userFind.getUsername())) {
-                    if(user.getLiked()!=null) {
-                        user.getLiked().add(post);
-                    } else {
-                        List<Post> posts = new ArrayList<Post>();
-                        posts.add(post);
-                        user.setLiked(posts);
+            if(postDTO.getLikedBy() != null) {
+                for (String userFind : postDTO.getLikedBy()) {
+                    if (user.getUsername().equals(userFind)) {
+                        if (user.getLiked() != null) {
+                            Iterator itr = user.getLiked().iterator();
+                            while(itr.hasNext()) {
+                                Post postFind = (Post) itr.next();
+                                if(postFind.getId().equals(post.getId())) {
+                                    System.out.printf("found!");
+                                    itr.remove();
+                                }
+                            }
+                            user.getLiked().add(post);
+                        } else {
+                            List<Post> posts = new ArrayList<Post>();
+                            posts.add(post);
+                            user.setLiked(posts);
+                        }
                     }
                 }
             }
-            for (User userFind: postDTO.getWatchedBy()) {
-                if(user.getUsername().equals(userFind.getUsername())) {
-                    if(user.getWatched()!=null) {
-                        user.getWatched().add(post);
-                    } else {
-                        List<Post> posts = new ArrayList<Post>();
-                        posts.add(post);
-                        user.setWatched(posts);
+            if(postDTO.getWatchedBy() != null) {
+                for (String userFind : postDTO.getWatchedBy()) {
+                    if (user.getUsername().equals(userFind)) {
+                        if (user.getWatched() != null) {
+                            Iterator itr = user.getLiked().iterator();
+                            while(itr.hasNext()) {
+                                Post postFind = (Post) itr.next();
+                                if(postFind.getId().equals(post.getId())) {
+                                    System.out.printf("found!");
+                                    itr.remove();
+                                }
+                            }
+                            user.getWatched().add(post);
+                        } else {
+                            List<Post> posts = new ArrayList<Post>();
+                            posts.add(post);
+                            user.setWatched(posts);
+                        }
                     }
                 }
             }
-            for (User userFind: postDTO.getFlaggedBy()) {
-                if(user.getUsername().equals(userFind.getUsername())) {
-                    if(user.getFlagged()!=null) {
-                        user.getFlagged().add(post);
-                    } else {
-                        List<Post> posts = new ArrayList<Post>();
-                        posts.add(post);
-                        user.setFlagged(posts);
+            if(postDTO.getFlaggedBy() != null) {
+                for (String userFind : postDTO.getFlaggedBy()) {
+                    if (user.getUsername().equals(userFind)) {
+                        if (user.getFlagged() != null) {
+                            Iterator itr = user.getLiked().iterator();
+                            while(itr.hasNext()) {
+                                Post postFind = (Post) itr.next();
+                                if(postFind.getId().equals(post.getId())) {
+                                    System.out.printf("found!");
+                                    itr.remove();
+                                }
+                            }
+                            user.getFlagged().add(post);
+                        } else {
+                            List<Post> posts = new ArrayList<Post>();
+                            posts.add(post);
+                            user.setFlagged(posts);
+                        }
                     }
                 }
-            }*/
+            }
             userRegistrationService.updateUser(user);
         } catch (Exception e) {
             e.printStackTrace();

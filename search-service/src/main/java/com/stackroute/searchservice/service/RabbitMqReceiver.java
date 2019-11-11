@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -48,6 +49,14 @@ public class RabbitMqReceiver {
             try {
                 Location location = locationService.getLocation(postDTO.getLocation());
                 List<Post> posts = location.getPosts();
+                Iterator itr = posts.iterator();
+                while(itr.hasNext()) {
+                    Post postFind = (Post) itr.next();
+                    if(postFind.getId().equals(post.getId())) {
+                        System.out.printf("found!");
+                        itr.remove();
+                    }
+                }
                 posts.add(post);
                 location.setPosts(posts);
                 locationService.updateLocation(location);
@@ -68,6 +77,14 @@ public class RabbitMqReceiver {
             try {
                 Category category = categoryService.getCategory(postDTO.getCategory());
                 List<Post> posts = category.getPosts();
+                Iterator itr = posts.iterator();
+                while(itr.hasNext()) {
+                    Post postFind = (Post) itr.next();
+                    if(postFind.getId().equals(post.getId())) {
+                        System.out.printf("found!");
+                        itr.remove();
+                    }
+                }
                 posts.add(post);
                 category.setPosts(posts);
                 categoryService.updateCategory(category);

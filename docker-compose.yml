@@ -10,6 +10,20 @@ services:
     ports:
       - 8888:8888
 
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j
+    restart: always
+    ports:
+      - 7474:7474
+      - 7687:7687
+    network_mode: "host"
+    hostname: localhost
+    environment:
+      - NEO4J_AUTH=neo4j/secret
+    volumes:
+      - $HOME/neo4j/data:/data
+
   eureka-server:
     build: eureka-server/
     container_name: eureka-server

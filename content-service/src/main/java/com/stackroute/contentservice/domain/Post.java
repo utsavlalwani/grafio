@@ -26,7 +26,7 @@ public class Post {
     private List<String> tags;
     private String category;
     private String location;
-    private List<User> likedBy;
-    private List<User> flaggedBy;
-    private List<User> watchedBy;
+    private List<String> likedBy;
+    private List<String> flaggedBy;
+    private List<String> watchedBy;
 }

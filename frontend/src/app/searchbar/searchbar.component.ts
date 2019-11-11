@@ -9,17 +9,15 @@ import { Router } from '@angular/router';
 })
 export class SearchbarComponent implements OnInit {
 
-  constructor(private http: HttpClient,private router:Router) { }
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
   ngOnInit() {
-
   }
 
-  response:any;
-  search(query)
-  {
+  search(query) {
     this.router.navigateByUrl('/').then(() => {
-      this.router.navigateByUrl('/search/'+query);
+      this.router.navigateByUrl('/search/' + query);
     });
   }
 }

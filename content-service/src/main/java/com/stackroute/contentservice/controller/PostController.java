@@ -1,13 +1,11 @@
 package com.stackroute.contentservice.controller;
 
 import com.stackroute.contentservice.domain.Post;
-import com.stackroute.contentservice.domain.PostDTO;
 import com.stackroute.contentservice.exception.PostAlreadyExistsException;
 import com.stackroute.contentservice.exception.PostNotFoundException;
 import com.stackroute.contentservice.service.PostService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -47,9 +46,11 @@ public class PostController {
     public ResponseEntity<?> savePost(@RequestBody Post post) {
         ResponseEntity responseEntity;
         try {
+            Date date = new Date();
+            post.setTimestamp(date);
             Post posted = postService.savePost(post);
             responseEntity = new ResponseEntity<Post>(posted, HttpStatus.CREATED);
-            rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(post));
+            rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(posted));
         } catch (PostAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         } catch (JsonProcessingException e) {
@@ -62,9 +63,13 @@ public class PostController {
     public ResponseEntity<?> updatePost(@RequestBody Post post) {
         ResponseEntity responseEntity;
         try {
-            responseEntity = new ResponseEntity<Post>(postService.updatePost(post), HttpStatus.OK);
+            Post updated = postService.updatePost(post);
+            responseEntity = new ResponseEntity<Post>(updated, HttpStatus.OK);
+            rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(updated));
         } catch (PostNotFoundException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (JsonProcessingException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
@@ -102,7 +107,7 @@ public class PostController {
         return responseEntity;
     }
 
-    @GetMapping("/posts/trending")
+    @GetMapping("/post/trending")
     public ResponseEntity<?> getTrendingPosts() {
         ResponseEntity responseEntity;
         try {
@@ -114,7 +119,7 @@ public class PostController {
         return responseEntity;
     }
 
-    @GetMapping("/posts/trending/{category}")
+    @GetMapping("/post/trending/{category}")
     public ResponseEntity<?> getTrendingPostsByCategory(@PathVariable String category) {
         ResponseEntity responseEntity;
         try {

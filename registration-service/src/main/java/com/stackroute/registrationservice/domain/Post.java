@@ -23,5 +23,4 @@ public class Post {
     private String location;
     private List<String> tags;
     private String category;
-
 }

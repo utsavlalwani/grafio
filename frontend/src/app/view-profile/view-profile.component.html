@@ -6,7 +6,6 @@
 <mat-divider></mat-divider>
 <br>
 <mat-card-content><div><h4>Your Email Address : {{userData.email}}</h4></div>
-    <br>
 <div>
     <h4>Full Name : {{userData.name}}</h4>
 </div>
@@ -14,10 +13,14 @@
     <h3>Your Preferences</h3>
     <mat-grid-list cols = "2" rowHeight = "300px">
         <mat-grid-tile *ngFor="let interests of userData.newsPreferences">
-    <div>
-        <h3>{{interests}}</h3>
-        </div>
-         <img src="../../assets/images/{{interests}}.jpg" alt="interests" class = "image">
+            <mat-card>
+    
+        <mat-card-header><h3>{{interests}}</h3></mat-card-header>
+        
+        <mat-card-content>
+         <img src="../../assets/{{interests}}.jpg" alt="interests" class = "image">
+        </mat-card-content>
+         </mat-card>
         
     
     </mat-grid-tile>

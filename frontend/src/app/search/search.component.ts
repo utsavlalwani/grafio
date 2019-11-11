@@ -35,11 +35,11 @@ export class SearchComponent implements OnInit {
          this.response = data['posts'];
         }, (error) => {
           console.log(error);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/404');
         })
      }
    );
   }
- 
+
 
 }
