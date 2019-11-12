@@ -69,7 +69,7 @@
       </mat-step>
 
       <mat-step [stepControl]="thirdFormGroup" optional>
-        <form [formGroup]="thirdFormGroup" class="container">
+        <form [formGroup]="thirdFormGroup" class="container" fxLayout="column" fxLayoutAlign="start start" style="min-height: min-content;">
           <ng-template matStepLabel>Your Preferences</ng-template>
           <mat-selection-list #list [(ngModel)]="selectedOptions" [ngModelOptions]="{standalone: true}"
                               (ngModelChange)="onNgModelChange($event)" >

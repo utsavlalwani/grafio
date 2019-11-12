@@ -1,33 +1,36 @@
-<mat-toolbar color = "primary">
-    <h3>Your Profile Details</h3>
-</mat-toolbar>
+<mat-card class="viewProfile">
+    <mat-card-title class="title" style="color: #673ab7">Your registration details</mat-card-title>
+</mat-card>
 <mat-card>
-<mat-card-title>Hi {{userData.username}}!</mat-card-title>
-<mat-divider></mat-divider>
-<br>
-<mat-card-content><div><h4>Your Email Address : {{userData.email}}</h4></div>
-<div>
-    <h4>Full Name : {{userData.name}}</h4>
-</div>
-<div>
-    <h3>Your Preferences</h3>
-    <mat-grid-list cols = "2" rowHeight = "300px">
-        <mat-grid-tile *ngFor="let interests of userData.newsPreferences">
-            <mat-card>
-    
-        <mat-card-header><h3>{{interests}}</h3></mat-card-header>
-        
-        <mat-card-content>
-         <img src="../../assets/{{interests}}.jpg" alt="interests" class = "image">
-        </mat-card-content>
-         </mat-card>
-        
-    
-    </mat-grid-tile>
-    </mat-grid-list>
-</div>
-</mat-card-content>
-<!-- <mat-grid-list></mat-grid-list> -->
+    <mat-card-title class="title">Hello there, {{userData.username}}!</mat-card-title>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-card-content class="title">
+        Your Email Address : <i>{{userData.email}}</i>
+        <br>
+        Full Name : <i>{{userData.name}}</i>
+        <mat-divider></mat-divider>
+        <div>
+            <h3>Categories that suit your taste:</h3>
+            <mat-grid-list cols="2" rowHeight="300px">
+                <mat-grid-tile *ngFor="let interests of userData.newsPreferences">
+                    <mat-card>
+
+                        <mat-card-header>
+                            <h3>{{interests}}</h3>
+                        </mat-card-header>
+
+                        <mat-card-content>
+                            <img src="../../assets/{{interests}}.jpg" alt="interests" class="image">
+                        </mat-card-content>
+                    </mat-card>
+
+
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+    </mat-card-content>
+    <!-- <mat-grid-list></mat-grid-list> -->
 
 
 </mat-card>
