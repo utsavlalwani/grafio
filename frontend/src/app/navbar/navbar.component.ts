@@ -101,7 +101,7 @@ username:String;
 
   liked(): void {
     if (this.loggedIn()) {
-      this.router.navigateByUrl('/liked');
+      this.router.navigateByUrl('/activities');
     } else {
       this.openLogin();
     }

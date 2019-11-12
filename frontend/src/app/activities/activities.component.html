@@ -1,0 +1,28 @@
+<h2>
+  <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">poll</mat-icon>
+  Your Posts:
+</h2>
+<mat-divider></mat-divider>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>thumb_up</mat-icon>
+      <p>Liked</p>
+    </ng-template>
+    <app-liked></app-liked>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>flag</mat-icon>
+      <p>Reported</p>
+    </ng-template>
+    <app-flagged></app-flagged>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>movie</mat-icon>
+      <p>Watched</p>
+    </ng-template>
+    <app-watched></app-watched>
+  </mat-tab>
+</mat-tab-group>

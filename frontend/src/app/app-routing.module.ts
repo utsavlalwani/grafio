@@ -11,13 +11,14 @@ import {ViewProfileComponent} from './view-profile/view-profile.component';
 import { SearchComponent} from './search/search.component';
 import {NotfoundComponent} from './notfound/notfound.component';
 import {PostDetailComponent} from './post-detail/post-detail.component';
+import {ActivitiesComponent} from './activities/activities.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/trending', pathMatch : 'full'},
   {path: 'register', component: RegisterComponent},
   {path: 'trending', component: TrendingComponent},
-  {path: 'liked', component: LikedComponent},
+  {path: 'activities', component: ActivitiesComponent},
   {path: 'recommended', component: RecommendationComponent},
   {path: 'posted', component: PostedComponent},
   {path: 'category/:categoryName', component: CategoryComponent},

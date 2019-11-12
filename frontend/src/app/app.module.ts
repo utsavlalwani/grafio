@@ -10,7 +10,7 @@ import {
     MatFormFieldModule, MatGridListModule,
     MatIconModule,
     MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
-    MatStepperModule,
+    MatStepperModule, MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -37,7 +37,11 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 import {ViewProfileComponent} from './view-profile/view-profile.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ActivitiesComponent } from './activities/activities.component';
+import { FlaggedComponent } from './flagged/flagged.component';
+import { WatchedComponent } from './watched/watched.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +60,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     SearchbarComponent,
     ViewProfileComponent,
     NotfoundComponent,
-    PostDetailComponent
+    PostDetailComponent,
+    ActivitiesComponent,
+    FlaggedComponent,
+    WatchedComponent
   ],
     imports: [
         BrowserModule,
@@ -84,8 +91,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
         MatVideoModule,
         MatCheckboxModule,
         MatSelectModule,
-        FlexLayoutModule
-
+        FlexLayoutModule,
+        MatTabsModule
     ],
   entryComponents: [
     LoginComponent,
