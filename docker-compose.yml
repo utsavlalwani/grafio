@@ -139,3 +139,14 @@ services:
     hostname: localhost
     ports:
       - 8094:8094
+
+  recommendation-service:
+    build: recommendation-service
+    container_name: recommendation-service
+    depends_on:
+      - neo4j
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8096:8096
