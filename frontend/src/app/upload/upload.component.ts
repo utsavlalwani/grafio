@@ -133,6 +133,18 @@ export class UploadComponent implements OnInit {
     });
   }
 
+  selectedFile = null;
+
+  onFileSelected(event)
+  {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload()
+  {
+    console.log(this.selectedFile); // You can use FormData upload to backend server
+  }
+
 }
 export class FileUploadModel {
   data: File;

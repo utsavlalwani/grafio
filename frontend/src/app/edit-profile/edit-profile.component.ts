@@ -29,7 +29,7 @@ export class EditProfileComponent implements OnInit {
       console.log(data);
     })
 
-    let emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const emailregex: RegExp = /[^@]+@[^\.]+\..+/;
 
     this.firstFormGroup = this.formBuilder.group({
       'email': ['', [Validators.required, Validators.pattern(emailregex)], this.checkInUseEmail]
@@ -186,7 +186,7 @@ export class EditProfileComponent implements OnInit {
       .subscribe(
         () => {
           this.ngOnInit();
-          this.router.navigateByUrl('/trending');
+          this.router.navigateByUrl('/viewProfile');
         }
       );
   }
