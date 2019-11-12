@@ -28,7 +28,6 @@ public class RabbitMqReceiver {
                     .subCategory(new SubCategory(postDTO.getCategory(), null, null))
                     .location(new Location(postDTO.getLocation(), null, null))
                     .timestamp(postDTO.getTimestamp())
-                    .id(postDTO.getId())
                     .tags(postDTO.getTags())
                     .build();
             System.out.println(postDTO.toString());

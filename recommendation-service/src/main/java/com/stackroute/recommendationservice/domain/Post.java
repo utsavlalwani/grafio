@@ -18,7 +18,6 @@ import org.neo4j.ogm.annotation.Relationship;
 public class Post {
 	@Id
 	private Long videoID;
-	private Long id;
 	private String title;
 	private String videoUrl;
 	private List<String> tags;
