@@ -36,7 +36,8 @@ public class RabbitMqReceiver {
                 user = queryService.getUser(postDTO.getPostedBy().getUsername());
             }
             catch (NullPointerException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("User not found");
                 return;
             }
             if(user == null) {
@@ -55,7 +56,8 @@ public class RabbitMqReceiver {
                 }
             }
             catch (NullPointerException e) {
-                e.printStackTrace();
+                System.out.println("Post not liked yet");
+                //e.printStackTrace();
             }
             queryService.saveUser(user);
         } catch (IOException e) {
