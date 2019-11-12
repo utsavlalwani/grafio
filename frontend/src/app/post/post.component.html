@@ -1,6 +1,6 @@
 <mat-card class="post" (click)="postDetail()">
   <mat-card-content>
-    <mat-video [overlay]="false" color="primary" spinner="spin">
+    <mat-video [overlay]="false" color="primary" spinner="spin" [download]="true" [preload]="false">
       <source src="{{post?.videoUrl}}" type="video/mp4">
     </mat-video>
     <br>

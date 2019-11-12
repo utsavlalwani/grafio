@@ -14,7 +14,14 @@ export class PostedComponent implements OnInit {
   ngOnInit() {
     this.posted.getPosts().subscribe(data => {
       this.posts = data['posts'];
+
+      var occurs = 0;
+  
+      // for (var i=0; i<this.posts.length; i++) {
+      //   if (this.posts.title.length()>0 ) occurs++;
+      // }
     });
+   
   }
 
 }

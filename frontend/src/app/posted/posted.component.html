@@ -1,11 +1,11 @@
 <h2>
   <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">movie_creation</mat-icon>
-  Your Posts:
+  Your Posts ({{occurs}}):
 </h2>
 <mat-divider></mat-divider>
-<div fxLayout="row" fxLayout.xs="column" fxLayout.md="row" fxLayout.sm="row">
-    <section *ngFor="let post of posts" fxFlex.xs="80%" 
-        fxFlex.md="33%" fxFlex.sm="50%" fxLayoutAlign="space-between">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayout.md="row wrap" fxLayout.sm="row wrap">
+    <section *ngFor="let post of posts"  fxFlex="30%"
+        fxFlex.md="33%" fxFlex.sm="50%" fxLayoutAlign="space-between" [fxFlex.gt-sm]=30>
         <app-post [post]="post"></app-post>
     </section>
 </div>

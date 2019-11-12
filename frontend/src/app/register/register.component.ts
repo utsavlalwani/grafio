@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
     // tslint:disable-next-line:max-line-length
-    const emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const emailRegex: RegExp = /^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}/;
 
     this.firstFormGroup = this.formBuilder.group({
       username: ['', Validators.required],
