@@ -1,10 +1,13 @@
 .registration-form {
-  width: 600px;
-  margin: 20px auto;
+  margin:auto;
 }
 .title{
   text-align: center;
 }
 .form-button {
   margin: 0px 5px;
+}
+.container{
+ width:300px;
+ margin: auto;
 }

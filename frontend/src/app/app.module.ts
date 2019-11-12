@@ -37,6 +37,7 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 import {ViewProfileComponent} from './view-profile/view-profile.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +83,9 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
         MatGridListModule,
         MatVideoModule,
         MatCheckboxModule,
-        MatSelectModule
+        MatSelectModule,
+        FlexLayoutModule
+
     ],
   entryComponents: [
     LoginComponent,
