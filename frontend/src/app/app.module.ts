@@ -5,13 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatCardModule, MatDatepickerModule,
-  MatDialogModule,
-  MatFormFieldModule, MatGridListModule,
-  MatIconModule,
-  MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
-  MatStepperModule,
-  MatToolbarModule
+    MatButtonModule, MatCardModule, MatDatepickerModule,
+    MatDialogModule,
+    MatFormFieldModule, MatGridListModule,
+    MatIconModule,
+    MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
+    MatStepperModule,
+    MatToolbarModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatVideoModule } from 'mat-video';
@@ -32,7 +32,11 @@ import { PostedComponent } from './posted/posted.component';
 import { PostComponent } from './post/post.component';
 import { CategoryComponent } from './category/category.component';
 import { EditProfileComponent} from './edit-profile/edit-profile.component';
-
+import { SearchComponent } from './search/search.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import {ViewProfileComponent} from './view-profile/view-profile.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,34 +50,40 @@ import { EditProfileComponent} from './edit-profile/edit-profile.component';
     PostedComponent,
     PostComponent,
     CategoryComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    SearchComponent,
+    SearchbarComponent,
+    ViewProfileComponent,
+    NotfoundComponent,
+    PostDetailComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    LayoutModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDialogModule,
-    FormsModule,
-    MatStepperModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatMenuModule,
-    MatProgressBarModule,
-    MatCardModule,
-    MatGridListModule,
-    MatVideoModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        HttpClientModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        LayoutModule,
+        MatSidenavModule,
+        MatListModule,
+        MatDialogModule,
+        FormsModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatMenuModule,
+        MatProgressBarModule,
+        MatCardModule,
+        MatGridListModule,
+        MatVideoModule,
+        MatCheckboxModule,
+        MatSelectModule
+    ],
   entryComponents: [
     LoginComponent,
     UploadComponent

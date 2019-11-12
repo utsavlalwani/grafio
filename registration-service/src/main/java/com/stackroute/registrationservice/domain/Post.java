@@ -3,6 +3,7 @@ package com.stackroute.registrationservice.domain;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -15,13 +16,11 @@ import java.util.List;
 public class Post {
 
     @Id
-    private long id;
+    private BigInteger id;
     private String title;
     private String videoUrl;
     private Date timestamp;
     private String location;
     private List<String> tags;
-    private boolean isAnonymous;
     private String category;
-
 }

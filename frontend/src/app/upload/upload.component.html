@@ -4,38 +4,44 @@
     <mat-form-field class="form-element">
       <input matInput placeholder="Title" ngModel name="title" required #title>
     </mat-form-field>
+
     <mat-form-field class="form-element">
-      <input matInput placeholder="Category" ngModel name="category" required #category>
+      <mat-label>Category</mat-label>
+      <mat-select ngModel name="category">
+        <mat-option *ngFor="let cat of categories" [value]="cat"  #category>
+          {{cat}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <mat-label>Location</mat-label>
+      <mat-select ngModel name="location">
+        <mat-optgroup *ngFor="let locs of locations" [label]="locs.state">
+          <mat-option *ngFor="let loc of locs.districts" [value]="loc"  #location>
+            {{loc}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field class="form-element">
       <input matInput placeholder="Add Tags" ngModel name="addTags" #tags>
     </mat-form-field>
+    <div class="progress-bar">
+      <p>{{currentProgress}}</p>
+      <mat-progress-bar mode = "determinate" [value] = "progressNumber"></mat-progress-bar>
+    </div>
 
     <div>
-<!--      <p>Upload Your File</p>-->
       <button mat-raised-button color="primary" (click)="onClick()">
         <mat-icon>file_upload</mat-icon>
         Select File
       </button>
-
-      <!--<ul>
-        <li *ngFor="let file of files" [@fadeInOut]="file.state">
-          <mat-progress-bar [value]="file.progress"></mat-progress-bar>
-          <span id="file-label">
-                {{file.data.name}}
-            <a title="Retry" (click)="retryFile(file)" *ngIf="file.canRetry">
-                  <mat-icon>refresh</mat-icon>
-                </a>
-                <a title="Cancel" (click)="cancelFile(file)" *ngIf="file.canCancel">
-                  <mat-icon>cancel</mat-icon>
-                </a>
-              </span>
-        </li>
-      </ul>-->
       <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="{{accept}}" hidden="hidden"/>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)=addPost(title.value,category.value,tags.value)>Submit</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)=addPost(myForm)>Submit</button>
   </mat-dialog-actions>
 </form>

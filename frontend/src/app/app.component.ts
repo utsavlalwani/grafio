@@ -18,4 +18,6 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/logo.svg')
     );
   }
+
+  
 }

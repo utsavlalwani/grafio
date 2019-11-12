@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
     },
     {
       name: 'Science',
-      icon: 'emoji_objects'
+      icon: 'whatshot'
     },
     {
       name: 'Health',

@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 class category {
   name: string;
@@ -45,15 +47,17 @@ export class CategoryComponent implements OnInit {
     },
     {
       name: 'Science',
-      icon: 'emoji_objects'
+      icon: 'whatshot'
     },
     {
       name: 'Health',
       icon: 'fitness_center'
     },
   ];
-  constructor(private route: ActivatedRoute) { }
-
+  constructor(private route: ActivatedRoute,
+              private http: HttpClient,
+              private router: Router) { }
+  posts: any;
   ngOnInit() {
     this.route.url.subscribe(url => {
       this.categoryName = this.route.snapshot.paramMap.get('categoryName');
@@ -62,6 +66,20 @@ export class CategoryComponent implements OnInit {
           this.category = c;
         }
       });
+      const httpOptions = {
+        headers: new HttpHeaders(
+          {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+          })
+      };
+      this.http.get(environment.categoryUrl + this.category.name, httpOptions).subscribe(
+        (data) => {
+          this.posts = data['posts'];
+        }, (error) => {
+          this.router.navigateByUrl('/404');
+        }
+      );
     });
   }
 

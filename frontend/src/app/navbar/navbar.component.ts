@@ -5,7 +5,6 @@ import {UploadComponent} from '../upload/upload.component';
 import {Router} from '@angular/router';
 import {CategoryComponent} from '../category/category.component';
 import { RegisterService } from '../services/register.service';
-import { Subject } from 'rxjs';
 
 
 @Component({
@@ -50,7 +49,7 @@ export class NavbarComponent implements OnInit {
     },
     {
       name: 'Science',
-      icon: 'emoji_objects'
+      icon: 'whatshot'
     },
     {
       name: 'Health',
@@ -58,7 +57,7 @@ export class NavbarComponent implements OnInit {
     },
   ];
 
-username:String;  
+username:String;
   ngOnInit() {
     console.log("asdas"+localStorage.getItem('username'));
   }

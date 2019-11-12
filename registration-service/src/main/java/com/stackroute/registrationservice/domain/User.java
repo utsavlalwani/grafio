@@ -22,12 +22,10 @@ public class User {
     private String name;
     private String email;
     private Date dateOfBirth;
-
     private List<String> newsPreferences;
 
     private List<Post> posts;
     private List<Post> liked;
     private List<Post> watched;
     private List<Post> flagged;
-    private List<Post> bought;
 }
