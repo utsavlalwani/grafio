@@ -31,7 +31,10 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 // Add a filter to validate the tokens with every request
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 // authorization requests config
-                .authorizeRequests().antMatchers("/login-service/api/v1/authenticate", "/registration-service/api/v1/register", "/content-service/api/v1/post/trending/*").permitAll()
+                .authorizeRequests().antMatchers("/login-service/api/v1/authenticate", 
+						"/registration-service/api/v1/register", 
+						"/content-service/api/v1/post/trending",
+						"/content-service/api/v1/post/trending/*").permitAll()
 //                .authorizeRequests().antMatchers("/registration-service/api/v1/register", "/login-service/api/v1/authenticate").permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
 //                .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
