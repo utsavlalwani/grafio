@@ -114,7 +114,10 @@ export class UploadComponent implements OnInit {
       location: input.value.location,
       // tags: tags,
       videoUrl: this.response,
-      postedBy: username
+      postedBy: username,
+      likedBy: [],
+      flaggedBy: [],
+      watchedBy: []
     };
     console.log(this.post);
     const httpOptions = {

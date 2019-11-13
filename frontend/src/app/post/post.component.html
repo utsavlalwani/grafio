@@ -5,9 +5,8 @@
     </mat-video>
     <br>
     <mat-card-title>{{post?.title}}</mat-card-title>
-    <mat-card-subtitle>{{post?.postedBy?.username}}</mat-card-subtitle>
-    <mat-card-subtitle>viewed by: {{views}}
-      <br>
+    <mat-card-subtitle>{{post?.postedBy}}</mat-card-subtitle>
+    <mat-card-subtitle>
       posted on: {{post?.timestamp | date:'mediumDate'}}
     </mat-card-subtitle>
   </mat-card-content>
