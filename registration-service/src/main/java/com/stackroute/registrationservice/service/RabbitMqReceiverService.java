@@ -30,7 +30,7 @@ public class RabbitMqReceiverService {
                     .timestamp(postDTO.getTimestamp())
                     .category(postDTO.getCategory())
                     .build();
-            User user = userRegistrationService.getUser(postDTO.getPostedBy().getUsername());
+            User user = userRegistrationService.getUser(postDTO.getPostedBy());
             if(user.getPosts()!=null) {
                 Iterator itr = user.getPosts().iterator();
                 while(itr.hasNext()) {
