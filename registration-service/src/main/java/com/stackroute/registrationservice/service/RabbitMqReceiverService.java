@@ -71,7 +71,7 @@ public class RabbitMqReceiverService {
                 for (String userFind : postDTO.getWatchedBy()) {
                     if (user.getUsername().equals(userFind)) {
                         if (user.getWatched() != null) {
-                            Iterator itr = user.getLiked().iterator();
+                            Iterator itr = user.getWatched().iterator();
                             while(itr.hasNext()) {
                                 Post postFind = (Post) itr.next();
                                 if(postFind.getId().equals(post.getId())) {
@@ -92,7 +92,7 @@ public class RabbitMqReceiverService {
                 for (String userFind : postDTO.getFlaggedBy()) {
                     if (user.getUsername().equals(userFind)) {
                         if (user.getFlagged() != null) {
-                            Iterator itr = user.getLiked().iterator();
+                            Iterator itr = user.getFlagged().iterator();
                             while(itr.hasNext()) {
                                 Post postFind = (Post) itr.next();
                                 if(postFind.getId().equals(post.getId())) {
