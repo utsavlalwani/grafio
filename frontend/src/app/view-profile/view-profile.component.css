@@ -5,3 +5,7 @@
 .title{
     text-align: center;
 }
+.card{
+    position: relative;
+    margin: auto;
+}

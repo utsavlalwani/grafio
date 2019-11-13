@@ -17,6 +17,7 @@ export class CategoryComponent implements OnInit {
 
   categoryName: string;
   category: category;
+  breakpoint:number;
   categories: {
     name: string;
     icon: string;
@@ -65,6 +66,11 @@ export class CategoryComponent implements OnInit {
         if (c.name === this.categoryName) {
           this.category = c;
         }
+        this.breakpoint = (window.innerWidth <= 600) ? 1:(window.innerWidth <= 959 && window.innerWidth > 600 ) 
+        ? 2:(window.innerWidth <= 1279 && window.innerWidth > 959 ) ? 3:(window.innerWidth <= 1919 
+        && window.innerWidth > 1279 ) ? 4:5;;
+
+
       });
       const httpOptions = {
         headers: new HttpHeaders(
@@ -81,6 +87,14 @@ export class CategoryComponent implements OnInit {
         }
       );
     });
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 600) ? 1 : (window.innerWidth <= 959 && window.innerWidth > 600 )
+                       ? 2:(window.innerWidth <= 1279 && window.innerWidth > 959 ) ? 3:(window.innerWidth <= 1919
+                       && window.innerWidth > 1279 ) ? 4:5;;
+
+
   }
 
 }
