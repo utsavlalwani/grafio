@@ -1,6 +1,6 @@
 <h2>
   <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">movie_creation</mat-icon>
-  Your Posts ({{posts?.length}}):
+  Your Posts ({{posts?.length}})
 </h2>
 <mat-divider></mat-divider>
 <!-- <div fxLayout="row wrap" fxLayout.xs="column" fxLayout.md="row wrap" fxLayout.sm="row wrap">
@@ -9,7 +9,6 @@
         <app-post [post]="post"></app-post>
     </section>
 </div> -->
-<span>Breakpoint: {{breakpoint}}</span>
 
 <mat-grid-list #grid [cols]="breakpoint" (window:resize)="onResize($event)" >
     <section *ngFor="let post of posts">

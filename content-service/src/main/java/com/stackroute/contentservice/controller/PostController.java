@@ -45,16 +45,20 @@ public class PostController {
     @PostMapping("/post")
     public ResponseEntity<?> savePost(@RequestBody Post post) {
         ResponseEntity responseEntity;
-        try {
-            Date date = new Date();
-            post.setTimestamp(date);
-            Post posted = postService.savePost(post);
-            responseEntity = new ResponseEntity<Post>(posted, HttpStatus.CREATED);
-            rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(posted));
-        } catch (PostAlreadyExistsException e) {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
-        } catch (JsonProcessingException e) {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        if(post.getCategory()!= null && post.getLocation() != null) {
+            try {
+                Date date = new Date();
+                post.setTimestamp(date);
+                Post posted = postService.savePost(post);
+                responseEntity = new ResponseEntity<Post>(posted, HttpStatus.CREATED);
+                rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(posted));
+            } catch (PostAlreadyExistsException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+            } catch (JsonProcessingException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            responseEntity = new ResponseEntity<String>("All mandatory fields not set!", HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
@@ -62,14 +66,18 @@ public class PostController {
     @PutMapping("/post")
     public ResponseEntity<?> updatePost(@RequestBody Post post) {
         ResponseEntity responseEntity;
-        try {
-            Post updated = postService.updatePost(post);
-            responseEntity = new ResponseEntity<Post>(updated, HttpStatus.OK);
-            rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(updated));
-        } catch (PostNotFoundException e) {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (JsonProcessingException e) {
-            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        if(post.getCategory()!= null && post.getLocation() != null) {
+            try {
+                Post updated = postService.updatePost(post);
+                responseEntity = new ResponseEntity<Post>(updated, HttpStatus.OK);
+                rabbitTemplate.convertAndSend(topicExchange, routingKey, new ObjectMapper().writeValueAsString(updated));
+            } catch (PostNotFoundException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+            } catch (JsonProcessingException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            responseEntity = new ResponseEntity<String>("All mandatory fields not set!", HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
