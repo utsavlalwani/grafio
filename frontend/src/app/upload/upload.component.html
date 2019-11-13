@@ -6,28 +6,27 @@
     </mat-form-field>
 
     <mat-form-field class="form-element">
-      <mat-label>Category</mat-label>
-      <mat-select ngModel name="category">
-        <mat-option *ngFor="let cat of categories" [value]="cat"  #category>
+      <mat-label >Category</mat-label>
+      <mat-select ngModel name="category" required>
+        <mat-option *ngFor="let cat of categories" [value]="cat"  #category >
           {{cat}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="form-element">
+    <mat-form-field class="form-element" required>
       <mat-label>Location</mat-label>
-      <mat-select ngModel name="location">
+      <mat-select ngModel name="location" required>
         <mat-optgroup *ngFor="let locs of locations" [label]="locs.state">
-          <mat-option *ngFor="let loc of locs.districts" [value]="loc"  #location>
+          <mat-option *ngFor="let loc of locs.districts" [value]="loc"  #location >
             {{loc}}
           </mat-option>
         </mat-optgroup>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="form-element">
-      <input matInput placeholder="Add Tags" ngModel name="addTags" #tags>
-    </mat-form-field>
+    <mat-checkbox formControlName="check1" required>Discussed Confidentiality</mat-checkbox>
+
     <div class="progress-bar">
       <p>{{currentProgress}}</p>
       <mat-progress-bar mode = "determinate" [value] = "progressNumber"></mat-progress-bar>

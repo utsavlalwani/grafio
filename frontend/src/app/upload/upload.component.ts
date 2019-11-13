@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
-import {NgForm} from '@angular/forms';
+import {NgForm,FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-upload',
@@ -21,6 +21,7 @@ export class UploadComponent implements OnInit {
   @Output() complete = new EventEmitter<string>();
   private files: Array<FileUploadModel> = [];
 
+  formGroup:FormGroup;
   response: any;
   post: any;
   locations = environment.locations;
@@ -31,9 +32,18 @@ export class UploadComponent implements OnInit {
     'Sports', 'Science', 'Health'];
 
   constructor(private http: HttpClient,
-              private router: Router) { }
+              private router: Router,
+              private formBuilder:FormBuilder) 
+              { 
+                this.formGroup = this.formBuilder.group({});
+
+              }
 
   ngOnInit() {
+
+    this.formGroup=this.formBuilder.group({
+      check1: ['', Validators.required]
+    });
   }
 
   onClick() {
