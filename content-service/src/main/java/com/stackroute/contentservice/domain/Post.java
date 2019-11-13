@@ -22,7 +22,7 @@ public class Post {
     private String title;
     private String videoUrl;
     private Date timestamp;
-    private User postedBy;
+    private String postedBy;
     private List<String> tags;
     private String category;
     private String location;

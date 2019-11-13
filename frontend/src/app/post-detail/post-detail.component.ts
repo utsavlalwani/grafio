@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {MatVideoComponent} from 'mat-video/app/video/video.component';
 
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.css']
 })
-export class PostDetailComponent implements OnInit {
+export class PostDetailComponent implements OnInit, AfterViewInit {
 
   post: any;
   postId: string;
@@ -26,6 +27,9 @@ export class PostDetailComponent implements OnInit {
         Authorization: 'Bearer ' + localStorage.getItem('jwt')
       })
   };
+
+  @ViewChild('video', {static: false}) matVideo: MatVideoComponent;
+  video: HTMLVideoElement;
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute) {}
@@ -65,6 +69,12 @@ export class PostDetailComponent implements OnInit {
         this.user = data;
       }
     );
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.video);
+    this.video = this.matVideo.getVideoTag();
+    this.video.addEventListener('ended', () => this.watch());
   }
 
   like() {
@@ -121,4 +131,20 @@ export class PostDetailComponent implements OnInit {
     );
   }
 
+  watch() {
+    if (this.views === 0) {
+      let view: string[] = new Array();
+      view.push(localStorage.getItem('username'));
+      this.post.watchedBy = view;
+    } else {
+      const index = this.post.watchedBy.indexOf(localStorage.getItem('username'));
+      if (index === -1) {
+        this.post.watchedBy.push(localStorage.getItem('username'));
+      }
+    }
+
+    this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
+      () => this.ngOnInit()
+    );
+  }
 }
