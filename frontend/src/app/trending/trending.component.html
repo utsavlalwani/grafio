@@ -5,8 +5,8 @@
   Trending
 </h2>
 <mat-divider></mat-divider>
-<mat-grid-list cols="4">
-  <section *ngFor="let post of posts" >
+<mat-grid-list #grid [cols]="breakpoint" (window:resize)="onResize($event)" >
+  <section *ngFor="let post of posts">
     <mat-grid-tile>
       <app-post [post]="post"></app-post>
     </mat-grid-tile>
