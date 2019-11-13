@@ -21,7 +21,7 @@ public class PostDTO implements Serializable {
     private String location;
     private List<String> tags;
     private boolean isAnonymous;
-    private User postedBy;
+    private String postedBy;
     private List<String> likedBy;
     private List<String> flaggedBy;
     private List<String> watchedBy;

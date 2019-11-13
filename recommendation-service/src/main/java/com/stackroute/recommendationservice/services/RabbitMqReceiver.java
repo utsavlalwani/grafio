@@ -32,7 +32,7 @@ public class RabbitMqReceiver {
                     .build();
             System.out.println(postDTO.toString());
             try {
-                user = queryService.getUser(postDTO.getPostedBy().getUsername());
+                user = queryService.getUser(postDTO.getPostedBy());
             }
             catch (NullPointerException e) {
                 //e.printStackTrace();
