@@ -20,7 +20,8 @@ public class Post {
     private Date timestamp;
     private String postedBy;
     private List<String> tags;
-    private List<User> likedBy;
-    private List<User> flaggedBy;
-    private List<User> watchedBy;
+    private List<String> likedBy;
+    private List<String> flaggedBy;
+    private List<String> watchedBy;
+    private List<String> boughtBy;
 }

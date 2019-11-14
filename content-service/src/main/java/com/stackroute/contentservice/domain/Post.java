@@ -29,4 +29,5 @@ public class Post {
     private List<String> likedBy;
     private List<String> flaggedBy;
     private List<String> watchedBy;
+    private List<String> boughtBy;
 }

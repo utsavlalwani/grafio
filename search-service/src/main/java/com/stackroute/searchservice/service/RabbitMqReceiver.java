@@ -45,6 +45,7 @@ public class RabbitMqReceiver {
                             .likedBy(postDTO.getLikedBy())
                             .flaggedBy(postDTO.getFlaggedBy())
                             .watchedBy(postDTO.getWatchedBy())
+                            .boughtBy(postDTO.getBoughtBy())
                             .build();
             try {
                 Location location = locationService.getLocation(postDTO.getLocation());

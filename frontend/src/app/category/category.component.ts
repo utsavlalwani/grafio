@@ -76,10 +76,9 @@ export class CategoryComponent implements OnInit {
         headers: new HttpHeaders(
           {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('jwt')
           })
       };
-      this.http.get(environment.uploadPostUrl + 'trending/' + this.category.name, httpOptions).subscribe(
+      this.http.get(environment.categoryUrl + this.category.name, httpOptions).subscribe(
         (data) => {
           this.posts = data['posts'];
         }, (error) => {

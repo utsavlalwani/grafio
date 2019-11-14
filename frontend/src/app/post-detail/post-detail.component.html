@@ -30,5 +30,9 @@
       </ng-template>
     </button>
     {{flags}}
+    <div *ngIf="isOwner">
+      <button mat-icon-button (click)="edit()">Edit</button>
+      <button mat-icon-button (click)="delete()">Delete</button>
+    </div>
   </mat-card-actions>
 </mat-card>

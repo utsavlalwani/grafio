@@ -21,7 +21,6 @@ export class TrendingComponent implements OnInit {
       headers: new HttpHeaders(
         {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
         })
     };
     this.http.get(environment.uploadPostUrl + 'trending', httpOptions).subscribe(

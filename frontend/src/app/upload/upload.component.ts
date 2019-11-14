@@ -33,8 +33,8 @@ export class UploadComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private formBuilder:FormBuilder) 
-              { 
+              private formBuilder:FormBuilder)
+              {
                 this.formGroup = this.formBuilder.group({});
 
               }
@@ -122,12 +122,12 @@ export class UploadComponent implements OnInit {
       title: input.value.title,
       category: input.value.category,
       location: input.value.location,
-      // tags: tags,
       videoUrl: this.response,
       postedBy: username,
       likedBy: [],
       flaggedBy: [],
-      watchedBy: []
+      watchedBy: [],
+      boughtBy: []
     };
     console.log(this.post);
     const httpOptions = {
