@@ -6,12 +6,15 @@ import com.stackroute.contentservice.exception.PostNotFoundException;
 import com.stackroute.contentservice.service.PostService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stackroute.contentservice.service.StripeClient;
+import com.stripe.model.Charge;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -25,10 +28,13 @@ public class PostController {
     private String topicExchange = "post";
     private String routingKey = "user.post.new";
 
+    private StripeClient stripeClient;
+
     @Autowired
-    public PostController(PostService postService, RabbitTemplate rabbitTemplate) {
+    public PostController(PostService postService, RabbitTemplate rabbitTemplate, StripeClient stripeClient) {
         this.rabbitTemplate = rabbitTemplate;
         this.postService = postService;
+        this.stripeClient = stripeClient;
     }
 
     @GetMapping("/post/{id}")
@@ -138,5 +144,12 @@ public class PostController {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return responseEntity;
+    }
+
+    @PostMapping("/charge")
+    public Charge chargeCard(HttpServletRequest request) throws Exception {
+        String token = request.getHeader("token");
+        Double amount = Double.parseDouble(request.getHeader("amount"));
+        return this.stripeClient.chargeCreditCard(token, amount);
     }
 }
