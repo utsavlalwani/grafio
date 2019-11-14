@@ -13,6 +13,7 @@ export class TrendingComponent implements OnInit {
 
   posts: any;
   breakpoint: number;
+  panelOpenState = false;
 
   constructor(private http: HttpClient) { }
 

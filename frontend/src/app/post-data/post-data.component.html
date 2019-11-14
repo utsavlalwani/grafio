@@ -1,0 +1,15 @@
+<mat-card class="post" (click)="postDetail()">
+        <mat-card-content>
+          <mat-video [overlay]="false" color="primary" spinner="spin" [download]="true" [preload]="false">
+            <source src="{{post?.videoUrl}}" type="video/mp4">
+          </mat-video>
+          <br>
+          <mat-card-title class="ellipse">{{post?.title}}</mat-card-title>
+          <mat-card-subtitle>{{post?.postedBy}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            posted on: {{post?.timestamp | date:'mediumDate'}}
+          </mat-card-subtitle>
+        </mat-card-content>
+      
+      </mat-card>
+      

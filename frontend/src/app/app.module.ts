@@ -43,6 +43,7 @@ import { FlaggedComponent } from './flagged/flagged.component';
 import { WatchedComponent } from './watched/watched.component';
 import { SearchMobileComponent } from './search-mobile/search-mobile.component';
 import { EditpostComponent } from './editpost/editpost.component';
+import { PostDataComponent } from './post-data/post-data.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { EditpostComponent } from './editpost/editpost.component';
     FlaggedComponent,
     WatchedComponent,
     SearchMobileComponent,
-    EditpostComponent
+    EditpostComponent,
+    PostDataComponent
   ],
   imports: [
     BrowserModule,
