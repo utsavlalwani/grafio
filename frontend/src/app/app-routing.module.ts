@@ -12,7 +12,6 @@ import { SearchComponent} from './search/search.component';
 import {NotfoundComponent} from './notfound/notfound.component';
 import {PostDetailComponent} from './post-detail/post-detail.component';
 import {ActivitiesComponent} from './activities/activities.component';
-import {PaymentComponent} from './payment/payment.component';
 
 
 const routes: Routes = [
@@ -27,8 +26,7 @@ const routes: Routes = [
   {path: 'viewProfile', component: ViewProfileComponent},
   {path: 'search/:query', component: SearchComponent},
   {path: '404', component: NotfoundComponent},
-  {path: 'postDetail/:postId', component: PostDetailComponent},
-  {path: 'payment/:postId', component: PaymentComponent}
+  {path: 'postDetail/:postId', component: PostDetailComponent}
 
 ];
 
