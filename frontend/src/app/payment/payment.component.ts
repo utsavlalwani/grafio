@@ -54,7 +54,7 @@ export class PaymentComponent implements OnInit {
       headers: header
     };
     const headers = new Headers({'token': token, 'amount': "100"});
-    this.http.post('http://localhost:8181/api/v1/payment', {}, httpOptions)
+    this.http.post('https://newszoid.stackroute.io:8443/content-service/api/v1/charge', {}, httpOptions)
       .subscribe(resp => {
 
         console.log("RESP = ",resp);
