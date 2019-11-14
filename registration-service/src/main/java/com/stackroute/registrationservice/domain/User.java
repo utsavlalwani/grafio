@@ -28,4 +28,5 @@ public class User {
     private List<Post> liked;
     private List<Post> watched;
     private List<Post> flagged;
+    private List<Post> bought;
 }

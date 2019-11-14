@@ -5,13 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-    MatButtonModule, MatCardModule, MatDatepickerModule,
-    MatDialogModule,
-    MatFormFieldModule, MatGridListModule,
-    MatIconModule,
-    MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
-    MatStepperModule, MatTabsModule,
-    MatToolbarModule
+  MatButtonModule, MatCardModule, MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule, MatGridListModule,
+  MatIconModule,
+  MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
+  MatStepperModule, MatTabsModule,
+  MatToolbarModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatVideoModule } from 'mat-video';
@@ -41,7 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivitiesComponent } from './activities/activities.component';
 import { FlaggedComponent } from './flagged/flagged.component';
 import { WatchedComponent } from './watched/watched.component';
-import { PaymentComponent } from './payment/payment.component';
+import { EditpostComponent } from './editpost/editpost.component';
 
 @NgModule({
   declarations: [
@@ -65,40 +65,41 @@ import { PaymentComponent } from './payment/payment.component';
     ActivitiesComponent,
     FlaggedComponent,
     WatchedComponent,
-    PaymentComponent
+    EditpostComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        HttpClientModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        LayoutModule,
-        MatSidenavModule,
-        MatListModule,
-        MatDialogModule,
-        FormsModule,
-        MatStepperModule,
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatMenuModule,
-        MatProgressBarModule,
-        MatCardModule,
-        MatGridListModule,
-        MatVideoModule,
-        MatCheckboxModule,
-        MatSelectModule,
-        FlexLayoutModule,
-        MatTabsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    LayoutModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDialogModule,
+    FormsModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatGridListModule,
+    MatVideoModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    FlexLayoutModule,
+    MatTabsModule
+  ],
   entryComponents: [
     LoginComponent,
-    UploadComponent
+    UploadComponent,
+    EditpostComponent
   ],
   providers: [DatePipe, CategoryComponent],
   bootstrap: [AppComponent]

@@ -23,7 +23,6 @@ export class SearchComponent implements OnInit {
       headers: new HttpHeaders(
         {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
         })
     };
    this.http.get('https://newszoid.stackroute.io:8443/search-service/api/v1/category/'+query,httpOptions).subscribe(

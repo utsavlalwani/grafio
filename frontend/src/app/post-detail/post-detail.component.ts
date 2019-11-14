@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {MatVideoComponent} from 'mat-video/app/video/video.component';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {EditpostComponent} from '../editpost/editpost.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -18,6 +20,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
   flags: number;
   isLiked: boolean;
   isFlagged: boolean;
+  isOwner: boolean;
   user: any;
 
   httpOptions = {
@@ -32,6 +35,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
   video: HTMLVideoElement;
 
   constructor(private http: HttpClient,
+              public dialog: MatDialog,
               private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -40,6 +44,11 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
     this.http.get(environment.uploadPostUrl + this.postId, this.httpOptions).subscribe(
       (data) => {
         this.post = data;
+        if (this.post.postedBy === localStorage.getItem('username')) {
+          this.isOwner = true;
+        } else {
+          this.isOwner = false;
+        }
         if (!this.post.watchedBy) {
           this.views = 0;
         } else {
@@ -72,7 +81,6 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.video);
     this.video = this.matVideo.getVideoTag();
     this.video.addEventListener('ended', () => this.watch());
   }
@@ -106,7 +114,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
 
   flag() {
     if (this.flags === 0) {
-      let flags: string[] = new Array();
+      const flags: string[] = new Array();
       flags.push(localStorage.getItem('username'));
       this.post.flaggedBy = flags;
     } else {
@@ -133,7 +141,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
 
   watch() {
     if (this.views === 0) {
-      let view: string[] = new Array();
+      const view: string[] = new Array();
       view.push(localStorage.getItem('username'));
       this.post.watchedBy = view;
     } else {
@@ -147,4 +155,38 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
       () => this.ngOnInit()
     );
   }
+
+  openEdit(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      id: this.post.id,
+      title: this.post.title,
+      category: this.post.category,
+      location: this.post.location,
+      videoUrl: this.post.videoUrl,
+      timestamp: this.post.timestamp
+    };
+    dialogConfig.width = '350px';
+    this.dialog.open(EditpostComponent, dialogConfig);
+  }
+
+  edit(): void {
+    this.openEdit();
+  }
+
+  delete(): void {
+    const posts = this.user.posts;
+    let i = posts.length;
+    while (i--) {
+      console.log('travesring');
+      if (posts[i].id == this.postId) {
+        console.log('found!');
+        posts.splice(i, 1);
+      }
+    }
+    this.user.posts = posts;
+    this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
+    this.http.delete(environment.uploadPostUrl + this.postId, this.httpOptions).subscribe();
+  }
+
 }
