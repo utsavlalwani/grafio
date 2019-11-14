@@ -58,9 +58,19 @@ export class NavbarComponent implements OnInit {
   ];
 
 username:String;
+breakpoint:String;
   ngOnInit() {
     console.log("asdas"+localStorage.getItem('username'));
+    this.breakpoint = (window.innerWidth <= 600) ? 'over' : 'side';
+
   }
+  onResize(event) {
+    this.breakpoint = (window.innerWidth <= 600) ? 'over' : 'side';
+  }
+  isMobile(){
+    return (window.innerWidth <= 400);
+  }
+
 
   openLogin(): void {
     const dialogRef = this.dialog.open(LoginComponent, {

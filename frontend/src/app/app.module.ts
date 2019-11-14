@@ -41,6 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivitiesComponent } from './activities/activities.component';
 import { FlaggedComponent } from './flagged/flagged.component';
 import { WatchedComponent } from './watched/watched.component';
+import { SearchMobileComponent } from './search-mobile/search-mobile.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { WatchedComponent } from './watched/watched.component';
     PostDetailComponent,
     ActivitiesComponent,
     FlaggedComponent,
-    WatchedComponent
+    WatchedComponent,
+    SearchMobileComponent
   ],
     imports: [
         BrowserModule,
