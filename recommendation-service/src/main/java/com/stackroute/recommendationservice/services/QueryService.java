@@ -20,17 +20,6 @@ public class QueryService {
         this.userRepository = userRepository;
     }
 
-    @Transactional(readOnly = true)
-    public Collection<User> graph(int userId) {
-        Collection<User> result = userRepository.graph(userId);
-        return result;
-    }
-
-
-    @Transactional(readOnly = true)
-    public Collection<Post> findByTitleLike(String title) {
-        return newsRepository.findByTitleLike(title);
-    }
 
     @Transactional
     public User getUser(String userName) {

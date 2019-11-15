@@ -16,9 +16,6 @@ public interface NewsRepository extends Neo4jRepository<Post, Long> {
 
 	Collection<Post> findByTitleLike(@Param("title") String title);
 
-    @Query("MATCH (m:Movie)<-[r:ACTED_IN]-(a:Person) RETURN m,r,a LIMIT {limit}")
-	Collection<Post> graph(@Param("limit") int limit);
-
 	@Query("match (u:User) where u.userName={userName} \n" +
 			"\tmatch (u)-[:Viewed]->(n:News) with collect(n) as viewedNews \n" +
 			"\t\tmatch (publisher:User)-[:Published]->(n) \n" +
