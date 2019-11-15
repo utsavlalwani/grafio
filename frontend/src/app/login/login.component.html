@@ -14,14 +14,16 @@
       <!-- <button mat-raised-button color="primary"   [mat-dialog-close]="true" (click)="loginUser(myForm)" class="form-button">Login</button>
       <button mat-raised-button color="primary" [mat-dialog-close]="true" routerLink="/register" class="form-button">New Here? Kindly Register</button>
     -->
-      <div *ngIf="errorMessage;else other_content">
+      <!-- <div *ngIf="errorMessage;else other_content">
           <button mat-raised-button color="primary"   [mat-dialog-close]="true" (click)="loginUser(myForm)" class="form-button">Login</button>
        
       </div>
       
       <ng-template #other_content>
           <button mat-raised-button color="primary"    (click)="loginUser(myForm)" class="form-button">Login</button>
-         </ng-template>
+         </ng-template> -->
+
+         <button mat-raised-button color="primary" (click)="loginUser(myForm)" class="form-button"  mat-button>Login</button>
       <button mat-raised-button color="primary" [mat-dialog-close]="true" routerLink="/register" class="form-button">New Here? Kindly Register</button>
 
     </mat-dialog-actions>

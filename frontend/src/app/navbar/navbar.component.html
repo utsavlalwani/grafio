@@ -24,10 +24,12 @@
   <section *ngIf="loggedIn(); else loggedOut">
     <mat-menu #userMenu="matMenu">
 
-      <button mat-menu-item routerLink="/viewProfile">
+      <button mat-menu-item routerLink="/viewProfile" matTooltip="Your personal details, right here!">
         <mat-icon aria-hidden="false" aria-label="edit profile">accessibility_new</mat-icon>
         Hi {{username}}!
       </button>
+     
+
       <mat-divider></mat-divider>
       <button mat-menu-item routerLink="/editProfile">
         <mat-icon aria-hidden="false" aria-label="edit profile">edit</mat-icon>
@@ -74,7 +76,9 @@
     <section *ngFor="let category of categories">
       <button mat-flat-button class="navbar-button" [routerLink]="['/category', category.name]">
         <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">{{category.icon}}</mat-icon>
-        {{category.name}}
+        <!-- {{category.name}} -->
+  <span >{{category.name}}</span>
+
       </button>
     </section>
   </mat-sidenav>

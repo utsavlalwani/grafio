@@ -2,3 +2,15 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-snack-bar-container {
+    max-width: 100% !important;
+  }
+
+  .mat-simple-snackbar {
+    display: flex; 
+    font-size: 28px !important; 
+    min-height: 50px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }

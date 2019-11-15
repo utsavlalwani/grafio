@@ -18,6 +18,8 @@ export class CategoryComponent implements OnInit {
   categoryName: string;
   category: category;
   breakpoint:number;
+  posts: any;
+
   categories: {
     name: string;
     icon: string;
@@ -58,7 +60,6 @@ export class CategoryComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
               private router: Router) { }
-  posts: any;
   ngOnInit() {
     this.route.url.subscribe(url => {
       this.categoryName = this.route.snapshot.paramMap.get('categoryName');

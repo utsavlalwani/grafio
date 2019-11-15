@@ -10,8 +10,8 @@ import {
   MatFormFieldModule, MatGridListModule,
   MatIconModule,
   MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
-  MatStepperModule, MatTabsModule,
-  MatToolbarModule
+  MatStepperModule, MatTabsModule,MatSnackBarModule,
+  MatToolbarModule,MatBadgeModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatVideoModule } from 'mat-video';
@@ -44,6 +44,8 @@ import { WatchedComponent } from './watched/watched.component';
 import { SearchMobileComponent } from './search-mobile/search-mobile.component';
 import { EditpostComponent } from './editpost/editpost.component';
 import { PostDataComponent } from './post-data/post-data.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,11 @@ import { PostDataComponent } from './post-data/post-data.component';
     MatCheckboxModule,
     MatSelectModule,
     FlexLayoutModule,
-    MatTabsModule
+    MatTabsModule,
+    MatBadgeModule,
+    MatAutocompleteModule,
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   entryComponents: [
     LoginComponent,

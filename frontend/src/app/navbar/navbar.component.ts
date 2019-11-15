@@ -7,6 +7,12 @@ import {CategoryComponent} from '../category/category.component';
 import { RegisterService } from '../services/register.service';
 
 
+class category1 {
+  name: string;
+  icon: string;
+}
+
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -59,16 +65,23 @@ export class NavbarComponent implements OnInit {
 
 username:String;
 breakpoint:String;
+
+
   ngOnInit() {
     console.log("asdas"+localStorage.getItem('username'));
     this.breakpoint = (window.innerWidth <= 600) ? 'over' : 'side';
 
-  }
+}
+  
+
+
+
+
   onResize(event) {
     this.breakpoint = (window.innerWidth <= 600) ? 'over' : 'side';
   }
   isMobile(){
-    return (window.innerWidth <= 400);
+    return (window.innerWidth <= 450);
   }
 
 

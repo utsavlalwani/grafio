@@ -1,9 +1,11 @@
 <h2>
-  <mat-icon aria-hidden="false" aria-label="main menu" class="category-icon">
+  <mat-icon aria-hidden="false" aria-label="main menu" class="category-icon" style="padding-right: 10px">
     {{category.icon}}
   </mat-icon>
-  {{category.name}}
+  
+  <span matBadge={{posts?.length}} matBadgeOverlap="false" matBadgePosition="above after">{{category.name}}</span>
 </h2>
+
 <mat-divider></mat-divider>
 <!-- <mat-grid-list cols="4">
   <section *ngFor="let post of posts" >
