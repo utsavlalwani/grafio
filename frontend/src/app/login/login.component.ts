@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService,
               private router: Router) { }
   errorMessage: string = null;
-
+  isAuthenticated: boolean = false;
   ngOnInit() {
   }
 
@@ -29,9 +29,19 @@ export class LoginComponent implements OnInit {
       const jwt = data.jwtToken;
       localStorage.setItem('jwt', jwt);
       localStorage.setItem('username', user.username);
+      
+      if(user.username.length>0)
+    {
+      this.router.navigateByUrl("/trending");
+    }
+    
     }, error => {
+
+      this.isAuthenticated=false;
       this.errorMessage = 'Incorrect username or password';
     });
+
+    
   }
 
 }
