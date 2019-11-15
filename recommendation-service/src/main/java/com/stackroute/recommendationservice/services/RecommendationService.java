@@ -32,8 +32,8 @@ public class RecommendationService {
 		//return newsRepository.recommend(userId);
 		CompletableFuture<Collection<Post>> task1 = CompletableFuture.supplyAsync(()-> mostViewedCategory(username));
 		CompletableFuture<Collection<Post>> task2 = CompletableFuture.supplyAsync(()-> mostLikedCategory(username));
-		CompletableFuture<Collection<Post>> task3 = CompletableFuture.supplyAsync(()-> byProfile(username));
-		CompletableFuture<Void> allOf = CompletableFuture.allOf(task1, task2, task3);
+		//CompletableFuture<Collection<Post>> task3 = CompletableFuture.supplyAsync(()-> byProfile(username));
+		CompletableFuture<Void> allOf = CompletableFuture.allOf(task1, task2);
 		allOf.get();
 		Collection<Post> result = task1.get();
 		if (result == null) {
@@ -41,11 +41,11 @@ public class RecommendationService {
 		} else {
 			result.addAll(task2.get());
 		}
-		if (result == null) {
+		/*if (result == null) {
 			task3.get();
 		} else {
 			result.addAll(task3.get());
-		}
+		}*/
 		return result;
 	}
 

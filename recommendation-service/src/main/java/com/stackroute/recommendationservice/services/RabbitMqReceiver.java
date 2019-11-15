@@ -55,7 +55,16 @@ public class RabbitMqReceiver {
                 }
             }
             catch (NullPointerException e) {
-                System.out.println("Post not liked yet");
+                //System.out.println("Post not liked yet");
+                //e.printStackTrace();
+            }
+            try {
+                for (String likedBy : postDTO.getWatchedBy()) {
+                    queryService.addToViewed(likedBy, postDTO.getId());
+                }
+            }
+            catch (NullPointerException e) {
+                //System.out.println("Post not viewed yet");
                 //e.printStackTrace();
             }
             queryService.saveUser(user);
