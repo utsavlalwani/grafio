@@ -1,14 +1,28 @@
 version: '3'
 
 services:
-  config-server:
-    build: config-server/
-    container_name: config-server
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    container_name: mysql-docker
+    network_mode: host
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - $HOME/mysql:/var/lib/mysql
+
+  mongo:
+    image: mongo
+    container_name: mongo
     restart: always
+    ports:
+      - 27017:27017
     network_mode: "host"
     hostname: localhost
-    ports:
-      - 8888:8888
+    volumes:
+      - $HOME/mongo:/data/db
 
   neo4j:
     image: neo4j:latest
@@ -24,6 +38,24 @@ services:
     volumes:
       - $HOME/neo4j/data:/data
 
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  config-server:
+    build: config-server/
+    container_name: config-server
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8888:8888
+    environment:
+      WAIT_HOSTS: localhost:5672, localhost:15672, localhost:7687, localhost:7687, localhost:27017, localhost:3306
+      WAIT_HOSTS_TIMEOUT: 100
+
   eureka-server:
     build: eureka-server/
     container_name: eureka-server
@@ -32,6 +64,9 @@ services:
     hostname: localhost
     ports:
       - 8085:8085
+    environment:
+      WAIT_HOSTS: localhost:8888
+      WAIT_HOSTS_TIMEOUT: 100
 
   api-gateway:
     build: api-gateway/
@@ -44,35 +79,10 @@ services:
     hostname: localhost
     ports:
       - 8080:8080
-
-  mongo:
-    image: mongo
-    container_name: mongo
-    restart: always
-    ports:
-      - 27017:27017
-    network_mode: "host"
-    hostname: localhost
-    volumes:
-      - $HOME/mongo:/data/db
-
-  mysql:
-    image: mysql:5.7
-    ports:
-      - "3306:3306"
-    container_name: mysql-docker
-    network_mode: host
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_ROOT_HOST=%
-    volumes:
-      - $HOME/mysql:/var/lib/mysql
+      WAIT_HOSTS: localhost:8085
+      WAIT_HOSTS_TIMEOUT: 100
 
-  rabbitmq:
-    image: rabbitmq:management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
 
   registration-service:
     build: registration-service/
@@ -88,6 +98,9 @@ services:
       - api-gateway
     ports:
       - "8092:8092"
+    environment:
+      WAIT_HOSTS: localhost:8085
+      WAIT_HOSTS_TIMEOUT: 100
 
   login-service:
     build: login-service/
@@ -101,6 +114,40 @@ services:
     hostname: localhost
     ports:
       - 8091:8091
+    environment:
+      WAIT_HOSTS: localhost:8085, localhost:8092
+      WAIT_HOSTS_TIMEOUT: 100
+
+  search:
+    build: search-service/
+    container_name: search-service
+    depends_on:
+      - eureka-server
+      - api-gateway
+      - rabbitmq
+      - content-service
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8094:8094
+    environment:
+      WAIT_HOSTS: localhost:8085
+      WAIT_HOSTS_TIMEOUT: 100
+
+  recommendation-service:
+    build: recommendation-service
+    container_name: recommendation-service
+    depends_on:
+      - neo4j
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8096:8096
+    environment:
+      WAIT_HOSTS: localhost:8085, localhost:8092
+      WAIT_HOSTS_TIMEOUT: 100
 
   content-service:
     build: content-service/
@@ -116,6 +163,10 @@ services:
     hostname: localhost
     ports:
       - 8093:8093
+    environment:
+      WAIT_HOSTS: localhost:8085, localhost:8092, localhost:8094, localhost:8096
+      WAIT_HOSTS_TIMEOUT: 100
+
 
   news-zoid-frontend:
     build: frontend/
@@ -125,28 +176,3 @@ services:
     restart: always
     ports:
       - "4200:4200"
-
-  search:
-    build: search-service/
-    container_name: search-service
-    depends_on:
-      - eureka-server
-      - api-gateway
-      - rabbitmq
-      - content-service
-    restart: always
-    network_mode: "host"
-    hostname: localhost
-    ports:
-      - 8094:8094
-
-  recommendation-service:
-    build: recommendation-service
-    container_name: recommendation-service
-    depends_on:
-      - neo4j
-    restart: always
-    network_mode: "host"
-    hostname: localhost
-    ports:
-      - 8096:8096
