@@ -1,11 +1,17 @@
 <mat-card class="post" (click)="postDetail()">
   <mat-card-content>
-    <mat-video [overlay]="false" color="primary" spinner="spin" [download]="true" [preload]="false">
+    <!-- <mat-video [overlay]="false" color="primary" spinner="spin" [download]="true" [preload]="false" width="300" height="200">
       <source src="{{post?.videoUrl}}" type="video/mp4">
-    </mat-video>
+    </mat-video> -->
+    <video width="320" height="240" controls>
+        <source src="{{post?.videoUrl}}" type="video/mp4">
+      </video> 
     <br>
     <mat-card-title class="ellipse">{{post?.title}}</mat-card-title>
-    <mat-card-subtitle>{{post?.postedBy}}</mat-card-subtitle>
+    <mat-card-subtitle>
+        <mat-icon aria-hidden="false" aria-label="edit profile">accessibility_new</mat-icon>
+      {{post?.postedBy}}
+    </mat-card-subtitle>
     <mat-card-subtitle>
       posted on: {{post?.timestamp | date:'mediumDate'}}
     </mat-card-subtitle>
