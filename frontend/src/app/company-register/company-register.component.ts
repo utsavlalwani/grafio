@@ -47,7 +47,8 @@ export class CompanyRegisterComponent implements OnInit {
   chargeCard(token: string, name, pass) {
     const header = {
       "token": token,
-      "amount": "20000"
+      "amount": "20000",
+      'Content-Type': 'application/json',
 
     };
     const httpOptions = {
