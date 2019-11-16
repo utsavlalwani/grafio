@@ -106,7 +106,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
 
     this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
       (data) => {
-        this.http.put(environment.registerUrl+"/"+localStorage.getItem("username"), this.user, this.httpOptions).subscribe();
+        this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
         this.ngOnInit();
       }
     );
@@ -133,7 +133,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
 
     this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
       (data) => {
-        this.http.put(environment.registerUrl, this.user, this.httpOptions).subscribe();
+        this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
         this.ngOnInit();
       }
     );

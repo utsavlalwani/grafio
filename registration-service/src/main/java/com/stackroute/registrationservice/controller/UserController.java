@@ -2,12 +2,15 @@ package com.stackroute.registrationservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stackroute.registrationservice.domain.Post;
 import com.stackroute.registrationservice.domain.User;
 import com.stackroute.registrationservice.domain.UserDAO;
 import com.stackroute.registrationservice.domain.UserDTO;
 import com.stackroute.registrationservice.exception.UserAlreadyExistsException;
 import com.stackroute.registrationservice.exception.UserNotFoundException;
+import com.stackroute.registrationservice.service.StripeClient;
 import com.stackroute.registrationservice.service.UserRegistrationService;
+import com.stripe.model.Charge;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
@@ -20,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,14 +40,17 @@ public class UserController {
 
     private Queue queue;
 
+    private StripeClient stripeClient;
+
     static final String queueName="user";
     static final String topicExchangeName="user-auth";
     static final String routingKey = "user.auth.reg";
 
     @Autowired
-    public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate, Queue queue) {
+    public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate, Queue queue, StripeClient stripeClient) {
         this.userRegistrationService=userRegistrationService;
         this.rabbitTemplate = rabbitTemplate;
+        this.stripeClient = stripeClient;
         this.queue = new Queue(queueName, false);
         BindingBuilder.bind(queue)
                 .to(new TopicExchange(topicExchangeName))
@@ -52,12 +59,22 @@ public class UserController {
 
     @PostMapping("register")
     public ResponseEntity<?> saveUser(@RequestBody UserDAO userDao) {
+        if(userDao.getIsSub() == null) {
+            userDao.setIsSub(false);
+        }
+        List<Post> post = new ArrayList<Post>();
         User user = User.builder()
                         .name(userDao.getName())
                         .dateOfBirth(userDao.getDateOfBirth())
                         .email(userDao.getEmail())
                         .username(userDao.getUsername())
                         .newsPreferences(userDao.getNewsPreferences())
+                        .posts(post)
+                        .liked(post)
+                        .flagged(post)
+                        .watched(post)
+                        .bought(post)
+                        .isSub(userDao.getIsSub())
                         .build();
         ResponseEntity responseEntity;
         /*ArrayList<String> listOfPosts = new ArrayList<>();//user.getPosts();
@@ -105,5 +122,12 @@ public class UserController {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return responseEntity;
+    }
+
+    @PostMapping("/charge")
+    public Charge chargeCard(HttpServletRequest request) throws Exception {
+        String token = request.getHeader("token");
+        Double amount = Double.parseDouble(request.getHeader("amount"));
+        return this.stripeClient.chargeCreditCard(token, amount);
     }
 }

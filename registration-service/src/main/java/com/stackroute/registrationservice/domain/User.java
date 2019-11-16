@@ -23,6 +23,7 @@ public class User {
     private String email;
     private Date dateOfBirth;
     private List<String> newsPreferences;
+    private Boolean isSub;
 
     private List<Post> posts;
     private List<Post> liked;
