@@ -20,5 +20,6 @@ public class UserDAO {
     private Date dateOfBirth;
     private List<String> newsPreferences;
     private String password;
+    private Boolean isSub;
 
 }
