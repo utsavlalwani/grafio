@@ -20,6 +20,7 @@ public class StripeClient {
         chargeParams.put("amount", (int)(amount * 100));
         chargeParams.put("currency", "USD");
         chargeParams.put("source", token);
+        chargeParams.put("description", "subscription for newsZoid");
         Charge charge = Charge.create(chargeParams);
         return charge;
     }

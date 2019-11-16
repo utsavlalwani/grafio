@@ -59,7 +59,7 @@ export class CompanyRegisterComponent implements OnInit {
 
         console.log("RESP = ",resp);
 
-      })
+      });
   }
 
 
@@ -81,7 +81,7 @@ export class CompanyRegisterComponent implements OnInit {
       s.src = "https://checkout.stripe.com/checkout.js";
       s.onload = () => {
         this.handler = (<any>window).StripeCheckout.configure({
-          key: 'pk_test_aeUUjYYcx4XNfKVW60pmHTtI',
+          key: 'pk_test_wjGbwX82splBNjohcWU6nBh4008Uzxzm9Z',
           locale: 'auto',
           token: function (token: any) {
             // You can access the token ID with `token.id`.
