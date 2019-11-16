@@ -54,12 +54,12 @@ export class CompanyRegisterComponent implements OnInit {
       headers: header
     };
     const headers = new Headers({'token': token, 'amount': "100"});
-    this.http.post('http://localhost:8443/registration-service/api/v1/charge', {}, httpOptions)
+    this.http.post('https://newszoid.stackroute.io:8443/registration-service/api/v1/charge', {}, httpOptions)
       .subscribe(resp => {
 
         console.log("RESP = ",resp);
 
-      })
+      });
   }
 
 
@@ -81,7 +81,7 @@ export class CompanyRegisterComponent implements OnInit {
       s.src = "https://checkout.stripe.com/checkout.js";
       s.onload = () => {
         this.handler = (<any>window).StripeCheckout.configure({
-          key: 'pk_test_aeUUjYYcx4XNfKVW60pmHTtI',
+          key: 'pk_test_wjGbwX82splBNjohcWU6nBh4008Uzxzm9Z',
           locale: 'auto',
           token: function (token: any) {
             // You can access the token ID with `token.id`.
