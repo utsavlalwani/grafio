@@ -50,6 +50,7 @@ public class RabbitMqReceiver {
                 user.setPublishedPosts(posts);
             }
             try {
+                queryService.removeFromLiked(postDTO.getId());
                 for (String likedBy : postDTO.getLikedBy()) {
                     queryService.addToLiked(likedBy, postDTO.getId());
                 }
@@ -59,8 +60,8 @@ public class RabbitMqReceiver {
                 //e.printStackTrace();
             }
             try {
-                for (String likedBy : postDTO.getWatchedBy()) {
-                    queryService.addToViewed(likedBy, postDTO.getId());
+                for (String viewedBy : postDTO.getWatchedBy()) {
+                    queryService.addToViewed(viewedBy, postDTO.getId());
                 }
             }
             catch (NullPointerException e) {

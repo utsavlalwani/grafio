@@ -77,17 +77,6 @@ public class UserController {
                         .isSub(userDao.getIsSub())
                         .build();
         ResponseEntity responseEntity;
-        /*ArrayList<String> listOfPosts = new ArrayList<>();//user.getPosts();
-        ArrayList<String> listOfViews = new ArrayList<>();
-
-        listOfPosts .add("www.google.com");
-        listOfPosts.add("www.deccanherald.com");
-        user.setPosts(listOfPosts);
-
-        listOfViews.add("www.yahoo.com");
-        listOfViews.add("www.facebook.com");
-        listOfViews.add("www.bing.com");
-        user.setViewed(listOfViews);*/
 
         try{
             User savedUser = userRegistrationService.saveUser(user);

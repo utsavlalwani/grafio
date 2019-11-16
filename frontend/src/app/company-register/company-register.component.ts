@@ -34,7 +34,7 @@ export class CompanyRegisterComponent implements OnInit {
 
 
 
-        this.chargeCard(token);
+        this.chargeCard(token, name, pass);
       } else {
         console.log(response.error.message);
         this.invalidfeedback = response.error.message;
@@ -44,7 +44,7 @@ export class CompanyRegisterComponent implements OnInit {
   }
 
 
-  chargeCard(token: string) {
+  chargeCard(token: string, name, pass) {
     const header = {
       "token": token,
       "amount": "20000"
@@ -54,7 +54,9 @@ export class CompanyRegisterComponent implements OnInit {
       headers: header
     };
     const headers = new Headers({'token': token, 'amount': "100"});
-    this.http.post('https://newszoid.stackroute.io:8443/registration-service/api/v1/charge', {}, httpOptions)
+    var parameter = JSON.stringify({username:name, password:pass});
+    console.log(parameter);
+    this.http.post('https://newszoid.stackroute.io:8443/registration-service/api/v1/charge', parameter, httpOptions)
       .subscribe(resp => {
 
         console.log("RESP = ",resp);

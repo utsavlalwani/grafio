@@ -57,6 +57,11 @@ public class QueryService {
         userRepository.save(user);
     }
 
+    @Transactional
+    public void removeFromLiked(Long videoId) {
+        newsRepository.deleteLikedRel(videoId);
+    }
+
     public Collection<Post> byLocation(String name) {
         return newsRepository.byLocation(name);
     }
