@@ -52,6 +52,9 @@ import{BottomSheetNewsZoid} from '../app/navbar/navbar.component';
 import { GraphComponent } from './graph/graph.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
+
+
+import {MatExpansionModule} from '@angular/material/expansion'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,7 +118,8 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
     MatSnackBarModule,
     MatTooltipModule,
     MatBottomSheetModule,
-    MatChipsModule
+    MatChipsModule,
+    MatExpansionModule
   ],
   entryComponents: [
     LoginComponent,
