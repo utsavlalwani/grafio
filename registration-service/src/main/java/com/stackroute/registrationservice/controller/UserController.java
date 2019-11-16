@@ -2,6 +2,7 @@ package com.stackroute.registrationservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stackroute.registrationservice.domain.Post;
 import com.stackroute.registrationservice.domain.User;
 import com.stackroute.registrationservice.domain.UserDAO;
 import com.stackroute.registrationservice.domain.UserDTO;
@@ -52,26 +53,20 @@ public class UserController {
 
     @PostMapping("register")
     public ResponseEntity<?> saveUser(@RequestBody UserDAO userDao) {
+        List<Post> posts = new ArrayList<Post>();
         User user = User.builder()
                         .name(userDao.getName())
                         .dateOfBirth(userDao.getDateOfBirth())
                         .email(userDao.getEmail())
                         .username(userDao.getUsername())
                         .newsPreferences(userDao.getNewsPreferences())
+                        .posts(posts)
+                        .liked(posts)
+                        .bought(posts)
+                        .watched(posts)
+                        .flagged(posts)
                         .build();
         ResponseEntity responseEntity;
-        /*ArrayList<String> listOfPosts = new ArrayList<>();//user.getPosts();
-        ArrayList<String> listOfViews = new ArrayList<>();
-
-        listOfPosts .add("www.google.com");
-        listOfPosts.add("www.deccanherald.com");
-        user.setPosts(listOfPosts);
-
-        listOfViews.add("www.yahoo.com");
-        listOfViews.add("www.facebook.com");
-        listOfViews.add("www.bing.com");
-        user.setViewed(listOfViews);*/
-
         try{
             User savedUser = userRegistrationService.saveUser(user);
             UserDTO userDTO = new UserDTO(user.getUsername(), bcryptEncoder.encode(userDao.getPassword()));
