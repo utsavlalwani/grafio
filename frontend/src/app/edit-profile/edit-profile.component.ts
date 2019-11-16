@@ -51,6 +51,7 @@ export class EditProfileComponent implements OnInit {
 
 
 
+  maxDate=new Date();
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -122,13 +123,13 @@ export class EditProfileComponent implements OnInit {
 
   checkInUseEmail(control) {
     // mimic http database access
-    let db = ['tonasy@gmAASail.com'];
+    let db = ['sdfesfe'];
     return new Observable(observer => {
       setTimeout(() => {
         let result = (db.indexOf(control.value) !== -1) ? { 'alreadyInUse': true } : null;
         observer.next(result);
         observer.complete();
-      }, 4000)
+      }, 1000)
     })
   }
 
@@ -151,9 +152,7 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-    // display form values on success
-    // alert('SUCCESS!! :-)\n\n');
-    //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.firstFormGroup.value, null, 4));
+    
   }
 
   onReset() {

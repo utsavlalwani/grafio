@@ -11,7 +11,7 @@ import {
   MatIconModule,
   MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
   MatStepperModule, MatTabsModule,MatSnackBarModule,
-  MatToolbarModule,MatBadgeModule
+  MatToolbarModule,MatBadgeModule,
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatVideoModule } from 'mat-video';
@@ -47,6 +47,8 @@ import { PostDataComponent } from './post-data/post-data.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet'; 
+import{BottomSheetNewsZoid} from '../app/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +73,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     WatchedComponent,
     SearchMobileComponent,
     EditpostComponent,
-    PostDataComponent
+    PostDataComponent,
+    BottomSheetNewsZoid
+    
   ],
   imports: [
     BrowserModule,
@@ -104,12 +108,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatBadgeModule,
     MatAutocompleteModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatBottomSheetModule
   ],
   entryComponents: [
     LoginComponent,
     UploadComponent,
-    EditpostComponent
+    EditpostComponent,
+    BottomSheetNewsZoid
   ],
   providers: [DatePipe, CategoryComponent],
   bootstrap: [AppComponent]

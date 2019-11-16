@@ -5,6 +5,7 @@ import {UploadComponent} from '../upload/upload.component';
 import {Router} from '@angular/router';
 import {CategoryComponent} from '../category/category.component';
 import { RegisterService } from '../services/register.service';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 
 class category1 {
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private router: Router,
               private category: CategoryComponent,
-              private registerService: RegisterService) { }
+              private registerService: RegisterService,
+              private _bottomSheet: MatBottomSheet) { }
 
   categories: {
     name: string;
@@ -145,4 +147,26 @@ breakpoint:String;
       this.openLogin();
     }
   }
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(BottomSheetNewsZoid);
+  }
+
 }
+
+@Component({
+  selector: 'bottom-sheet-news-zoid',
+  templateUrl: 'bottom-sheet-news-zoid.html',
+  styleUrls: ['./bottom-sheet-news-zoid.css']
+})
+export class BottomSheetNewsZoid {
+  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetNewsZoid>) {}
+
+  openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
+}
+
+
+

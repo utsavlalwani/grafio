@@ -41,7 +41,8 @@
                     <div>
                         <mat-form-field class="example-full-width">
                             <input matInput [matDatepicker]="picker" placeholder="When were you born?"
-                                formControlName="date" [(ngModel)]="userData.dateOfBirth" #date>
+                                formControlName="date" [(ngModel)]="userData.dateOfBirth" #date [value]="userData.dateOfBirth"
+                                [max]="maxDate">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker touchUi #picker></mat-datepicker>
                         </mat-form-field>

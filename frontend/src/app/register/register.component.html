@@ -56,7 +56,7 @@
           <div>
             <mat-form-field>
               <input matInput [matDatepicker]="picker" placeholder="When were you born?" formControlName="date"
-                     #date>
+                     #date [max]="maxDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker touchUi #picker></mat-datepicker>
             </mat-form-field>

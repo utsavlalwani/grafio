@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
     return this.firstFormGroup.get('name') as FormControl;
   }
 
+  maxDate=new Date();
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -140,13 +141,13 @@ export class RegisterComponent implements OnInit {
 
   checkInUseEmail(control) {
     // mimic http database access
-    const db = ['tonasy@gmAASail.com'];
+    const db = ['esdsefsef'];
     return new Observable(observer => {
       setTimeout(() => {
         const result = (db.indexOf(control.value) !== -1) ? { alreadyInUse: true } : null;
         observer.next(result);
         observer.complete();
-      }, 4000);
+      }, 1000);
     });
   }
 

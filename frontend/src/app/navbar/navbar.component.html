@@ -11,13 +11,13 @@
     <input matInput placeholder="Search for tags and locations" type="search" class="placeholder" style="color: aqua">
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field> -->
-  <section *ngIf = "isMobile(); else normalsize">
+  <section *ngIf="isMobile(); else normalsize">
     <app-search-mobile></app-search-mobile>
-    
+
   </section>
-  <ng-template #normalsize>  
+  <ng-template #normalsize>
     <app-searchbar></app-searchbar>
-    
+
   </ng-template>
 
 
@@ -28,7 +28,7 @@
         <mat-icon aria-hidden="false" aria-label="edit profile">accessibility_new</mat-icon>
         Hi {{username}}!
       </button>
-     
+
 
       <mat-divider></mat-divider>
       <button mat-menu-item routerLink="/editProfile">
@@ -45,9 +45,11 @@
     </button>
   </section>
   <ng-template #loggedOut>
+
     <button mat-raised-button (click)="openLogin()" id="signin-button">
       Sign in
     </button>
+
   </ng-template>
 </mat-toolbar>
 <mat-sidenav-container hasBackdrop="false">
@@ -57,7 +59,7 @@
       Trending Now
     </button>
     <button mat-flat-button class="navbar-button" (click)="recommendation()">
-      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon" >person</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">person</mat-icon>
       For You
     </button>
     <button mat-flat-button class="navbar-button" (click)="liked()">
@@ -69,15 +71,21 @@
       Your Posts
     </button>
     <button mat-flat-button class="navbar-button" (click)="upload()">
-      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon" >add_to_queue</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">add_to_queue</mat-icon>
       Upload News
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-flat-button class="navbar-button" (click)="openBottomSheet()" 
+     matTooltip="Do have a read, it's important.">
+      <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">code</mat-icon>
+      About us
     </button>
     <mat-divider></mat-divider>
     <section *ngFor="let category of categories">
       <button mat-flat-button class="navbar-button" [routerLink]="['/category', category.name]">
         <mat-icon aria-hidden="false" aria-label="main menu" class="button-icon">{{category.icon}}</mat-icon>
         <!-- {{category.name}} -->
-  <span >{{category.name}}</span>
+        <span>{{category.name}}</span>
 
       </button>
     </section>
