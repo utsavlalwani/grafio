@@ -12,21 +12,7 @@
         <mat-divider></mat-divider>
         <div>
             <h3>Categories that suit your taste:</h3>
-            <!-- <mat-grid-list cols="2" rowHeight="300px">
-                <mat-grid-tile *ngFor="let interests of userData.newsPreferences">
-                    <mat-card>
-
-                        <mat-card-header>
-                            <h3>{{interests}}</h3>
-                        </mat-card-header>
-
-                        <mat-card-content>
-                            <img src="../../assets/{{interests}}.jpg" alt="interests" class="image">
-                        </mat-card-content>
-                    </mat-card>
-                </mat-grid-tile>
-            </mat-grid-list> -->
-
+            <!-- 
             <div fxLayout="row wrap" fxLayout.xs="column" fxLayout.md="row wrap" fxLayout.sm="row wrap" fxLayoutAlign="space-between">
                 <section *ngFor="let interests of userData.newsPreferences" fxFlex="30%" 
                 fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="80%">
@@ -45,7 +31,17 @@
                     
 
                 </section>
-            </div>
+            </div> -->
+
+            <section style="width:70%;margin: auto">
+            <mat-chip-list aria-label="your interests">
+                <mat-chip color="primary" *ngFor="let interests of userData.newsPreferences" selected>{{interests}}
+                </mat-chip>
+                <!-- <mat-chip color="accent" selected>Accent fish</mat-chip> -->
+            </mat-chip-list>
+            </section>
+
+
         </div>
     </mat-card-content>
     <!-- <mat-grid-list></mat-grid-list> -->

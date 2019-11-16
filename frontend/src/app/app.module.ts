@@ -50,6 +50,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet'; 
 import{BottomSheetNewsZoid} from '../app/navbar/navbar.component';
 import { GraphComponent } from './graph/graph.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { CompanyRegisterComponent } from './company-register/company-register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +78,8 @@ import { GraphComponent } from './graph/graph.component';
     EditpostComponent,
     PostDataComponent,
     BottomSheetNewsZoid,
-    GraphComponent
+    GraphComponent,
+    CompanyRegisterComponent
     
   ],
   imports: [
@@ -111,7 +114,8 @@ import { GraphComponent } from './graph/graph.component';
     MatAutocompleteModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatChipsModule
   ],
   entryComponents: [
     LoginComponent,
