@@ -36,7 +36,8 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 						"/content-service/api/v1/post/trending",
 						"/content-service/api/v1/post/trending/*",
                         "/search-service/api/v1/category/*",
-                        "/search-service/api/v1/location/*").permitAll()
+                        "/search-service/api/v1/location/*",
+                        "/registration-service/api/v1/charge").permitAll()
 //                .authorizeRequests().antMatchers("/registration-service/api/v1/register", "/login-service/api/v1/authenticate").permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
 //                .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
