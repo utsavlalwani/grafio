@@ -15,13 +15,20 @@ public class StripeClient {
         Stripe.apiKey = "sk_test_gnCtprCLNNSHjV1VijD3e8TP0036eEsk4v";
     }
 
-    public Charge chargeCreditCard(String token, double amount) throws Exception {
+    public boolean chargeCreditCard(String token, double amount) throws Exception {
+        Charge charge = null;
         Map<String, Object> chargeParams = new HashMap<String, Object>();
         chargeParams.put("amount", (int)(amount * 100));
-        chargeParams.put("currency", "USD");
+        chargeParams.put("currency", "INR");
         chargeParams.put("source", token);
         chargeParams.put("description", "subscription for newsZoid");
-        Charge charge = Charge.create(chargeParams);
-        return charge;
+        try {
+            charge = Charge.create(chargeParams);
+            return charge.getPaid();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

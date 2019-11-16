@@ -125,9 +125,41 @@ public class UserController {
     }
 
     @PostMapping("/charge")
-    public Charge chargeCard(HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> chargeCard(HttpServletRequest request, @RequestBody UserDAO userDao) throws Exception {
         String token = request.getHeader("token");
         Double amount = Double.parseDouble(request.getHeader("amount"));
-        return this.stripeClient.chargeCreditCard(token, amount);
+        boolean status =  this.stripeClient.chargeCreditCard(token, amount);
+        if(!status) {
+            return new ResponseEntity<String>("Payment failed", HttpStatus.BAD_REQUEST);
+        }
+        userDao.setIsSub(true);
+        List<Post> post = new ArrayList<Post>();
+        User user = User.builder()
+                .name(userDao.getName())
+                .dateOfBirth(userDao.getDateOfBirth())
+                .email(userDao.getEmail())
+                .username(userDao.getUsername())
+                .newsPreferences(userDao.getNewsPreferences())
+                .posts(post)
+                .liked(post)
+                .flagged(post)
+                .watched(post)
+                .bought(post)
+                .isSub(userDao.getIsSub())
+                .build();
+        ResponseEntity responseEntity;
+
+        try{
+            User savedUser = userRegistrationService.saveUser(user);
+            UserDTO userDTO = new UserDTO(user.getUsername(), bcryptEncoder.encode(userDao.getPassword()));
+            rabbitTemplate.convertAndSend(topicExchangeName, routingKey, new ObjectMapper().writeValueAsString(userDTO));
+            responseEntity = new ResponseEntity<User>( savedUser,HttpStatus.CREATED);
+        } catch (UserAlreadyExistsException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        } catch (JsonProcessingException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return responseEntity;
+
     }
 }
