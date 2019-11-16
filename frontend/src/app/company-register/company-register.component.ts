@@ -30,7 +30,7 @@ export class CompanyRegisterComponent implements OnInit {
         let token = response.id;
         console.log(token);
         this.invalidfeedback = "";
-        this.router.navigate(['/loading']).then();
+        this.router.navigate(['/trending']).then();
 
 
 

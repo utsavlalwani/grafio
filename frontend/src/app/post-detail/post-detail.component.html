@@ -37,5 +37,8 @@
       <button mat-icon-button (click)="edit()">Edit</button>
       <button mat-icon-button (click)="delete()">Delete</button>
     </div>
+    <div *ngIf="user.isSub">
+      <button mat-icon-button (click)="download(post.videoUrl)">Buy</button>
+    </div>
   </mat-card-actions>
 </mat-card>

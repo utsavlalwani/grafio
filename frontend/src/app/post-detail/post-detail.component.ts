@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {MatVideoComponent} from 'mat-video/app/video/video.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {EditpostComponent} from '../editpost/editpost.component';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-post-detail',
@@ -36,7 +37,8 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient,
               public dialog: MatDialog,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
     this.postId = this.route.snapshot.paramMap.get('postId');
@@ -168,6 +170,10 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
     };
     dialogConfig.width = '350px';
     this.dialog.open(EditpostComponent, dialogConfig);
+  }
+
+  download(url: string): void {
+    this.document.location.href = url;
   }
 
   edit(): void {
