@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -13,9 +13,11 @@ import { RegisterService } from '../services/register.service';
   providers: [DatePipe]
 })
 export class EditProfileComponent implements OnInit {
+  onlyNewsPreferences: String[];
 
   constructor(private formBuilder: FormBuilder, private datePipe: DatePipe, private router: Router, private userRegistration: RegisterService) { }
   userData: any;
+
   date1 = new FormControl(new Date());
 
 
@@ -30,6 +32,7 @@ export class EditProfileComponent implements OnInit {
       this.userData = data;
       console.log(data);
 
+      this.onlyNewsPreferences=this.userData.newsPreferences;
       this.date1=this.userData.dateOfBirth;
     })
 
@@ -169,14 +172,14 @@ export class EditProfileComponent implements OnInit {
 
   userObject: any;
 
-  update(name, userName, email, dateOfBirth, selectedOptions) {
+  update(name, userName, email, selectedOptions) {
 
-    dateOfBirth = this.datePipe.transform(dateOfBirth, "yyyy-MM-dd");
+    // dateOfBirth = this.datePipe.transform(dateOfBirth, "yyyy-MM-dd");
     this.userObject = {
       "name": name,
       "username": userName,
       "email": email,
-      "dateOfBirth": dateOfBirth,
+      "dateOfBirth": this.userData.dateOfBirth,
       "newsPreferences": selectedOptions,
       "posts": this.userData.posts,
       "liked": this.userData.liked,
@@ -193,5 +196,16 @@ export class EditProfileComponent implements OnInit {
           this.router.navigateByUrl('/viewProfile');
         }
       );
+  }
+
+  selected(category1)
+  {
+    console.log(this.onlyNewsPreferences);
+    console.log(category1);
+    if(this.onlyNewsPreferences==null)return false;
+    if(this.onlyNewsPreferences.indexOf(category1)!=-1)
+    return true;
+    else
+    return false;
   }
 }

@@ -73,7 +73,7 @@
           <ng-template matStepLabel>Your Preferences</ng-template>
           <mat-selection-list #list [(ngModel)]="selectedOptions" [ngModelOptions]="{standalone: true}"
                               (ngModelChange)="onNgModelChange($event)" >
-            <mat-list-option [value]="category.name" *ngFor="let category of categories">
+            <mat-list-option  [value]="category.name" *ngFor="let category of categories" >
               <mat-icon aria-hidden="false" matListAvatar>{{category.icon}}</mat-icon>
               {{category.name}}
             </mat-list-option>

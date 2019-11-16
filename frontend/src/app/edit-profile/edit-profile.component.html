@@ -38,16 +38,16 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    {{date1}}
+                    <!-- {{date1}}
                     <div>
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field >
                             <input matInput [matDatepicker]="picker" placeholder="When were you born?"
-                                formControlName="date" #date [formControl]="date1" 
+                                formControlName="date" #date [value]="date1"
                                 [max]="maxDate">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker touchUi #picker></mat-datepicker>
                         </mat-form-field>
-                    </div>
+                    </div> -->
                     <div>
                         <button mat-button matStepperPrevious>Back</button>
                         <button mat-raised-button color="primary" matStepperNext>Next</button>
@@ -56,7 +56,8 @@
             </mat-step>
 
             <mat-step [stepControl]="thirdFormGroup" optional>
-                <form [formGroup]="thirdFormGroup" class='container' fxLayout="column" fxLayoutAlign="start start" style="min-height: min-content;">
+                <form [formGroup]="thirdFormGroup" class='container' fxLayout="column" fxLayoutAlign="start start"
+                    style="min-height: min-content;">
                     <ng-template matStepLabel>Your Preferences</ng-template>
                     <p>
                         Below are options from which you can select your interests in news!
@@ -64,21 +65,40 @@
                     <div>
                         Selected: {{ selectedOption | json }}
                     </div>
+                    
                     <mat-selection-list #list [(ngModel)]="selectedOptions" [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="onNgModelChange($event)">
-                        <mat-list-option *ngFor="let tta of taskTypeAreas" [value]="tta.name">
+
+                        <div *ngFor="let tta of taskTypeAreas">
+                            <div *ngIf="selected(tta.name);else other_content">
+                                
+                                <mat-list-option [value]="tta.name" selected>
+                                    {{tta.name}}
+                                </mat-list-option>
+                            </div>
+
+                            <ng-template #other_content>
+                                
+                                <mat-list-option [value]="tta.name" unselected>
+                                    {{tta.name}}
+                                </mat-list-option>
+                            </ng-template>
+                        </div>
+
+
+                        <!-- <mat-list-option *ngFor="let tta of taskTypeAreas" [value]="tta.name" unselected="selected(tta.name)">
                             {{tta.name}}
-                        </mat-list-option>
-                       
+                        </mat-list-option> -->
+
                     </mat-selection-list>
                     <div>
                         <button mat-button matStepperPrevious>Back</button>
                         <!-- <button mat-raised-button color="primary" matStepperNext>Next</button> -->
 
                         <button mat-raised-button color="primary" type="submit" matStepperNext
-                        (click)=update(name.value,userData.username,email.value,date.value,selectedOptions)>Submit</button>
+                            (click)=update(name.value,userData.username,email.value,selectedOptions)>Submit</button>
 
-                    <button mat-button (click)="stepper.reset()">Reset</button>
+                        <button mat-button (click)="stepper.reset()">Reset</button>
                     </div>
                 </form>
             </mat-step>

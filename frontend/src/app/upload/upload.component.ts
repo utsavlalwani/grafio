@@ -16,7 +16,7 @@ export class UploadComponent implements OnInit {
 
   /** Target URL for file uploading. */
   @Input() target = environment.postTargetUrl;
-  @Input() accept = '*';
+  @Input() accept = 'video/mp4,video/x-m4v,video/*';
   /** Allow you to add handler after its completion. Bubble up response text from remote. */
   @Output() complete = new EventEmitter<string>();
   private files: Array<FileUploadModel> = [];
