@@ -2,6 +2,7 @@ package com.stackroute.registrationservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stackroute.registrationservice.domain.Post;
 import com.stackroute.registrationservice.domain.User;
 import com.stackroute.registrationservice.domain.UserDAO;
 import com.stackroute.registrationservice.domain.UserDTO;
@@ -61,12 +62,18 @@ public class UserController {
         if(userDao.getIsSub() == null) {
             userDao.setIsSub(false);
         }
+        List<Post> post = new ArrayList<Post>();
         User user = User.builder()
                         .name(userDao.getName())
                         .dateOfBirth(userDao.getDateOfBirth())
                         .email(userDao.getEmail())
                         .username(userDao.getUsername())
                         .newsPreferences(userDao.getNewsPreferences())
+                        .posts(post)
+                        .liked(post)
+                        .flagged(post)
+                        .watched(post)
+                        .bought(post)
                         .isSub(userDao.getIsSub())
                         .build();
         ResponseEntity responseEntity;
