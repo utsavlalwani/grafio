@@ -28,7 +28,7 @@ export class TrendingComponent implements OnInit {
       (data) => {
         this.posts = data;
 
-      this.breakpoint = (window.innerWidth <= 777) ? 1:(window.innerWidth <= 1120 && window.innerWidth > 777 )
+        this.breakpoint = (window.innerWidth <= 777) ? 1:(window.innerWidth <= 1120 && window.innerWidth > 777 )
         ? 2:( window.innerWidth > 1120 ) ? 3:4;
     });
   }

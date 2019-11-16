@@ -15,8 +15,10 @@ import { RegisterService } from '../services/register.service';
 export class EditProfileComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private datePipe: DatePipe, private router: Router, private userRegistration: RegisterService) { }
+  userData: any;
+  date1 = new FormControl(new Date());
 
-  userData:any;
+
   ngOnInit() {
 
     console.log(localStorage.getItem('jwt'));
@@ -27,7 +29,10 @@ export class EditProfileComponent implements OnInit {
     this.userRegistration.getUser(username).subscribe((data) => {
       this.userData = data;
       console.log(data);
+
+      this.date1=this.userData.dateOfBirth;
     })
+
 
     const emailregex: RegExp = /[^@]+@[^\.]+\..+/;
 
@@ -51,7 +56,7 @@ export class EditProfileComponent implements OnInit {
 
 
 
-  maxDate=new Date();
+  maxDate = new Date();
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -152,7 +157,7 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-    
+
   }
 
   onReset() {

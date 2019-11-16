@@ -12,6 +12,7 @@ import { SearchComponent} from './search/search.component';
 import {NotfoundComponent} from './notfound/notfound.component';
 import {PostDetailComponent} from './post-detail/post-detail.component';
 import {ActivitiesComponent} from './activities/activities.component';
+import { GraphComponent } from './graph/graph.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'editProfile', component: EditProfileComponent},
   {path: 'viewProfile', component: ViewProfileComponent},
   {path: 'search/:query', component: SearchComponent},
+  {path: 'graph',component:GraphComponent},
   {path: '404', component: NotfoundComponent},
   {path: 'postDetail/:postId', component: PostDetailComponent}
 

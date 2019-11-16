@@ -12,9 +12,13 @@ export class SearchComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) { }
 
+  breakpoint:number;
+
   ngOnInit() {
     const query = this.route.snapshot.paramMap.get('query');
     this.search(query);
+    this.breakpoint = (window.innerWidth <= 777) ? 1:(window.innerWidth <= 1120 && window.innerWidth > 777 )
+    ? 2:( window.innerWidth > 1120 ) ? 3:4;
   }
 
   response: any;
@@ -39,6 +43,12 @@ export class SearchComponent implements OnInit {
      }
    );
   }
+
+  onResize(event) {
+    this.breakpoint = (window.innerWidth <= 777) ? 1:(window.innerWidth <= 1120 && window.innerWidth > 777 )
+    ? 2:( window.innerWidth > 1120 ) ? 3:4;
+  }
+
 
 
 }

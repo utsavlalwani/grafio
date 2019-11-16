@@ -49,6 +49,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet'; 
 import{BottomSheetNewsZoid} from '../app/navbar/navbar.component';
+import { GraphComponent } from './graph/graph.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,8 @@ import{BottomSheetNewsZoid} from '../app/navbar/navbar.component';
     SearchMobileComponent,
     EditpostComponent,
     PostDataComponent,
-    BottomSheetNewsZoid
+    BottomSheetNewsZoid,
+    GraphComponent
     
   ],
   imports: [
@@ -117,7 +119,7 @@ import{BottomSheetNewsZoid} from '../app/navbar/navbar.component';
     EditpostComponent,
     BottomSheetNewsZoid
   ],
-  providers: [DatePipe, CategoryComponent],
+  providers: [DatePipe, CategoryComponent, GraphComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

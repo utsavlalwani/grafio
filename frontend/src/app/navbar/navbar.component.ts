@@ -147,6 +147,9 @@ breakpoint:String;
       this.openLogin();
     }
   }
+  graph(){
+    this.router.navigateByUrl('/graph');  
+  }
 
   openBottomSheet(): void {
     this._bottomSheet.open(BottomSheetNewsZoid);
