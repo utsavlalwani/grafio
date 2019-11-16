@@ -17,7 +17,7 @@ export class CompanyRegisterComponent implements OnInit {
 
   private invalidfeedback: string;
 
-  chargeCreditCard(num,exp,cvv) {
+  chargeCreditCard(name,pass,num,exp,cvv) {
     // let form = document.getElementsByTagName("form")[0];
     let arr = exp.split('/',2);
     (<any>window).Stripe.card.createToken({
