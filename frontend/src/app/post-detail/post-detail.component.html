@@ -9,7 +9,9 @@
   <mat-card-title>{{post?.title}}</mat-card-title>
   <div class="info">
     <mat-card-subtitle>{{post?.postedBy?.username}}</mat-card-subtitle>
-    <mat-card-subtitle>viewed by: {{views}} |
+    <mat-card-subtitle>
+      
+      viewed by: {{views}} |
       posted on: {{post?.timestamp | date:'mediumDate'}} | {{post?.category}} | {{post?.location}}
     </mat-card-subtitle>
   </div>
