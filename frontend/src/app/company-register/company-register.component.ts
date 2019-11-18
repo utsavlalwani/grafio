@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class CompanyRegisterComponent implements OnInit {
 
   handler: any;
+  breakpoint : number;
 
 
   constructor(private http: HttpClient,private router: Router) { }
@@ -71,10 +72,13 @@ export class CompanyRegisterComponent implements OnInit {
   ngOnInit() {
 
     this.loadStripe();
+    this.breakpoint = (window.innerWidth <= 600)? 1:2;
 
   }
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 600)?1:2;
 
-
+  }
   loadStripe() {
 
     if(!window.document.getElementById('stripe-script')) {

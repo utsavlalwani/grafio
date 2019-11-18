@@ -1,77 +1,75 @@
-<!-- 
-          <form action="/echo" method="post" novalidate="novalidate" class="needs-validation">
-          
-              <input id="cc-name" name="cc-name" type="text" class="form-control cc-name" required autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">                     
-              <label for="cc-number" class="control-label mb-1">Card number</label>
-              <input id="cc-number" name="cc-number" type="tel" class="form-control cc-number identified visa" required="" pattern="[0-9]{16}"  >
-              <span class="invalid-feedback">Enter a valid 16 digit card number</span>
-                  <label for="cc-exp" class="control-label mb-1">Expiration</label>
-                  <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" required placeholder="MM / YY" #exp autocomplete="cc-exp">
-                  <span class="invalid-feedback">Enter the expiration date</span>
-                <label for="x_card_code" class="control-label mb-1" #cvv>Security code</label>
-  
-                  <input id="x_card_code" name="x_card_code" type="tel" class="form-control cc-cvc" required autocomplete="off">
-              <label for="x_zip" class="control-label mb-1">Postal code</label>
-              <input id="x_zip" name="x_zip" type="text" class="form-control" value="" data-val="true" data-val-required="Please enter the ZIP/Postal code" autocomplete="postal-code">
-              <span class="help-block" data-valmsg-for="x_zip" data-valmsg-replace="true"></span>
-              <button id="payment-button" type="submit" (click) = "chargeCreditCard(num.value,exp.value,cvv.value)" class="btn btn-lg btn-info btn-block">
-                <i class="fa fa-lock fa-lg"></i>&nbsp;
-                <span id="payment-button-amount">Pay $100.00</span>
-                <span id="payment-button-sending" style="display:none;">Sending…</span>
-              </button>
+<mat-toolbar color="primary">
+  <h3>Please Register and Pay</h3>
+</mat-toolbar>
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="100px">
+  <!-- <mat-grid-list cols = 2 rowHeight = "200px"> -->
+  <mat-grid-tile>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Name</mat-label>
+        <input #name matInput placeholder="John Doe">
+        <mat-hint>Enter your name</mat-hint>
+      </mat-form-field>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Password</mat-label>
+        <input #password matInput placeholder="QddfEEqq@123" type="password">
+        <mat-hint>Enter your password</mat-hint>
+      </mat-form-field>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label #TIN>TIN number</mat-label>
+        <input matInput placeholder="Tax payer identification">
+        <mat-hint>Enter your taxpayer id no.</mat-hint>
+      </mat-form-field>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Card Number</mat-label>
+        <input #num matInput placeholder="1111111111111111">
+        <mat-hint>Enter a valid 16 digit card number</mat-hint>
+      </mat-form-field>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Card Expiration</mat-label>
+        <input #exp matInput placeholder="99/99">
+        <mat-hint>Enter the expiration date</mat-hint>
+      </mat-form-field>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>CVV</mat-label>
+        <input #cvv matInput placeholder="xxx">
+        <mat-hint>Enter the 3 digits on back of cards</mat-hint>
+      </mat-form-field>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Postal Code</mat-label>
+        <input matInput placeholder="000000">
+        <mat-hint>Enter your postal code</mat-hint>
+      </mat-form-field>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile>
 
-
-              <span class="invalidfeedback">{{invalidfeedback}}</span> -->
-
-<p>
-  <mat-form-field appearance="legacy">
-    <mat-label >Name</mat-label>
-    <input #name matInput placeholder="John Doe">
-    <mat-hint>Enter your name</mat-hint>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="legacy">
-    <mat-label >Password</mat-label>
-    <input #password matInput placeholder="QddfEEqq@123" type="password">
-    <mat-hint>Enter your password</mat-hint>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="legacy">
-    <mat-label #TIN>TIN number</mat-label>
-    <input matInput placeholder="Tax payer identification">
-    <mat-hint>Enter your taxpayer id no.</mat-hint>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="legacy">
-    <mat-label >Card Number</mat-label>
-    <input #num matInput placeholder="1111111111111111">
-    <mat-hint>Enter a valid 16 digit card number</mat-hint>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="legacy">
-    <mat-label >Card Expiration</mat-label>
-    <input #exp matInput placeholder="99/99">
-    <mat-hint>Enter the expiration date</mat-hint>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="legacy">
-    <mat-label >CVV</mat-label>
-    <input #cvv matInput placeholder="xxx">
-    <mat-hint>Enter the 3 digits on back of cards</mat-hint>
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field appearance="legacy">
-    <mat-label>Postal Code</mat-label>
-    <input matInput placeholder="000000">
-    <mat-hint>Enter your postal code</mat-hint>
-  </mat-form-field>
-</p>
-
-<button mat-raised-button type="submit" (click)="chargeCreditCard(name.value,password.value,num.value,exp.value,cvv.value)" color="primary">Pay
-  100 $</button>
+    <button mat-raised-button type="submit"
+      (click)="chargeCreditCard(name.value,password.value,num.value,exp.value,cvv.value)" color="primary">Pay
+      100 $</button>
+  </mat-grid-tile>
+</mat-grid-list>
