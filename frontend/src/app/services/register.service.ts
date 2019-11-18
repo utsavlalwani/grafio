@@ -44,7 +44,7 @@ export class RegisterService {
 
         'Content-Type': 'application/json',
 
-        'Authorization': 'Bearer ' + localStorage.getItem('jwt'),
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
 
         'Access-Control-Allow-Origin': '*'
 
@@ -65,7 +65,7 @@ export class RegisterService {
 
         'Content-Type': 'application/json',
 
-        'Authorization': 'Bearer ' + localStorage.getItem('jwt'),
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
 
         'Access-Control-Allow-Origin': '*'
 

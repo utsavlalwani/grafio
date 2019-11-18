@@ -57,7 +57,7 @@ export class EditpostComponent implements OnInit {
       headers: new HttpHeaders(
         {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+          Authorization: 'Bearer ' + localStorage.getItem('jwt')
         })
     };
     this.http.put(environment.uploadPostUrl, this.post, httpOptions).subscribe(data => {

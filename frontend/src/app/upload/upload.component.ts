@@ -74,7 +74,7 @@ export class UploadComponent implements OnInit {
     const fd = new FormData();
     fd.append(this.param, file.data);
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      Authorization: 'Bearer ' + localStorage.getItem('jwt')
     });
     /*const request = new HttpRequest('POST', this.target, fd, { headers, responseType: 'text' });
     file.inProgress = true;
@@ -133,7 +133,7 @@ export class UploadComponent implements OnInit {
       headers: new HttpHeaders(
         {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+          Authorization: 'Bearer ' + localStorage.getItem('jwt')
         })
     };
     this.http.post(environment.uploadPostUrl, this.post, httpOptions).subscribe(data => {
