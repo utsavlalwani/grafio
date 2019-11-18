@@ -63,6 +63,6 @@ public interface NewsRepository extends Neo4jRepository<Post, Long> {
 	Collection<Post> byProfile(@Param("userName") String userName);
 
 
-	@Query("match(:User)-[r:LIKED]->(p:Post) where p.videoID={vidoId}  delete r")
+	@Query("match(:User)-[r:LIKED]->(p:Post) where p.videoID={videoId}  delete r")
 	void deleteLikedRel(@Param("videoid") Long videoId);
 }
