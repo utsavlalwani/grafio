@@ -54,7 +54,10 @@ import {MatChipsModule} from '@angular/material/chips';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
 
 
-import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatExpansionModule} from '@angular/material/expansion';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { FlagPostComponent } from './flag-post/flag-post.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +85,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     PostDataComponent,
     BottomSheetNewsZoid,
     GraphComponent,
-    CompanyRegisterComponent
+    CompanyRegisterComponent,
+    TermsAndConditionsComponent,
+    PrivacyPolicyComponent,
+    FlagPostComponent
     
   ],
   imports: [
