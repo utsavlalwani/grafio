@@ -7,6 +7,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import {EditpostComponent} from '../editpost/editpost.component';
 import { DOCUMENT } from '@angular/common';
 import {FlagPostComponent} from '../flag-post/flag-post.component';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -42,6 +43,9 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
               @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
+    if (localStorage.getItem('jwt') == null) {
+      this.openLogin();
+    }
     this.postId = this.route.snapshot.paramMap.get('postId');
 
     this.http.get(environment.uploadPostUrl + this.postId, this.httpOptions).subscribe(
@@ -115,6 +119,15 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
         this.ngOnInit();
       }
     );
+
+  }
+
+  openLogin(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '250px',
+    });
+    // dialogRef.afterClosed().subscribe(result => {
+    // });
   }
 
   flag() {
