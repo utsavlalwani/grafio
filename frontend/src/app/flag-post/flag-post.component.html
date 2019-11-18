@@ -1,1 +1,19 @@
-<p>flag-post works!</p>
+<section>
+    <mat-form-field>
+      <mat-label>Reason</mat-label>
+      <select matNativeControl required>
+        <option>aaaa</option>
+        <option>bbbbb</option>
+        <option >cccc</option>
+        <option >dddd</option>
+      </select>
+    </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Comments</mat-label>
+    <input matInput placeholder="Additional comments">
+  </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close] cdkFocusInitial>Flag</button>
+    </div>
+</section>
