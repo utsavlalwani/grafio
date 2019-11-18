@@ -92,6 +92,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
       let likes: string[] = [];
       likes.push(localStorage.getItem('username'));
       this.post.likedBy = likes;
+      this.user.liked.push(this.post);
     } else {
       const index = this.post.likedBy.indexOf(localStorage.getItem('username'));
       if (index !== -1) {
@@ -102,6 +103,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
         }
         this.isLiked = false;
       } else {
+        this.user.liked.push(this.post);
         this.post.likedBy.push(localStorage.getItem('username'));
       }
     }
@@ -119,6 +121,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
       const flags: string[] = new Array();
       flags.push(localStorage.getItem('username'));
       this.post.flaggedBy = flags;
+      this.user.flagged.push(this.post);
     } else {
       const index = this.post.flaggedBy.indexOf(localStorage.getItem('username'));
       if (index !== -1) {
@@ -129,6 +132,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
         }
         this.isFlagged = false;
       } else {
+        this.user.flagged.push(this.post);
         this.post.flaggedBy.push(localStorage.getItem('username'));
       }
     }
@@ -146,15 +150,20 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
       const view: string[] = new Array();
       view.push(localStorage.getItem('username'));
       this.post.watchedBy = view;
+      this.user.watched.push(this.post);
     } else {
       const index = this.post.watchedBy.indexOf(localStorage.getItem('username'));
-      if (index === -1) {
+      if (index == -1) {
         this.post.watchedBy.push(localStorage.getItem('username'));
+        this.user.watched.push(this.post);
       }
     }
 
     this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
-      () => this.ngOnInit()
+      () =>  {
+        this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
+        this.ngOnInit();
+      }
     );
   }
 
@@ -184,7 +193,6 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
     const posts = this.user.posts;
     let i = posts.length;
     while (i--) {
-      console.log('travesring');
       if (posts[i].id == this.postId) {
         console.log('found!');
         posts.splice(i, 1);
