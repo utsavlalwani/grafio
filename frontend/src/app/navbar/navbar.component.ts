@@ -163,11 +163,24 @@ breakpoint:String;
   styleUrls: ['./bottom-sheet-news-zoid.css']
 })
 export class BottomSheetNewsZoid {
-  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetNewsZoid>) {}
+  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetNewsZoid>,
+              private router: Router) {}
 
   openLink(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();
     event.preventDefault();
+  }
+  
+  
+  TnC(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+    this.router.navigateByUrl("/terms");
+  }
+  privacy(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+    this.router.navigateByUrl("/privacy");
   }
 }
 

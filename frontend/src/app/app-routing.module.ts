@@ -14,6 +14,8 @@ import {PostDetailComponent} from './post-detail/post-detail.component';
 import {ActivitiesComponent} from './activities/activities.component';
 import { GraphComponent } from './graph/graph.component';
 import {CompanyRegisterComponent} from './company-register/company-register.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 const routes: Routes = [
@@ -30,7 +32,9 @@ const routes: Routes = [
   {path: 'graph', component: GraphComponent},
   {path: '404', component: NotfoundComponent},
   {path: 'postDetail/:postId', component: PostDetailComponent},
-  {path: 'orgRegister', component: CompanyRegisterComponent}
+  {path: 'orgRegister', component: CompanyRegisterComponent},
+  {path: 'terms', component: TermsAndConditionsComponent},
+  {path: 'privacy', component: PrivacyPolicyComponent}
 ];
 
 @NgModule({

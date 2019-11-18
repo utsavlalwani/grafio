@@ -14,3 +14,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: center !important;
     justify-content: center !important;
   }
+
+  .goBack
+{
+    position: relative;
+    width: 130px;
+    margin:auto;
+
+}
