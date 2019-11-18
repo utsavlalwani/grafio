@@ -68,6 +68,15 @@ public class RabbitMqReceiver {
                 //System.out.println("Post not viewed yet");
                 //e.printStackTrace();
             }
+            try {
+                for (String boughtBy : postDTO.getBoughtBy()) {
+                    queryService.addToBought(boughtBy, postDTO.getId());
+                }
+            }
+            catch (NullPointerException e) {
+                //System.out.println("Post not viewed yet");
+                //e.printStackTrace();
+            }
             queryService.saveUser(user);
         } catch (IOException e) {
             e.printStackTrace();

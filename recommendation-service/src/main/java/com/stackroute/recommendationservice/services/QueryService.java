@@ -58,6 +58,19 @@ public class QueryService {
     }
 
     @Transactional
+    public void addToBought(String username, Long videoId){
+        User user = getUser(username);
+        Set<Post> bought = user.getBoughtPosts();
+        if(bought == null) {
+            bought = new HashSet<>();
+        }
+        Post post = newsRepository.findById(videoId).orElse(null);
+        bought.add(post);
+        user.setBoughtPosts(bought);
+        userRepository.save(user);
+    }
+
+    @Transactional
     public void removeFromLiked(Long videoId) {
         newsRepository.deleteLikedRel(videoId);
     }

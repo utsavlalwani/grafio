@@ -40,5 +40,7 @@ public class User {
 	private Set<Post> viewedPosts;
 	@Relationship(type="LIKED", direction = Relationship.OUTGOING)
 	private Set<Post> likedPosts;
+	@Relationship(type="BOUGHT", direction = Relationship.OUTGOING)
+	private Set<Post> boughtPosts;
 
 }
