@@ -6,6 +6,7 @@ import {MatVideoComponent} from 'mat-video/app/video/video.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {EditpostComponent} from '../editpost/editpost.component';
 import { DOCUMENT } from '@angular/common';
+import {FlagPostComponent} from '../flag-post/flag-post.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -117,32 +118,46 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
   }
 
   flag() {
-    if (this.flags === 0) {
-      const flags: string[] = new Array();
-      flags.push(localStorage.getItem('username'));
-      this.post.flaggedBy = flags;
-      this.user.flagged.push(this.post);
-    } else {
-      const index = this.post.flaggedBy.indexOf(localStorage.getItem('username'));
-      if (index !== -1) {
-        this.post.flaggedBy.splice(index, 1);
-        const ind = this.user.flagged.indexOf(this.postId);
-        if (ind !== -1) {
-          this.user.flagged.splice(ind, 1);
-        }
-        this.isFlagged = false;
-      } else {
+      if (this.flags === 0) {
+        const flags: string[] = new Array();
+        flags.push(localStorage.getItem('username'));
+        this.post.flaggedBy = flags;
         this.user.flagged.push(this.post);
-        this.post.flaggedBy.push(localStorage.getItem('username'));
-      }
-    }
+        const dialogRef = this.dialog.open(FlagPostComponent, {
+          width: '250px',
+        });
 
-    this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
-      (data) => {
-        this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
-        this.ngOnInit();
+        dialogRef.afterClosed().subscribe(result => {
+          if(result!=null) {
+            return;
+          }
+          this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
+            (data) => {
+              this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
+              this.ngOnInit();
+            }
+          );
+        });
+      } else {
+        const index = this.post.flaggedBy.indexOf(localStorage.getItem('username'));
+        if (index !== -1) {
+          this.post.flaggedBy.splice(index, 1);
+          const ind = this.user.flagged.indexOf(this.postId);
+          if (ind !== -1) {
+            this.user.flagged.splice(ind, 1);
+          }
+          this.isFlagged = false;
+        } else {
+          this.user.flagged.push(this.post);
+          this.post.flaggedBy.push(localStorage.getItem('username'));
+        }
+        this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
+          (data) => {
+            this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
+            this.ngOnInit();
+          }
+        );
       }
-    );
   }
 
   watch() {

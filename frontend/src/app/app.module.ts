@@ -131,7 +131,8 @@ import { FlagPostComponent } from './flag-post/flag-post.component';
     LoginComponent,
     UploadComponent,
     EditpostComponent,
-    BottomSheetNewsZoid
+    BottomSheetNewsZoid,
+    FlagPostComponent
   ],
   providers: [DatePipe, CategoryComponent, GraphComponent],
   bootstrap: [AppComponent]
