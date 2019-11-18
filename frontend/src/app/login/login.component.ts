@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-login',
@@ -12,10 +12,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class LoginComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
-              private router: Router,private snackBar: MatSnackBar,
+              private router: Router, private snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<LoginComponent>) { }
   errorMessage: string = null;
-  formisvalid: boolean = true;
+  formisvalid = true;
   ngOnInit() {
   }
 
@@ -31,27 +31,25 @@ export class LoginComponent implements OnInit {
       const jwt = data.jwtToken;
       localStorage.setItem('jwt', jwt);
       localStorage.setItem('username', user.username);
-      
-      if(user.username.length>0)
-    {
-      this.formisvalid=false;
-      this.dialogRef.close(); 
+      if (user.username.length > 0) {
+        this.formisvalid = false;
+        this.dialogRef.close();
 
-      this.snackBar.open("You are now logged in!","close ",{
-        duration: 4000
-      });
-     
-      this.router.navigateByUrl("/trending");
-      
-      
-    }
-    
+        this.snackBar.open('You are now logged in!', 'close ', {
+          duration: 4000
+        });
+
+        this.router.navigateByUrl('/trending');
+
+
+      }
+
     }, error => {
 
       this.errorMessage = 'Incorrect username or password';
     });
 
-    
+
   }
 
 }

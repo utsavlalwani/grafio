@@ -10,8 +10,8 @@ import {
   MatFormFieldModule, MatGridListModule,
   MatIconModule,
   MatInputModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
-  MatStepperModule, MatTabsModule,MatSnackBarModule,
-  MatToolbarModule,MatBadgeModule,
+  MatStepperModule, MatTabsModule, MatSnackBarModule,
+  MatToolbarModule, MatBadgeModule,
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatVideoModule } from 'mat-video';
@@ -46,9 +46,8 @@ import { EditpostComponent } from './editpost/editpost.component';
 import { PostDataComponent } from './post-data/post-data.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-import {MatBottomSheetModule} from '@angular/material/bottom-sheet'; 
-import{BottomSheetNewsZoid} from '../app/navbar/navbar.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {BottomSheetNewsZoid} from '../app/navbar/navbar.component';
 import { GraphComponent } from './graph/graph.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
@@ -57,7 +56,7 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
 import {MatExpansionModule} from '@angular/material/expansion';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { FlagPostComponent } from './flag-post/flag-post.component'; 
+import { FlagPostComponent } from './flag-post/flag-post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +88,6 @@ import { FlagPostComponent } from './flag-post/flag-post.component';
     TermsAndConditionsComponent,
     PrivacyPolicyComponent,
     FlagPostComponent
-    
   ],
   imports: [
     BrowserModule,

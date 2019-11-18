@@ -13,65 +13,29 @@ import { RegisterService } from '../services/register.service';
   providers: [DatePipe]
 })
 export class EditProfileComponent implements OnInit {
-  onlyNewsPreferences: String[];
+  onlyNewsPreferences: string[];
 
-  constructor(private formBuilder: FormBuilder, private datePipe: DatePipe, private router: Router, private userRegistration: RegisterService) { }
+  constructor(private formBuilder: FormBuilder,
+              private datePipe: DatePipe,
+              private router: Router,
+              private userRegistration: RegisterService) { }
   userData: any;
 
   date1 = new FormControl(new Date());
-
-
-  ngOnInit() {
-
-    console.log(localStorage.getItem('jwt'));
-    let obj = this.userRegistration.checkToken(JSON.stringify(localStorage.getItem('jwt')));
-    console.log("sur " + obj);
-    let username = obj.sub;
-    console.log(username);
-    this.userRegistration.getUser(username).subscribe((data) => {
-      this.userData = data;
-      console.log(data);
-
-      this.onlyNewsPreferences=this.userData.newsPreferences;
-      this.date1=this.userData.dateOfBirth;
-    })
-
-
-    const emailregex: RegExp = /[^@]+@[^\.]+\..+/;
-
-    this.firstFormGroup = this.formBuilder.group({
-      'email': ['', [Validators.required, Validators.pattern(emailregex)], this.checkInUseEmail]
-    });
-
-    this.secondFormGroup = this.formBuilder.group({
-      'name': ['', Validators.required],
-      'date': ['', Validators.required],
-      'validate': ''
-    });
-    this.thirdFormGroup = this.formBuilder.group({
-
-    });
-  }
-
-
-
-
-
-
 
   maxDate = new Date();
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
-  titleAlert: string = 'This field is required';
+  titleAlert = 'This field is required';
   post: any = '';
   hide = true;
   submitted = false;
-  selectedOptions: String[] = [];
+  selectedOptions: string[] = [];
   selectedOption;
   disabled = true;
-
+  userObject: any;
   taskTypeAreas: {
     name: string;
   }[] = [
@@ -102,6 +66,46 @@ export class EditProfileComponent implements OnInit {
     ];
 
 
+
+  ngOnInit() {
+
+    console.log(localStorage.getItem('jwt'));
+    let obj = this.userRegistration.checkToken(JSON.stringify(localStorage.getItem('jwt')));
+    console.log('sur ' + obj);
+    let username = obj.sub;
+    console.log(username);
+    this.userRegistration.getUser(username).subscribe((data) => {
+      this.userData = data;
+      console.log(data);
+
+      this.onlyNewsPreferences = this.userData.newsPreferences;
+      this.date1 = this.userData.dateOfBirth;
+    });
+
+
+    const emailregex: RegExp = /[^@]+@[^\.]+\..+/;
+
+    this.firstFormGroup = this.formBuilder.group({
+      'email': ['', [Validators.required, Validators.pattern(emailregex)], this.checkInUseEmail]
+    });
+
+    this.secondFormGroup = this.formBuilder.group({
+      'name': ['', Validators.required],
+      'date': ['', Validators.required],
+      'validate': ''
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+
+    });
+  }
+
+
+
+
+
+
+
+
   onNgModelChange($event) {
     console.log($event);
     this.selectedOption = $event;
@@ -114,13 +118,13 @@ export class EditProfileComponent implements OnInit {
       (validate) => {
         if (validate == '1') {
           this.firstFormGroup.get('name').setValidators([Validators.required, Validators.minLength(3)]);
-          this.titleAlert = "You need to specify at least 3 characters";
+          this.titleAlert = 'You need to specify at least 3 characters';
         } else {
           this.firstFormGroup.get('name').setValidators(Validators.required);
         }
         this.firstFormGroup.get('name').updateValueAndValidity();
       }
-    )
+    );
   }
 
   get name() {
@@ -137,8 +141,8 @@ export class EditProfileComponent implements OnInit {
         let result = (db.indexOf(control.value) !== -1) ? { 'alreadyInUse': true } : null;
         observer.next(result);
         observer.complete();
-      }, 1000)
-    })
+      }, 1000);
+    });
   }
 
   getErrorEmail() {
@@ -170,7 +174,6 @@ export class EditProfileComponent implements OnInit {
     this.thirdFormGroup.reset();
   }
 
-  userObject: any;
 
   update(name, userName, email, selectedOptions) {
 
@@ -198,14 +201,13 @@ export class EditProfileComponent implements OnInit {
       );
   }
 
-  selected(category1)
-  {
+  selected(category1) {
     console.log(this.onlyNewsPreferences);
     console.log(category1);
-    if(this.onlyNewsPreferences==null)return false;
-    if(this.onlyNewsPreferences.indexOf(category1)!=-1)
-    return true;
+    if (this.onlyNewsPreferences == null) return false;
+    if (this.onlyNewsPreferences.indexOf(category1) != -1)
+      return true;
     else
-    return false;
+      return false;
   }
 }

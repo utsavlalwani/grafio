@@ -21,10 +21,10 @@ export class PostDataComponent implements OnInit {
 
 
   ngOnInit() {
-    if (!this.post['watchedBy']) {
+    if (!this.post.watchedBy) {
       this.views = 0;
     } else {
-      this.views = this.post['watchedBy'].length;
+      this.views = this.post.watchedBy.length;
     }
   }
 

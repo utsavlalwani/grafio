@@ -141,7 +141,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          if(result!=null) {
+          if (result != null) {
             return;
           }
           this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
@@ -181,7 +181,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
       this.user.watched.push(this.post);
     } else {
       const index = this.post.watchedBy.indexOf(localStorage.getItem('username'));
-      if (index == -1) {
+      if (index === -1) {
         this.post.watchedBy.push(localStorage.getItem('username'));
         this.user.watched.push(this.post);
       }

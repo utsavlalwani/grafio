@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
-import {NgForm,FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {NgForm, FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-upload',
@@ -21,11 +21,11 @@ export class UploadComponent implements OnInit {
   @Output() complete = new EventEmitter<string>();
   private files: Array<FileUploadModel> = [];
 
-  formGroup:FormGroup;
+  formGroup: FormGroup;
   response: any;
   post: any;
   locations = environment.locations;
-  currentProgress : string;
+  currentProgress: string;
   progressNumber: number;
   categories = ['National', 'International',
     'Business', 'Technology', 'Entertainment',
@@ -33,15 +33,14 @@ export class UploadComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private formBuilder:FormBuilder)
-              {
-                this.formGroup = this.formBuilder.group({});
+              private formBuilder: FormBuilder) { this.formGroup = this.formBuilder.group({}); }
 
-              }
+  selectedFile = null;
+
 
   ngOnInit() {
 
-    this.formGroup=this.formBuilder.group({
+    this.formGroup = this.formBuilder.group({
       check1: ['', Validators.required]
     });
   }
@@ -88,11 +87,11 @@ export class UploadComponent implements OnInit {
 
     this.http.post(this.target, fd, {headers, responseType: 'text', reportProgress: true, observe: 'events'})
       .subscribe(event => {
-        if(event.type === HttpEventType.UploadProgress){
+        if (event.type === HttpEventType.UploadProgress) {
           console.log('Upload Progress: ' + Math.round(event.loaded / event.total * 100) + '%');
           this.progressNumber = Math.round(event.loaded / event.total * 100);
           this.currentProgress = 'Upload Progress: ' + Math.round(event.loaded / event.total * 100) + '%';
-        }else if(event.type === HttpEventType.Response){
+        } else if (event.type === HttpEventType.Response) {
           console.log(event);
           this.response = event.body;
         }
@@ -144,15 +143,12 @@ export class UploadComponent implements OnInit {
     });
   }
 
-  selectedFile = null;
 
-  onFileSelected(event)
-  {
+  onFileSelected(event) {
     this.selectedFile = event.target.files[0];
   }
 
-  onUpload()
-  {
+  onUpload() {
     console.log(this.selectedFile); // You can use FormData upload to backend server
   }
 

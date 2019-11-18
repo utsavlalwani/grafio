@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     return this.firstFormGroup.get('name') as FormControl;
   }
 
-  maxDate=new Date();
+  maxDate = new Date();
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
         }
         // console.log(status);
       }
-    )
+    );
 
     this.secondFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit {
         }
         // console.log(status);
       }
-    )
+    );
 
     this.thirdFormGroup = this.formBuilder.group({
     });
@@ -200,7 +200,7 @@ export class RegisterComponent implements OnInit {
         () => {
               console.log(this.userObject);
               this.ngOnInit();
-               this.router.navigateByUrl('/trending');
+              this.router.navigateByUrl('/trending');
         }
       );
   }

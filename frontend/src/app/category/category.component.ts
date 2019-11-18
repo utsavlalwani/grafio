@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 class category {
   name: string;
@@ -17,46 +17,46 @@ export class CategoryComponent implements OnInit {
 
   categoryName: string;
   category: category;
-  breakpoint:number;
+  breakpoint: number;
   posts: any;
 
   categories: {
     name: string;
     icon: string;
   }[] = [
-    {
-      name: 'National',
-      icon: 'flag'
-    },
-    {
-      name: 'International',
-      icon: 'public'
-    },
-    {
-      name: 'Business',
-      icon: 'business'
-    },
-    {
-      name: 'Technology',
-      icon: 'memory'
-    },
-    {
-      name: 'Entertainment',
-      icon: 'movie'
-    },
-    {
-      name: 'Sports',
-      icon: 'directions_bike'
-    },
-    {
-      name: 'Science',
-      icon: 'whatshot'
-    },
-    {
-      name: 'Health',
-      icon: 'fitness_center'
-    },
-  ];
+      {
+        name: 'National',
+        icon: 'flag'
+      },
+      {
+        name: 'International',
+        icon: 'public'
+      },
+      {
+        name: 'Business',
+        icon: 'business'
+      },
+      {
+        name: 'Technology',
+        icon: 'memory'
+      },
+      {
+        name: 'Entertainment',
+        icon: 'movie'
+      },
+      {
+        name: 'Sports',
+        icon: 'directions_bike'
+      },
+      {
+        name: 'Science',
+        icon: 'whatshot'
+      },
+      {
+        name: 'Health',
+        icon: 'fitness_center'
+      },
+    ];
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
               private router: Router) { }
@@ -67,8 +67,8 @@ export class CategoryComponent implements OnInit {
         if (c.name === this.categoryName) {
           this.category = c;
         }
-        this.breakpoint = (window.innerWidth <= 777) ? 1:(window.innerWidth <= 1120 && window.innerWidth > 777 )
-    ? 2:( window.innerWidth > 1120 ) ? 3:4;
+        this.breakpoint = (window.innerWidth <= 777) ? 1 : (window.innerWidth <= 1120 && window.innerWidth > 777)
+          ? 2 : (window.innerWidth > 1120) ? 3 : 4;
 
 
       });
@@ -89,8 +89,8 @@ export class CategoryComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (window.innerWidth <= 777) ? 1:(window.innerWidth <= 1120 && window.innerWidth > 777 )
-    ? 2:( window.innerWidth > 1120 ) ? 3:4;
+    this.breakpoint = (window.innerWidth <= 777) ? 1 : (window.innerWidth <= 1120 && window.innerWidth > 777)
+      ? 2 : (window.innerWidth > 1120) ? 3 : 4;
   }
 
 }

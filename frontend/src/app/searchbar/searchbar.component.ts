@@ -21,7 +21,7 @@ export class SearchbarComponent implements OnInit {
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
-    .pipe(startWith(''),map(value => this._filter(value)));
+    .pipe(startWith(''), map(value => this._filter(value)));
   }
 
   search(query) {
