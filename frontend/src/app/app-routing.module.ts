@@ -17,6 +17,7 @@ import {CompanyRegisterComponent} from './company-register/company-register.comp
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { CompanyRegisterStepperComponent } from './company-register-stepper/company-register-stepper.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
   {path: 'orgRegister', component: CompanyRegisterComponent},
   {path: 'terms', component: TermsAndConditionsComponent},
   {path: 'privacy', component: PrivacyPolicyComponent},
-  {path: 'orgRegister1', component: CompanyRegisterStepperComponent}
+  {path: 'orgRegister1', component: CompanyRegisterStepperComponent},
+  {path: 'footer', component: FooterComponent}
 ];
 
 @NgModule({
