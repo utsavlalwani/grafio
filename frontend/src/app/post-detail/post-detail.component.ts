@@ -155,7 +155,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          if(result!=null) {
+          if (result != null) {
             return;
           }
           this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
@@ -178,12 +178,22 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
           this.user.flagged.push(this.post);
           this.post.flaggedBy.push(localStorage.getItem('username'));
         }
-        this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
-          (data) => {
-            this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
-            this.ngOnInit();
+
+        const dialogRef = this.dialog.open(FlagPostComponent, {
+          width: '250px',
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result != null) {
+            return;
           }
-        );
+          this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
+            (data) => {
+              this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
+              this.ngOnInit();
+            }
+          );
+        });
       }
   }
 
@@ -195,7 +205,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
       this.user.watched.push(this.post);
     } else {
       const index = this.post.watchedBy.indexOf(localStorage.getItem('username'));
-      if (index == -1) {
+      if (index === -1) {
         this.post.watchedBy.push(localStorage.getItem('username'));
         this.user.watched.push(this.post);
       }

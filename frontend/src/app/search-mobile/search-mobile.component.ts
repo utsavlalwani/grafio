@@ -16,12 +16,12 @@ export class SearchMobileComponent implements OnInit {
   options: string[] = ['National', 'International', 'Business', 'Technology', 'Entertainment', 'Sports', 'Science', 'Health'];
   filteredOptions: Observable<string[]>;
 
-  constructor(private router : Router,
-    private http: HttpClient) { }
+  constructor(private router: Router,
+              private http: HttpClient) { }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
-    .pipe(startWith(''),map(value => this._filter(value)))
+    .pipe(startWith(''), map(value => this._filter(value)));
   }
   search(query) {
     this.router.navigateByUrl('/').then(() => {

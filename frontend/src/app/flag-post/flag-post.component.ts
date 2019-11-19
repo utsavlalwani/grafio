@@ -9,7 +9,7 @@ import {MatDialogRef} from '@angular/material';
 export class FlagPostComponent implements OnInit {
 
   constructor( public flagPost: MatDialogRef<FlagPostComponent>) {
-    flagPost.disableClose=true;
+    flagPost.disableClose = true;
     flagPost.backdropClick().subscribe(() => {
       // Close the dialog
       this.onNoClick();
