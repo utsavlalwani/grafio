@@ -1,6 +1,7 @@
 .form-button {
-  text-align: start;
-  margin: 5px 0;
+  text-align: center;
+  margin:auto;
+  margin-bottom: 7px;
 }
 .mat-dialog-actions .mat-button-base+.mat-button-base {
   margin-left: 0;

@@ -61,7 +61,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { FlagPostComponent } from './flag-post/flag-post.component';
 
 
-import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FooterComponent } from './footer/footer.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +93,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     CompanyRegisterComponent,
     TermsAndConditionsComponent,
     PrivacyPolicyComponent,
-    FlagPostComponent
+    FlagPostComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
