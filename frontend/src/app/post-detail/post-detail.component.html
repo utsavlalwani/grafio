@@ -2,45 +2,31 @@
    <mat-video #video [preload]="true" [autoplay]="true" [overlay]="true"
              color="primary" spinner="spin" src="{{post?.videoUrl}}">
   </mat-video>
-  <!--<video #video width="320" height="240" controls>
-      <source src="{{post?.videoUrl}}" type="video/mp4">
-    </video>-->
   <br>
   <mat-card-title>{{post?.title}}</mat-card-title>
   <div class="info">
-    <mat-card-subtitle>{{post?.postedBy?.username}}</mat-card-subtitle>
-    <mat-card-subtitle>
-      
-      viewed by: {{views}} |
-      posted on: {{post?.timestamp | date:'mediumDate'}} | {{post?.category}} | {{post?.location}}
+    <mat-card-subtitle style="display: flex; align-items: center">
+      <mat-icon>accessibility_new</mat-icon>
+      {{post?.postedBy}}
+    </mat-card-subtitle>
+    <mat-card-subtitle style="display: flex; align-items: center">
+      <mat-icon>remove_red_eye</mat-icon>  {{views}} |
+      <mat-icon>access_time</mat-icon> {{post?.timestamp | date:'mediumDate'}} |
+      <mat-icon>category</mat-icon>{{post?.category}} |
+      <mat-icon>my_location</mat-icon>{{post?.location}}
     </mat-card-subtitle>
   </div>
-  <mat-card-actions>
-    <button mat-icon-button (click)="like()">
-      <div *ngIf="isLiked; else notLiked">
-        <mat-icon aria-hidden="false" aria-label="post actions" class="button-icon" [ngStyle]="{color: 'blue'}">thumb_up</mat-icon>
-      </div>
-      <ng-template #notLiked>
-        <mat-icon aria-hidden="false" aria-label="post actions" class="button-icon" [ngStyle]="{color: 'black'}">thumb_up</mat-icon>
-      </ng-template>
-    </button>
-    {{likes}}
-
-    <button mat-icon-button (click)="flag()">
-      <div *ngIf="isFlagged; else notFlagged">
-        <mat-icon aria-hidden="false" aria-label="post actions" class="button-icon" [ngStyle]="{color: 'blue'}">flag</mat-icon>
-      </div>
-      <ng-template #notFlagged>
-        <mat-icon aria-hidden="false" aria-label="post actions" class="button-icon" [ngStyle]="{color: 'black'}">flag</mat-icon>
-      </ng-template>
-    </button>
-    {{flags}}
+  <mat-card-actions style="display: flex; align-items: center">
+      <mat-icon (click)="like()" class="icon-disabled" [ngClass]="{'icon-enabled': getIsLiked()}">thumb_up</mat-icon>
+      {{likes}}
+      <mat-icon (click)="flag()" class="icon-disabled" [ngClass]="{'icon-enabled': getIsFlagged()}">flag</mat-icon>
+      {{flags}}
     <div *ngIf="isOwner">
       <button mat-icon-button (click)="edit()">Edit</button>
       <button mat-icon-button (click)="delete()">Delete</button>
     </div>
     <div *ngIf="user?.isSub">
-      <button mat-icon-button (click)="download(post.videoUrl)">Buy</button>
+      <button mat-icon-button (click)="download(post?.videoUrl)" color="primary">Download</button>
     </div>
   </mat-card-actions>
 </mat-card>

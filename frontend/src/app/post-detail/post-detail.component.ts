@@ -21,6 +21,7 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
   views: number;
   likes: number;
   flags: number;
+  bought: number;
   isLiked: boolean;
   isFlagged: boolean;
   isOwner: boolean;
@@ -61,6 +62,11 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
         } else {
           this.views = this.post.watchedBy.length;
         }
+        if (!this.post.boughtBy) {
+          this.bought = 0;
+        } else {
+          this.bought = this.post.boughtBy.length;
+        }
         if (!this.post.likedBy) {
           this.likes = 0;
         } else {
@@ -90,6 +96,14 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.video = this.matVideo.getVideoTag();
     this.video.addEventListener('ended', () => this.watch());
+  }
+
+  getIsLiked() {
+    return this.isLiked;
+  }
+
+  getIsFlagged() {
+    return this.isFlagged;
   }
 
   like() {
@@ -210,6 +224,25 @@ export class PostDetailComponent implements OnInit, AfterViewInit {
   }
 
   download(url: string): void {
+    if (this.bought === 0) {
+      const buys: string[] = new Array();
+      buys.push(localStorage.getItem('username'));
+      this.post.boughtBy = buys;
+      this.user.bought.push(this.post);
+    } else {
+      const index = this.post.bought.indexOf(localStorage.getItem('username'));
+      if (index == -1) {
+        this.post.boughtBy.push(localStorage.getItem('username'));
+        this.user.bought.push(this.post);
+      }
+    }
+
+    this.http.put(environment.uploadPostUrl, this.post, this.httpOptions).subscribe(
+      () =>  {
+        this.http.put(environment.registerUrl + '/' + localStorage.getItem('username'), this.user, this.httpOptions).subscribe();
+        this.ngOnInit();
+      }
+    );
     this.document.location.href = url;
   }
 
