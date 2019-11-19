@@ -65,6 +65,7 @@ import { SubscriptionPageComponent } from './subscription-page/subscription-page
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FooterComponent } from './footer/footer.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,7 +137,8 @@ import { FooterComponent } from './footer/footer.component';
     MatChipsModule,
     MatExpansionModule,
     MatPaginatorModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    AngularFontAwesomeModule
   ],
   entryComponents: [
     LoginComponent,
