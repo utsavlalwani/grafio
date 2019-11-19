@@ -14,6 +14,9 @@ export class TrendingComponent implements OnInit {
   posts: any;
   breakpoint: number;
   panelOpenState = false;
+  page = 0;
+  size = 9;
+  data: any;
 
   constructor(private http: HttpClient) { }
 
@@ -30,11 +33,25 @@ export class TrendingComponent implements OnInit {
 
         this.breakpoint = (window.innerWidth <= 777) ? 1 : (window.innerWidth <= 1120 && window.innerWidth > 777)
           ? 2 : (window.innerWidth > 1120) ? 3 : 4;
+
+        this.getData({ pageIndex: this.page, pageSize: this.size });
+
       });
   }
 
   onResize(event) {
     this.breakpoint = (window.innerWidth <= 777) ? 1 : (window.innerWidth <= 1120 && window.innerWidth > 777)
       ? 2 : (window.innerWidth > 1120) ? 3 : 4;
+  }
+
+  getData(obj) {
+    let index = 0,
+      startingIndex = obj.pageIndex * obj.pageSize,
+      endingIndex = startingIndex + obj.pageSize;
+
+    this.data = this.posts.filter(() => {
+      index++;
+      return (index > startingIndex && index <= endingIndex) ? true : false;
+    });
   }
 }

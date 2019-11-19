@@ -6,3 +6,11 @@
   display: flex;
   justify-content: space-between;
 }
+.icon-enabled{
+  color: blue;
+  cursor: pointer;
+}
+.icon-disabled {
+  padding: 3px;
+  cursor: pointer;
+}

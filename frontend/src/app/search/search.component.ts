@@ -15,6 +15,9 @@ export class SearchComponent implements OnInit {
   breakpoint: number;
   query1: string;
   response: any;
+  page = 0;
+  size = 9;
+  data: any;
 
   ngOnInit() {
     const query = this.route.snapshot.paramMap.get('query');
@@ -34,13 +37,19 @@ export class SearchComponent implements OnInit {
     this.http.get('https://newszoid.stackroute.io:8443/search-service/api/v1/category/' + query, httpOptions).subscribe(
       (data) => {
         this.response = data['posts'];
+      this.getData({ pageIndex: this.page, pageSize: this.size });
+
       }, (error) => {
         this.http.get('https://newszoid.stackroute.io:8443/search-service/api/v1/location/' + query, httpOptions).subscribe(
           (data) => {
             this.response = data['posts'];
+      this.getData({ pageIndex: this.page, pageSize: this.size });
+
           }, (error) => {
             console.log(error);
             this.router.navigateByUrl('/404');
+      this.getData({ pageIndex: this.page, pageSize: this.size });
+
           });
       }
     );
@@ -51,6 +60,15 @@ export class SearchComponent implements OnInit {
       ? 2 : (window.innerWidth > 1120) ? 3 : 4;
   }
 
+  getData(obj) {
+    let index = 0,
+      startingIndex = obj.pageIndex * obj.pageSize,
+      endingIndex = startingIndex + obj.pageSize;
 
+    this.data = this.response.filter(() => {
+      index++;
+      return (index > startingIndex && index <= endingIndex) ? true : false;
+    });
+  }
 
 }

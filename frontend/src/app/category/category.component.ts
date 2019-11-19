@@ -20,7 +20,7 @@ export class CategoryComponent implements OnInit {
   breakpoint: number;
   posts: any;
   page = 0;
-  size = 4;
+  size = 9;
   data: any;
   categories: {
     name: string;

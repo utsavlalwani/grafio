@@ -1,23 +1,19 @@
-<h2>Search results for 
-<span matBadge={{response?.length}} matBadgeOverlap="false" matBadgePosition="above after">{{query1}}</span>
+<h2>Search results for
+  <span matBadge={{response?.length}} matBadgeOverlap="false" matBadgePosition="above after">{{query1}}</span>
 
 </h2>
 <mat-divider></mat-divider>
-<!-- <div class="grid-container">
-<mat-grid-list cols="3" rowHeight="380px">
-  <section *ngFor="let search of response" >
+
+
+
+<mat-grid-list #grid [cols]="breakpoint" (window:resize)="onResize($event)">
+  <section *ngFor="let search of response">
     <mat-grid-tile>
       <app-post [post]="search"></app-post>
     </mat-grid-tile>
   </section>
 </mat-grid-list>
-</div> -->
 
-
-<mat-grid-list #grid [cols]="breakpoint" (window:resize)="onResize($event)" >
-    <section *ngFor="let search of response">
-    <mat-grid-tile >
-      <app-post [post]="search"></app-post>
-    </mat-grid-tile>
-   </section>
-  </mat-grid-list>
+<mat-paginator [length]="response?.length" [pageSize]="size" [pageIndex]="page" (page)="getData($event)"
+style="color: #673ab7">
+</mat-paginator>
