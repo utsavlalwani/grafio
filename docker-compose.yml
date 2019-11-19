@@ -77,7 +77,7 @@ services:
     networks:
       - custBridge
     ports:
-      - 8080:8080
+      - 8443:8443
     environment:
       WAIT_HOSTS: eureka-server:8085
       WAIT_HOSTS_TIMEOUT: 180
