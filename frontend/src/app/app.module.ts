@@ -59,6 +59,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { FlagPostComponent } from './flag-post/flag-post.component';
+import { CompanyRegisterStepperComponent } from './company-register-stepper/company-register-stepper.component';
+import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +91,9 @@ import { FlagPostComponent } from './flag-post/flag-post.component';
     CompanyRegisterComponent,
     TermsAndConditionsComponent,
     PrivacyPolicyComponent,
-    FlagPostComponent
+    FlagPostComponent,
+    CompanyRegisterStepperComponent,
+    SubscriptionPageComponent
   ],
   imports: [
     BrowserModule,

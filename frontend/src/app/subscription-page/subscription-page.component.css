@@ -1,0 +1,24 @@
+.card-container{
+    height : 300px;
+    background-image: url("../../assets/Subscription.jpg");
+}
+.title-container{
+    height: 20%;
+    text-align: center;
+    color : white
+ 
+}
+.content-container{
+    height: 80%;
+    width: 80%;
+   
+    text-align: center;
+   
+    margin : auto;
+    color: white;
+}
+.card-container:hover {
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  

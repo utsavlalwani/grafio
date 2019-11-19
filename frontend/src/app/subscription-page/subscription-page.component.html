@@ -1,0 +1,50 @@
+<mat-grid-list  #grid [cols] = "breakpoint" (window:resize)="onResize($event)" rowHeight="500px">
+    <mat-grid-tile *ngFor = "let rate of rates">
+        <mat-card class = "card-container">
+            <div class="title-container">
+            <mat-card-title>
+                Pay {{rate.name}}
+            </mat-card-title>
+            </div>
+            
+            <div class="content-container">
+            <mat-card-content>
+               <h3> Get Unlimited Downloads Access for {{rate.content}}</h3>
+            </mat-card-content>
+            <button mat-raised-button color = "primary" matStepperNext>Pay Now</button>
+            </div>
+        </mat-card>
+    </mat-grid-tile>
+    <!-- <mat-grid-tile>
+            <mat-card class = "card-container">
+                <div class="title-container">
+                <mat-card-title>
+                    Pay 100$
+                </mat-card-title>
+                </div>
+                
+                <div class="content-container">
+                <mat-card-content>
+                   <h3> Get Unlimited Downloads Access for 6 Months</h3>
+                </mat-card-content>
+                <button mat-raised-button color = "primary" matStepperNext>Pay Now</button>
+                </div>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+                <mat-card class = "card-container">
+                    <div class="title-container">
+                    <mat-card-title>
+                        Pay 150$
+                    </mat-card-title>
+                    </div>
+                    
+                    <div class="content-container">
+                    <mat-card-content>
+                       <h3> Get Unlimited Downloads Access for 1 Year</h3>
+                    </mat-card-content>
+                    <button mat-raised-button color = "primary" matStepperNext>Pay Now</button>
+                    </div>
+                </mat-card>
+            </mat-grid-tile> -->
+</mat-grid-list>

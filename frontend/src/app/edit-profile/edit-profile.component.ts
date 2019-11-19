@@ -104,7 +104,12 @@ export class EditProfileComponent implements OnInit {
 
 
 
-
+  isMobile() {
+    return (window.innerWidth <= 450);
+  }
+  isDateNull() {
+    return (this.userData.dateOfBirth == null);
+  }
 
   onNgModelChange($event) {
     console.log($event);
