@@ -11,22 +11,14 @@
       <span *ngIf="errorMessage">{{errorMessage}}</span>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <!-- <button mat-raised-button color="primary"   [mat-dialog-close]="true" (click)="loginUser(myForm)" class="form-button">Login</button>
-      <button mat-raised-button color="primary" [mat-dialog-close]="true" routerLink="/register" class="form-button">New Here? Kindly Register</button>
-    -->
-      <!-- <div *ngIf="errorMessage;else other_content">
-          <button mat-raised-button color="primary"   [mat-dialog-close]="true" (click)="loginUser(myForm)" class="form-button">Login</button>
-       
-      </div>
-      
-      <ng-template #other_content>
-          <button mat-raised-button color="primary"    (click)="loginUser(myForm)" class="form-button">Login</button>
-         </ng-template> -->
 
-         <button mat-raised-button color="primary" (click)="loginUser(myForm)" class="form-button"  mat-button>Login</button>
-      <button mat-raised-button color="primary" [mat-dialog-close]="true" routerLink="/register" class="form-button">Individual? Kindly Register</button>
+      <button mat-raised-button color="primary" (click)="loginUser(myForm)" class="form-button"
+        mat-button>Login</button>
+      <button mat-raised-button [mat-dialog-close]="true" routerLink="/register" class="form-button">Individual? Kindly
+        Register</button>
 
-      <button mat-raised-button color="primary" [mat-dialog-close]="true" routerLink="/orgRegister" class="form-button">Organization? Kindly Register</button>
+      <button mat-raised-button [mat-dialog-close]="true" routerLink="/orgRegister1" class="form-button">Organization?
+        Kindly Register</button>
 
     </mat-dialog-actions>
   </form>

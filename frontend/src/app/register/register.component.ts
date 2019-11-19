@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RegisterService } from '../services/register.service';
 import { MatStepper } from '@angular/material';
+import { PrefixNot } from '@angular/compiler';
 
 @Component({
   selector: 'app-register',
@@ -12,20 +13,6 @@ import { MatStepper } from '@angular/material';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  @ViewChild('stepper', { static: false }) stepper: MatStepper;
-  constructor(private formBuilder: FormBuilder,
-    private datePipe: DatePipe,
-    private router: Router,
-    private registration: RegisterService) { }
-
-  get name() {
-    return this.firstFormGroup.get('name') as FormControl;
-  }
-  isMobile() {
-    return (window.innerWidth <= 450);
-  }
-
 
   maxDate = new Date();
   isLinear = false;
@@ -38,6 +25,8 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   selectedOptions: string[] = [];
   selectedOption;
+  selectable = true;
+  userObject: any;
 
   categories: {
     name: string;
@@ -77,7 +66,19 @@ export class RegisterComponent implements OnInit {
       },
     ];
 
-  userObject: any;
+
+  @ViewChild('stepper', { static: false }) stepper: MatStepper;
+  constructor(private formBuilder: FormBuilder,
+              private datePipe: DatePipe,
+              private router: Router,
+              private registration: RegisterService) { }
+
+  get name() {
+    return this.firstFormGroup.get('name') as FormControl;
+  }
+  isMobile() {
+    return (window.innerWidth <= 450);
+  }
 
   ngOnInit() {
 
@@ -97,7 +98,7 @@ export class RegisterComponent implements OnInit {
         }
         // console.log(status);
       }
-    )
+    );
 
     this.secondFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -112,7 +113,7 @@ export class RegisterComponent implements OnInit {
         }
         // console.log(status);
       }
-    )
+    );
 
     this.thirdFormGroup = this.formBuilder.group({
     });
@@ -188,6 +189,11 @@ export class RegisterComponent implements OnInit {
 
   register(name, username, email, dateOfBirth, password, newsPreferences) {
 
+    const pref: string[] = [];
+    newsPreferences.forEach(element => {
+      pref.push(element.name);
+    });
+    console.log(pref);
     dateOfBirth = this.datePipe.transform(dateOfBirth, 'yyyy-MM-dd');
     this.userObject = {
       name,
@@ -195,7 +201,7 @@ export class RegisterComponent implements OnInit {
       email,
       password,
       dateOfBirth,
-      newsPreferences
+      pref
     };
     // console.log(this.userObject);
 
@@ -209,4 +215,18 @@ export class RegisterComponent implements OnInit {
       );
   }
 
+  isSelected(selectedOption: any): boolean {
+    const index = this.selectedOptions.indexOf(selectedOption);
+    return index >= 0;
+  }
+
+  toggleOffer(selectedOption: any): void {
+    let index = this.selectedOptions.indexOf(selectedOption);
+
+    if (index >= 0) {
+      this.selectedOptions.splice(index, 1);
+    } else {
+      this.selectedOptions.push(selectedOption);
+    }
+  }
 }

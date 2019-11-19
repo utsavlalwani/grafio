@@ -37,18 +37,22 @@ export class SearchComponent implements OnInit {
     this.http.get('https://newszoid.stackroute.io:8443/search-service/api/v1/category/' + query, httpOptions).subscribe(
       (data) => {
         this.response = data['posts'];
-      this.getData({ pageIndex: this.page, pageSize: this.size });
+        if (this.response.length >= 1) {
+        this.getData({ pageIndex: this.page, pageSize: this.size });
+
+        }
 
       }, (error) => {
         this.http.get('https://newszoid.stackroute.io:8443/search-service/api/v1/location/' + query, httpOptions).subscribe(
           (data) => {
             this.response = data['posts'];
-      this.getData({ pageIndex: this.page, pageSize: this.size });
+            if (this.response.length >= 1) {
+              this.getData({ pageIndex: this.page, pageSize: this.size });
+              }
 
           }, (error) => {
             console.log(error);
             this.router.navigateByUrl('/404');
-      this.getData({ pageIndex: this.page, pageSize: this.size });
 
           });
       }

@@ -61,6 +61,10 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { FlagPostComponent } from './flag-post/flag-post.component';
 import { CompanyRegisterStepperComponent } from './company-register-stepper/company-register-stepper.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
+
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +97,8 @@ import { SubscriptionPageComponent } from './subscription-page/subscription-page
     PrivacyPolicyComponent,
     FlagPostComponent,
     CompanyRegisterStepperComponent,
-    SubscriptionPageComponent
+    SubscriptionPageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +135,8 @@ import { SubscriptionPageComponent } from './subscription-page/subscription-page
     MatBottomSheetModule,
     MatChipsModule,
     MatExpansionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule
   ],
   entryComponents: [
     LoginComponent,
