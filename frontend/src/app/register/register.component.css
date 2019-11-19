@@ -15,3 +15,7 @@
 .form-element{
   width : 50%;
 }
+
+.mat-icon {
+  transform: scale(.7);
+}

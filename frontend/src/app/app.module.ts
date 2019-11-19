@@ -59,6 +59,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { FlagPostComponent } from './flag-post/flag-post.component';
+
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,7 +129,8 @@ import { FlagPostComponent } from './flag-post/flag-post.component';
     MatBottomSheetModule,
     MatChipsModule,
     MatExpansionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule
   ],
   entryComponents: [
     LoginComponent,
