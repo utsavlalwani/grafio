@@ -30,8 +30,10 @@ public class User {
 	//private String gender;
 	//private String location;
 	private String email;
-	private Date dateOfBirth;
-	private Set<String> newsPreferences;
+	@Relationship(type = "AGE_GROUP", direction = Relationship.OUTGOING)
+	private AgeGroup ageGroup;
+	@Relationship(type = "PREFERENCES", direction = Relationship.OUTGOING)
+	private Set<SubCategory> newsPreferences;
 	@Relationship(type = "PUBLISHED", direction = Relationship.OUTGOING)
 	private Set<Post> publishedPosts;
 	@Relationship(type = "userLocation")
