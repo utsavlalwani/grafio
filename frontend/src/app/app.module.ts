@@ -53,6 +53,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
 
 
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 import {MatExpansionModule} from '@angular/material/expansion';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
@@ -123,7 +125,8 @@ import { FlagPostComponent } from './flag-post/flag-post.component';
     MatTooltipModule,
     MatBottomSheetModule,
     MatChipsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatPaginatorModule
   ],
   entryComponents: [
     LoginComponent,

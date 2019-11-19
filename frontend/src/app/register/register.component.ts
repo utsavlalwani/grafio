@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {DatePipe} from '@angular/common';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {RegisterService} from '../services/register.service';
-import {MatStepper} from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { RegisterService } from '../services/register.service';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -13,15 +13,19 @@ import {MatStepper} from '@angular/material';
 })
 export class RegisterComponent implements OnInit {
 
-  @ViewChild('stepper', {static: false}) stepper: MatStepper;
+  @ViewChild('stepper', { static: false }) stepper: MatStepper;
   constructor(private formBuilder: FormBuilder,
-              private datePipe: DatePipe,
-              private router: Router,
-              private registration: RegisterService) { }
+    private datePipe: DatePipe,
+    private router: Router,
+    private registration: RegisterService) { }
 
   get name() {
     return this.firstFormGroup.get('name') as FormControl;
   }
+  isMobile() {
+    return (window.innerWidth <= 450);
+  }
+
 
   maxDate = new Date();
   isLinear = false;
@@ -39,39 +43,39 @@ export class RegisterComponent implements OnInit {
     name: string;
     icon: string;
   }[] = [
-    {
-      name: 'National',
-      icon: 'flag'
-    },
-    {
-      name: 'International',
-      icon: 'public'
-    },
-    {
-      name: 'Business',
-      icon: 'business'
-    },
-    {
-      name: 'Technology',
-      icon: 'memory'
-    },
-    {
-      name: 'Entertainment',
-      icon: 'movie'
-    },
-    {
-      name: 'Sports',
-      icon: 'directions_bike'
-    },
-    {
-      name: 'Science',
-      icon: 'whatshot'
-    },
-    {
-      name: 'Health',
-      icon: 'fitness_center'
-    },
-  ];
+      {
+        name: 'National',
+        icon: 'flag'
+      },
+      {
+        name: 'International',
+        icon: 'public'
+      },
+      {
+        name: 'Business',
+        icon: 'business'
+      },
+      {
+        name: 'Technology',
+        icon: 'memory'
+      },
+      {
+        name: 'Entertainment',
+        icon: 'movie'
+      },
+      {
+        name: 'Sports',
+        icon: 'directions_bike'
+      },
+      {
+        name: 'Science',
+        icon: 'whatshot'
+      },
+      {
+        name: 'Health',
+        icon: 'fitness_center'
+      },
+    ];
 
   userObject: any;
 
@@ -93,7 +97,7 @@ export class RegisterComponent implements OnInit {
         }
         // console.log(status);
       }
-    );
+    )
 
     this.secondFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -108,7 +112,7 @@ export class RegisterComponent implements OnInit {
         }
         // console.log(status);
       }
-    );
+    )
 
     this.thirdFormGroup = this.formBuilder.group({
     });
@@ -162,7 +166,7 @@ export class RegisterComponent implements OnInit {
       .hasError('required') ?
       'Field is required (at least eight characters, one uppercase letter and one number)' :
       this.firstFormGroup.get('password').
-      hasError('requirements') ?
+        hasError('requirements') ?
         'Password needs to be at least eight characters, one uppercase letter and one number' : '';
   }
 
@@ -192,15 +196,15 @@ export class RegisterComponent implements OnInit {
       password,
       dateOfBirth,
       newsPreferences
-    } ;
+    };
     // console.log(this.userObject);
 
     this.registration.saveUser(this.userObject)
       .subscribe(
         () => {
-              console.log(this.userObject);
-              this.ngOnInit();
-              this.router.navigateByUrl('/trending');
+          console.log(this.userObject);
+          this.ngOnInit();
+          this.router.navigateByUrl('/trending');
         }
       );
   }

@@ -46,7 +46,7 @@ export class GraphComponent implements OnInit {
             this.flag.push(0);
           else
             this.flag.push(post['flaggedBy'].length);
-        })
+        });
       }
       this.chart = new Chart(this.chartRef.nativeElement, {
         type: 'bar',
@@ -154,39 +154,45 @@ export class GraphComponent implements OnInit {
           Authorization: 'Bearer ' + localStorage.getItem('jwt'),
         })
     };
+    let i = 0;
+    const len = categories.length;
     categories.forEach(category => {
+      i++;
       let url = 'https://newszoid.stackroute.io:8443/content-service/api/v1/posts/' + category.name;
       this.http.get(url, httpOptions).subscribe((data1: any) => {
         this.count.push(data1.length);
         this.category2.push(category.name);
-        this.chart = new Chart(this.pieRef.nativeElement, {
-          type: 'pie',
-          data: {
-            labels: this.category2,
-            datasets: [
-              {
-                data: this.count,
-                backgroundColor: ['#388E3C', '#616161', '#7B1FA2', '#FFA000', '#00695C', '#40C4FF', '#303F9F', '#D84315']
+        if (i === len) {
+          this.chart = new Chart(this.pieRef.nativeElement, {
+            type: 'pie',
+            data: {
+              labels: this.category2,
+              datasets: [
+                {
+                  data: this.count,
+                  backgroundColor: ['#388E3C', '#616161', '#7B1FA2', '#FFA000', '#00695C', '#40C4FF', '#303F9F', '#D84315']
+                },
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              title: {
+                display: true,
+                text: 'NewsZoid Content',
+                fontSize: 30
               },
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            title: {
-              display: true,
-              text: 'NewsZoid Content',
-              fontSize: 30
-            },
 
-            legend: {
-              display: true,
-              position: 'top',
+              legend: {
+                display: true,
+                position: 'top',
 
-            },
-          }
+              },
+            }
 
-        });
+          });
+        }
+
       });
     });
 
