@@ -16,6 +16,7 @@ import { GraphComponent } from './graph/graph.component';
 import {CompanyRegisterComponent} from './company-register/company-register.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
   {path: 'postDetail/:postId', component: PostDetailComponent},
   {path: 'orgRegister', component: CompanyRegisterComponent},
   {path: 'terms', component: TermsAndConditionsComponent},
-  {path: 'privacy', component: PrivacyPolicyComponent}
+  {path: 'privacy', component: PrivacyPolicyComponent},
+  {path: 'footer', component: FooterComponent}
 ];
 
 @NgModule({

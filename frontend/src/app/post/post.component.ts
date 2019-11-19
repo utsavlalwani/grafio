@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {RegisterService} from '../services/register.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-
+import {PostDetailComponent} from '../post-detail/post-detail.component';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
