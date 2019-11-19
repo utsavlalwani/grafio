@@ -30,7 +30,7 @@ public class RabbitMqUserConfig {
 
     @Bean
     Binding binding(@Qualifier("queue")Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("user.auth.#");
+        return BindingBuilder.bind(queue).to(exchange).with("user.reg.#");
     }
 
     @Bean

@@ -45,6 +45,7 @@ public class UserController {
     static final String queueName="user";
     static final String topicExchangeName="user-auth";
     static final String routingKey = "user.auth.reg";
+    static final String neo4jRoutingKey = "user.reg.rec";
 
     @Autowired
     public UserController(UserRegistrationService userRegistrationService, RabbitTemplate rabbitTemplate, Queue queue, StripeClient stripeClient) {
@@ -82,6 +83,7 @@ public class UserController {
             User savedUser = userRegistrationService.saveUser(user);
             UserDTO userDTO = new UserDTO(user.getUsername(), bcryptEncoder.encode(userDao.getPassword()));
             rabbitTemplate.convertAndSend(topicExchangeName, routingKey, new ObjectMapper().writeValueAsString(userDTO));
+            rabbitTemplate.convertAndSend(topicExchangeName, neo4jRoutingKey, new ObjectMapper().writeValueAsString(userDao));
             responseEntity = new ResponseEntity<User>( savedUser,HttpStatus.CREATED);
         } catch (UserAlreadyExistsException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
@@ -107,7 +109,17 @@ public class UserController {
         ResponseEntity responseEntity;
         try {
             responseEntity = new ResponseEntity<User>(userRegistrationService.updateUser(user), HttpStatus.OK);
-        } catch (UserNotFoundException e) {
+            UserDAO userDAO = UserDAO.builder()
+                    .dateOfBirth(user.getDateOfBirth())
+                    .email(user.getEmail())
+                    .isSub(user.getIsSub())
+                    .name(user.getName())
+                    .newsPreferences(user.getNewsPreferences())
+                    .password("")
+                    .username(user.getUsername())
+                    .build();
+            rabbitTemplate.convertAndSend(topicExchangeName, neo4jRoutingKey, new ObjectMapper().writeValueAsString(userDAO));
+        } catch (UserNotFoundException | NullPointerException | JsonProcessingException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return responseEntity;

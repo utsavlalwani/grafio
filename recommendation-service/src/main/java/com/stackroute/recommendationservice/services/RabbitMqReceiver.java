@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class RabbitMqReceiver {
@@ -89,15 +87,33 @@ public class RabbitMqReceiver {
         try {
             System.out.println(message);
             userDTO = new ObjectMapper().readValue(message, UserDTO.class);
-            String[] locations = {"Bangalore", "Kolkata", "Pondicherri", "Kerala", "Bihar", "UP"};
-            Random r = new Random();
-            int index = r.nextInt(locations.length);
+
             user = User.builder()
                     .username(userDTO.getUsername())
-                    .location(new Location(locations[index], null, null))
                     .build();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        try {
+            queryService.removeAgeGroupRel(userDTO.getUsername());
+            Date dob = userDTO.getDateOfBirth();
+            Calendar calendar = new GregorianCalendar();
+            calendar.setTime(dob);
+            int year = calendar.get(Calendar.YEAR);
+            year = ((year+5)/10)*10;
+            user.setAgeGroup(new AgeGroup(year));
+        } catch (NullPointerException e) {
+            //System.out.println("age not set");
+        }
+        Set<SubCategory> newsPreferences = new HashSet<>();
+        try {
+            queryService.removeNewsPrefRel(userDTO.getUsername());
+            for(String pref: userDTO.getNewsPreferences()) {
+                newsPreferences.add(new SubCategory(pref, null, null));
+            }
+            user.setNewsPreferences(newsPreferences);
+        } catch (NullPointerException e) {
+            //System.out.println("pref not set");
         }
         queryService.saveUser(user);
     }

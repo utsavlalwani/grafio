@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.*;
 public class RecommendationController {
 
 	private final RecommendationService recommendationService;
+	private final QueryService queryService;
 
-	public RecommendationController(RecommendationService recommendationService) {
+	public RecommendationController(RecommendationService recommendationService, QueryService queryService) {
 		this.recommendationService = recommendationService;
+		this.queryService = queryService;
 	}
 
 
@@ -42,4 +44,20 @@ public class RecommendationController {
 		return resp;
 	}
 
+	@GetMapping("/recommend/ageGroup/{id}")
+	public List<PostResp> recommendByAgeGroup(@PathVariable(value = "id") String userId) throws ExecutionException, InterruptedException {
+		Collection<Post> posts = recommendationService.byAgeGroup(userId);
+		List<PostResp> resp= new ArrayList<>();
+		for(Post post: posts) {
+			PostResp postResp = new PostResp(post.getVideoID(),
+					post.getTitle(),
+					post.getVideoUrl(),
+					post.getTags(),
+					post.getLocation(),
+					post.getSubCategory(),
+					post.getTimestamp());
+			resp.add(postResp);
+		}
+		return resp;
+	}
 }

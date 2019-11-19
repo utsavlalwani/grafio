@@ -62,7 +62,19 @@ public interface NewsRepository extends Neo4jRepository<Post, Long> {
 			"\t\torder by count(r) desc")
 	Collection<Post> byProfile(@Param("userName") String userName);
 
+	@Query("MATCH (user:User)-[:VIEWED]->(n:Post) where user.username={userName} WITH collect(n) as viewedNews \t\n" +
+			"MATCH (u:User)-[:AGE_GROUP]->(a:AgeGroup) WHERE u.username={userName}\n" +
+			"MATCH (n:Post)-[r:VIEWED_BY_AGE_GROUP]->(a)\n" +
+			"where not n in viewedNews\n" +
+			"return n, count(r)\n" +
+			"order by count(r) desc")
+	Collection<Post> byAgeRange(@Param("userName") String userName);
 
 	@Query("match(:User)-[r:LIKED]->(p:Post) where p.videoID={videoId}  delete r")
 	void deleteLikedRel(@Param("videoId") Long videoId);
+
+	@Query("MATCH (a:AgeGroup) where a.ageGroup={ageGroup}\n" +
+			"MATCH (n:Post) where n.videoID={videoId}\n" +
+			"MERGE (n)-[:VIEWED_BY_AGE_GROUP{"+"user:{userName}"+"}]->(a)")
+	void createViewedByAgeRel(@Param("videoId") Long videoId, @Param("ageGroup") int ageGroup, @Param("userName") String userName);
 }

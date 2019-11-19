@@ -1,5 +1,6 @@
 package com.stackroute.recommendationservice.services;
 
+import com.stackroute.recommendationservice.domain.AgeGroup;
 import com.stackroute.recommendationservice.domain.Post;
 import com.stackroute.recommendationservice.domain.User;
 import com.stackroute.recommendationservice.repositories.NewsRepository;
@@ -38,6 +39,10 @@ public class QueryService {
         if(viewed == null) {
             viewed = new HashSet<>();
         }
+        AgeGroup ageGroup = user.getAgeGroup();
+        if(ageGroup != null) {
+            newsRepository.createViewedByAgeRel(videoId, ageGroup.getAgeGroup(), username);
+        }
         Post post = newsRepository.findById(videoId).orElse(null);
         viewed.add(post);
         user.setViewedPosts(viewed);
@@ -75,7 +80,21 @@ public class QueryService {
         newsRepository.deleteLikedRel(videoId);
     }
 
+    @Transactional
+    public void removeAgeGroupRel(String userName) {
+        userRepository.deleteAgeGroupRel(userName);
+    }
+
+    @Transactional
+    public void removeNewsPrefRel(String userName) {
+        userRepository.deleteNewsPrefRel(userName);
+    }
+
     public Collection<Post> byLocation(String name) {
         return newsRepository.byLocation(name);
+    }
+
+    public Collection<Post> byAgeRange(String userName) {
+        return newsRepository.byAgeRange(userName);
     }
 }

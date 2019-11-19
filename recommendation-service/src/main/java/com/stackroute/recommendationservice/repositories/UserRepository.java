@@ -15,4 +15,11 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
     @Query("match (u:User) where n.videoID=1 match (u:User)-[:Viewed]->(n) return u")
     Collection<User> graph(@Param("videoID") int videoId);
 
+    @Query("match(u:User)-[r:AGE_GROUP]->(:AgeGroup) where u.username={userName} delete r")
+    void deleteAgeGroupRel(@Param("userName") String userName);
+
+    @Query("match(u:User)-[r:PREFERENCES]->(:SubCategory) where u.username={userName} delete r")
+    void deleteNewsPrefRel(@Param("userName") String userName);
+
 }
+
