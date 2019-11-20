@@ -1,5 +1,6 @@
-<mat-card class="registration-form">
+<mat-card class="registration-form" style = "text-align: center;">
     <mat-card-title class="title">Please Register and Subscribe</mat-card-title>
+    <div class="container">
     <mat-card-content class="container1" *ngIf="isMobile(); else normalsize">
       <mat-vertical-stepper linear #stepper class="container">
             <mat-step [stepControl]="firstFormGroup">
@@ -156,4 +157,5 @@
                                                                                   </mat-horizontal-stepper>
                                                                       </ng-template>
                                                                       </mat-card-content>
+                                                                      </div>
                                                                       </mat-card>

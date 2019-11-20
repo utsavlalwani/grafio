@@ -12,6 +12,7 @@ export class RecommendationComponent implements OnInit {
   recs: any;
   breakpoint: number;
   posts: any;
+  postByAge: any;
   constructor(private http: HttpClient,
               private router: Router) { }
 
@@ -26,6 +27,15 @@ export class RecommendationComponent implements OnInit {
       + localStorage.getItem('username'), httpOptions).subscribe(
         (data) => {
           this.posts = data;
+        }/*, (error) => {
+        this.router.navigateByUrl('/404');
+      }*/
+      );
+
+      this.http.get('https://newszoid.stackroute.io:8443/recommendation-service/recommend/ageGroup/'
+      + localStorage.getItem('username'), httpOptions).subscribe(
+        (data) => {
+          this.postByAge = data;
         }/*, (error) => {
         this.router.navigateByUrl('/404');
       }*/
