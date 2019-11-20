@@ -7,7 +7,7 @@
 
 
 <mat-grid-list #grid [cols]="breakpoint" (window:resize)="onResize($event)">
-  <section *ngFor="let search of response">
+  <section *ngFor="let search of data">
     <mat-grid-tile>
       <app-post [post]="search"></app-post>
     </mat-grid-tile>

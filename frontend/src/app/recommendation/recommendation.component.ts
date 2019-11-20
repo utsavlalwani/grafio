@@ -13,6 +13,10 @@ export class RecommendationComponent implements OnInit {
   breakpoint: number;
   posts: any;
   postByAge: any;
+  page = 0;
+  size = 9;
+  data: any;
+  dataAge: any;
   constructor(private http: HttpClient,
               private router: Router) { }
 
@@ -27,15 +31,19 @@ export class RecommendationComponent implements OnInit {
       + localStorage.getItem('username'), httpOptions).subscribe(
         (data) => {
           this.posts = data;
+        this.getData({ pageIndex: this.page, pageSize: this.size });
+
         }/*, (error) => {
         this.router.navigateByUrl('/404');
       }*/
       );
 
-      this.http.get('https://newszoid.stackroute.io:8443/recommendation-service/recommend/ageGroup/'
+    this.http.get('https://newszoid.stackroute.io:8443/recommendation-service/recommend/ageGroup/'
       + localStorage.getItem('username'), httpOptions).subscribe(
         (data) => {
           this.postByAge = data;
+        this.getDataAge({ pageIndex: this.page, pageSize: this.size });
+
         }/*, (error) => {
         this.router.navigateByUrl('/404');
       }*/
@@ -50,5 +58,25 @@ export class RecommendationComponent implements OnInit {
 
 
   }
+  getData(obj) {
+    let index = 0,
+      startingIndex = obj.pageIndex * obj.pageSize,
+      endingIndex = startingIndex + obj.pageSize;
 
+    this.data = this.posts.filter(() => {
+      index++;
+      return (index > startingIndex && index <= endingIndex) ? true : false;
+    });
+  }
+
+  getDataAge(obj) {
+    let index = 0,
+      startingIndex = obj.pageIndex * obj.pageSize,
+      endingIndex = startingIndex + obj.pageSize;
+
+    this.dataAge = this.postByAge.filter(() => {
+      index++;
+      return (index > startingIndex && index <= endingIndex) ? true : false;
+    });
+  }
 }
